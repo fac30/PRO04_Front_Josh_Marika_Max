@@ -1,35 +1,41 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import React, { useState } from 'react';
+import './App.css';
+import Button from './components/Button';
 
-function App() {
-  const [count, setCount] = useState(0);
+
+interface Product {
+  id: number;
+  artist: string;
+  title: string;
+  price: number;
+  image: string;
+}
+
+const App: React.FC = () => {
+  const [cartCount, setCartCount] = useState(0);
+
+
+  const addToCart = () => {
+    setCartCount(prevCount => prevCount + 1);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app">
+      {/* <Header cartCount={cartCount} /> */}
+      <main>
+        <section className="hero">
+          <h1>Welcome to Font Hill Records</h1>
+          <p>Discover the best vinyl records!</p>
+          <Button onClick={addToCart} text="Add to Cart" />
+        </section>
+        <section className="featured-products">
+          <h2>What's New</h2>
+          {/* <ProductGrid products={featuredProducts} addToCart={addToCart} /> */}
+        </section>
+        {/* Add more sections here */}
+      </main>
+    </div>
   );
-}
+};
 
 export default App;
