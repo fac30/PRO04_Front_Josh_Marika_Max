@@ -1,45 +1,25 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Button from './components/Button';
+// import Header from './components/Header';
+// import Homepage from './pages/Homepage';
 
-
-
-interface Product {
-  id: number;
-  artist: string;
-  title: string;
-  price: number;
-  image: string;
-}
-
-const App = () => { 
-  const [cartCount, setCartCount] = useState(0);
-
-
-  const addToCart = () => {
-    setCartCount(prevCount => prevCount + 1);
-  };
-
+const App: React.FC = () => {
   return (
-    <div className="app">
-      <header>
-      {/* <Header cartCount={cartCount} /> */}
-      </header>
-      <main>
-        <section className="hero">
-          <h1>Welcome to Font Hill Records</h1>
-          <p>Discover the best vinyl records!</p>
-          <Button onClick={addToCart} text="Add to Cart" />
-        </section>
-        <section className="featured-products">
-          <h2>What's New</h2>
-          {/* <ProductGrid products={featuredProducts} addToCart={addToCart} /> */}
-        </section>
-        {/* Add more sections here */}
-      </main>
-    </div>
+    <Router>
+      <div className="App">
+        {/* <Header /> */}
+        <main>
+          <Routes>
+            {/* <Route path="/" element={<Homepage />} /> */}
+            <Route path="/new-releases" element={<h1>New Releases</h1>} />
+            <Route path="/genres" element={<h1>Genres</h1>} />
+            <Route path="/deals" element={<h1>Deals</h1>} />
+            {/* Add more routes as needed */}
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
-};
+}
 
 export default App;
