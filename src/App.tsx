@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Button from './components/Button';
+
 
 
 interface Product {
@@ -21,7 +23,9 @@ const App = () => {
 
   return (
     <div className="app">
+      <header>
       {/* <Header cartCount={cartCount} /> */}
+      </header>
       <main>
         <section className="hero">
           <h1>Welcome to Font Hill Records</h1>
