@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Button from './components/Button';
+import ProductCard from './components/ProdectCard'';
 
 
 interface Product {
@@ -33,6 +34,7 @@ const App = () => {
           {/* <ProductGrid products={featuredProducts} addToCart={addToCart} /> */}
         </section>
         {/* Add more sections here */}
+        <ProductCard/>
       </main>
     </div>
   );
