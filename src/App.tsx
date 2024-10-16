@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import './App.css';
-import Button from './components/Button';
-import ProductCard from './components/ProdectCard'';
-
+import { useState } from "react";
+import "./App.css";
+import Button from "./components/Button";
+import ProductCard from "./components/ProdectCard";
 
 interface Product {
   id: number;
@@ -12,12 +11,11 @@ interface Product {
   image: string;
 }
 
-const App = () => { 
+const App = () => {
   const [cartCount, setCartCount] = useState(0);
 
-
   const addToCart = () => {
-    setCartCount(prevCount => prevCount + 1);
+    setCartCount((prevCount) => prevCount + 1);
   };
 
   return (
@@ -34,7 +32,7 @@ const App = () => {
           {/* <ProductGrid products={featuredProducts} addToCart={addToCart} /> */}
         </section>
         {/* Add more sections here */}
-        <ProductCard/>
+        <ProductCard />
       </main>
     </div>
   );
