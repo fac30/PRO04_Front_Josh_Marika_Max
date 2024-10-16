@@ -8,7 +8,7 @@ interface Product {
   image: string;
 }
 
-const getProductData = async (): Promise<Product[]> => {
+const productData = async (): Promise<Product[]> => {
   try {
     const data: Product[] = await fetchData("vinyl", "GET");
     return data;
@@ -18,4 +18,4 @@ const getProductData = async (): Promise<Product[]> => {
   }
 };
 
-export { getProductData };
+export { productData };
