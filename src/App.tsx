@@ -44,7 +44,7 @@ const App = () => {
 
         <section className="featured-products">
           <h2>What's New</h2>
-          <div className="product-grid">
+          <div className="flex flex-wrap justify-center gap-4">
             {productData.map((card) => (
               <ProductCard
                 key={card.id}

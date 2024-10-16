@@ -8,7 +8,9 @@ interface ProductCardProps {
 
 const ProductCard = ({ id, title, artist, price, image }: ProductCardProps) => {
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 max-w-xs">
+    <div className="bg-white shadow-md rounded-lg p-4 max-w-xs w-full">
+      {" "}
+      {/* Added w-full */}
       {image ? (
         <img
           src={image}
