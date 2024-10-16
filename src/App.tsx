@@ -11,7 +11,7 @@ interface Product {
   image: string;
 }
 
-const App: React.FC = () => {
+const App = () => { 
   const [cartCount, setCartCount] = useState(0);
 
 
