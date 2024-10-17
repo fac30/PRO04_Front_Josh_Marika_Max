@@ -7,7 +7,7 @@ interface Product {
   title: string;
   artist: string;
   price: number;
-  image: string;
+  image_url: string;
 }
 
 interface ProductCardProps {
@@ -17,9 +17,9 @@ interface ProductCardProps {
 const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 max-w-xs w-full">
-      {product.image ? (
+      {product.image_url ? (
         <img
-          src={product.image}
+          src={product.image_url}
           alt={`Vinyl cover for ${product.title}`}
           className="w-full h-48 object-cover rounded-t-lg"
         />
