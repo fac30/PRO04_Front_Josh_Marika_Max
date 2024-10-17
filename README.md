@@ -1,50 +1,99 @@
-# React + TypeScript + Vite
+# Hill Front Records
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Dependencies](#dependencies)
+- [Development Workflow](#development-workflow)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Project Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+## Installation
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (version 20 or higher recommended)
+- [Git](https://git-scm.com/)
+
+### Steps to Install
+1. **Clone the repository**
+
+   ```
+   git clone https://github.com/fac30/PRO04_Front_Josh_Marika_Max.git
+   cd PRO04_Front_Josh_Marika_Max
+   ```
+
+2. **Install dependencies**
+
+   ```
+   npm install
+   ```
+
+This will install all the required dependencies, including React, TypeScript, Vite, ESLint, Prettier, and others.
+
+## Usage
+
+### Running the Development Server
+
+To start the development server, use the following command:
+
+```
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+This will start a local server using Vite, and you can view the project in your browser at `http://localhost:3000`.
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+### Building for Production
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
+To create a production build, run:
+
 ```
+npm run build
+```
+
+The build will be located in the `dist` directory.
+
+
+## Dependencies
+- React
+- TypeScript
+- Vite
+- Node.js & Express
+- ESLint
+- Prettier
+- Maintains consistent commit messages using Git Conventional Commit.
+
+## Development Workflow
+
+### Linting and Formatting
+- **ESLint** is used to enforce consistent code style. Run linting with:
+  ```
+  npm run lint
+  ```
+- **Prettier** is used for code formatting. Code will be automatically formatted on save (if configured) or can be manually formatted with:
+  ```
+  npm run format
+  ```
+
+### Commit Guidelines
+The project uses **Git Conventional Commit** to maintain a clean and readable commit history. Please use the following structure for your commits:
+
+```
+type(scope): subject
+```
+Example:
+
+```
+feat(header): add navigation bar
+```
+
+
+
+
+
+
+
