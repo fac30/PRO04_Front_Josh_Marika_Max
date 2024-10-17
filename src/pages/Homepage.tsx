@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
-import Logo from "../components/Logo";
+import Logo from "../components/common/Logo";
 import ProductCard from "../components/ProductCard";
 import { fetchData } from "../utils/fetch-data";
 
