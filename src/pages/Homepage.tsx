@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
+import Button from "../components/common/Button";
 import Logo from "../components/common/Logo";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/productsCard/ProductCard";
 import { fetchData } from "../utils/fetch-data";
 
 interface Product {
@@ -34,21 +34,24 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <main className="container mx-auto px-4 py-8" role="main">
-        <header className="text-center mb-12">
+    <div className="min-h-screen bg-gray-100 w-full flex flex-col">
+         {/* Header */}
+         <header className="bg-white p-4 shadow">
+        <div className="flex justify-between items-center p-4">
           <Logo aria-label="Font Hill Records logo" />
-          <h1 className="text-4xl font-bold mb-4">
-            Welcome to Font Hill Records
-          </h1>
-          <p className="text-xl mb-6">
-            Discover and collect your favorite vinyl records
-          </p>
-        </header>
+        </div>
+      </header>
+         
+
+      {/* Main Content */}
+      <main className="flex-grow w-full px-4 py-8 flex flex-col items-center justify-center text-center" role="main">
+          <h1 className="text-4xl font-bold mb-4">Welcome to Font Hill Records</h1>
+          <p className="text-xl mb-6">Discover and collect your favorite vinyl records</p>
+       
 
         <Button text="Shop Now" aria-label="Shop Now Button"></Button>
 
-        <section className="mb-12" aria-labelledby="new-on-store">
+        <section className="mb-12 w-full" aria-labelledby="new-on-store">
           <h2 className="text-2xl font-semibold mb-4">New on Store</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {productData.map((product) => (
@@ -58,8 +61,8 @@ const HomePage = () => {
         </section>
       </main>
 
-      <footer role="contentinfo" className="bg-gray-800 text-white py-8">
-        <div className="container mx-auto px-4">
+      <footer role="contentinfo" className="bg-gray-800 text-white py-8 w-full">
+        <div className="text-center">
           <p>Footer</p>
         </div>
       </footer>
