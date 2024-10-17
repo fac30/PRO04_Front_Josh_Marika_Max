@@ -1,6 +1,6 @@
 // import Navbar from './Navbar';
-import Button from '../components/Button'; 
-import Logo from '../components/Logo'; 
+import Button from '../components/common/Button'; 
+import Logo from '../components/common/Logo'; 
 
 
 const HomePage = () => {
