@@ -9,7 +9,7 @@ interface Product {
   title: string;
   artist: string;
   price: number;
-  image: string;
+  image_url: string;
 }
 
 const HomePage = () => {
@@ -35,19 +35,24 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 w-full flex flex-col">
-         {/* Header */}
-         <header className="bg-white p-4 shadow">
+      {/* Header */}
+      <header className="bg-white p-4 shadow">
         <div className="flex justify-between items-center p-4">
           <Logo aria-label="Font Hill Records logo" />
         </div>
       </header>
-         
 
       {/* Main Content */}
-      <main className="flex-grow w-full px-4 py-8 flex flex-col items-center justify-center text-center" role="main">
-          <h1 className="text-4xl font-bold mb-4">Welcome to Font Hill Records</h1>
-          <p className="text-xl mb-6">Discover and collect your favorite vinyl records</p>
-       
+      <main
+        className="flex-grow w-full px-4 py-8 flex flex-col items-center justify-center text-center"
+        role="main"
+      >
+        <h1 className="text-4xl font-bold mb-4">
+          Welcome to Font Hill Records
+        </h1>
+        <p className="text-xl mb-6">
+          Discover and collect your favorite vinyl records
+        </p>
 
         <Button text="Shop Now" aria-label="Shop Now Button"></Button>
 
