@@ -35,9 +35,9 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8" role="main">
         <header className="text-center mb-12">
-          <Logo />
+          <Logo aria-label="Font Hill Records logo" />
           <h1 className="text-4xl font-bold mb-4">
             Welcome to Font Hill Records
           </h1>
@@ -46,7 +46,9 @@ const HomePage = () => {
           </p>
         </header>
 
-        <section className="mb-12">
+        <Button text="Shop Now" aria-label="Shop Now Button"></Button>
+
+        <section className="mb-12" aria-labelledby="new-on-store">
           <h2 className="text-2xl font-semibold mb-4">New on Store</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {productData.map((product) => (
@@ -56,7 +58,7 @@ const HomePage = () => {
         </section>
       </main>
 
-      <footer className="bg-gray-800 text-white py-8">
+      <footer role="contentinfo" className="bg-gray-800 text-white py-8">
         <div className="container mx-auto px-4">
           <p>Footer</p>
         </div>
