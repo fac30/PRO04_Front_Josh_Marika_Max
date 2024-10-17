@@ -46,20 +46,11 @@ const HomePage = () => {
           </p>
         </header>
 
-        {/* <Button text="Shop Now" /> */}
-
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-4">New on Store</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {productData.map((product) => (
-              <ProductCard
-                key={product.id}
-                id={product.id}
-                title={product.title}
-                artist={product.artist}
-                price={product.price}
-                image={product.image}
-              />
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </section>
