@@ -35,12 +35,13 @@ const Main = () => {
 
   return (
     <main
+      id="main-content"
       className="flex-grow w-full px-4 py-8 flex flex-col items-center justify-center text-center"
       role="main"
     >
-      <h2 className="text-4xl font-bold mb-4">
+      <h1 className="text-4xl font-bold mb-4">
         Welcome to Font Hill Records
-      </h2>
+      </h1>
       <p className="text-xl mb-6">
         Discover and collect your favorite vinyl records
       </p>
