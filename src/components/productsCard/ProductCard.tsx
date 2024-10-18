@@ -1,7 +1,5 @@
 // ProductCard.tsx
 
-import React from "react";
-
 interface Product {
   id: number;
   title: string;
