@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Button from "../common/Button";
 import ProductCard from "../productsCard/ProductCard";
 import { fetchData } from "../../utils/fetch-data";
 
@@ -43,8 +42,6 @@ const Main = () => {
       <p className="text-xl mb-6">
         Discover and collect your favorite vinyl records
       </p>
-
-      <Button text="Shop Now" aria-label="Shop Now Button"></Button>
 
       <section className="mb-12 w-full" aria-labelledby="new-on-store">
         <h2 className="text-2xl font-semibold mb-4">New on Store</h2>
