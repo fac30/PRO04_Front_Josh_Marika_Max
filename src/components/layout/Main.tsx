@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import ProductCard from "../productsCard/ProductCard";
 import { fetchData } from "../../utils/fetch-data";
 
+
+
 interface Product {
   id: number;
   title: string;
