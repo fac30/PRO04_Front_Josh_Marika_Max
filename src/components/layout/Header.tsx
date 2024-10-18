@@ -1,6 +1,7 @@
 import Logo from "../common/Logo";
 import NavBar from "../layout/NavBar"
 import { FaUserCircle, FaShoppingBag } from "react-icons/fa";
+import IconWithText from "../common/IconWithText";
 
 
 const Header = () => {
@@ -9,13 +10,8 @@ const Header = () => {
       <div className="flex justify-between items-center p-4">
         <Logo aria-label="Font Hill Records logo" />
         <div className="flex items-center space-x-4">
-        <div className="flex items-center space-x-2 hover:text-gray-600">
-          <FaUserCircle size={24} />
-          <span>Account</span>
-          </div>
-          <div className="flex items-center space-x-2 hover:text-gray-600"></div>
-          <FaShoppingBag size={24} />
-          <span>Cart</span>
+          <IconWithText IconComponent={FaUserCircle} label="Account" />
+          <IconWithText IconComponent={FaShoppingBag} label="Cart" />
         </div>
       </div>
       <NavBar />
