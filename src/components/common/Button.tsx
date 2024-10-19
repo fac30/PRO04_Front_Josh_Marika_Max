@@ -20,10 +20,16 @@ const Button = ({
   disabled = false,
   ...props
 }: ButtonProps) => {
+  
+  const baseClasses = 'px-4 py-2 rounded text-white transition duration-300 focus:outline-none focus:ring';
+
+  const colorClasses = disabled
+  ? 'bg-background-light cursor-not-allowed'
+  : 'bg-primary hover:bg-primary-dark focus:bg-primary-dark';
 
   return (
     <button
-      className={`px-4 py-2 rounded text-white transition duration-300 ${disabled ? 'bg-gray-400' : 'bg-blue-500 hover:bg-blue-700'} focus:outline-none focus:ring`}
+    className={`${baseClasses} ${colorClasses} ${className}`}
       onClick={onClick}
       type={type}
       disabled={disabled}

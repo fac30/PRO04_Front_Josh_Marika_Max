@@ -17,7 +17,7 @@ const Header = () => {
   };
   
   return (
-    <header className="bg-white p-4 shadow">
+    <header className="bg-background-default p-4 shadow">
        <a href="#main-content" className="sr-only focus:not-sr-only">
         Skip to main content
       </a>
@@ -30,7 +30,7 @@ const Header = () => {
         </div>
       </div>
       <NavBar />
-      <p className="bg-gray-100 text-center py-2 font-semibold">
+      <p className="bg-background-light text-center py-2 font-semibold">
         FREE UK DELIVERY ON ALL ORDERS (International delivery available)
       </p>
     </header>

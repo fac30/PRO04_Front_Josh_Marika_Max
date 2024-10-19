@@ -14,7 +14,7 @@ const Search = () => {
   };
 
   return (
-    <div className="flex items-center space-x-2 bg-white border rounded-full px-4 py-1 w-full max-w-md">
+    <div className="flex items-center space-x-2 bg-background-default border border-gray-300 rounded-full px-4 py-1 w-full max-w-md">
       <input
         type="text"
         value={query}
@@ -22,7 +22,8 @@ const Search = () => {
         placeholder="Search"
         className="w-full focus:outline-none"
       />
-      <button onClick={handleSearch} className="text-gray-700 hover:text-blue-500">
+      <button onClick={handleSearch} 
+      className="text-primary hover:text-primary-dark focus:text-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark">
         <FiSearch size={20} />
       </button>
     </div>

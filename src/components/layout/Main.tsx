@@ -36,19 +36,21 @@ const Main = () => {
   return (
     <main
       id="main-content"
-      className="flex-grow w-full px-4 py-8 flex flex-col items-center justify-center text-center"
+      // className="flex-grow w-full px-4 py-4 flex flex-col  bg-background-default"
+      className="items-center justify-center text-center px-4 py-4 flex flex-col"
       role="main"
     >
-      <h1 className="text-4xl font-bold mb-4">
+      <h1 className="text-4xl font-bold mb-4 text-text-primary">
         Welcome to Font Hill Records
       </h1>
-      <p className="text-xl mb-6">
+      <p className="text-xl mb-6 text-text-secondary">
         Discover and collect your favorite vinyl records
       </p>
 
       <section className="mb-12 w-full" aria-labelledby="new-on-store">
-        <h2 className="text-2xl font-semibold mb-4">New on Store</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <h2 id="new-on-store" className="text-2xl font-semibold mb-4 text-text-primary">
+          New on Store</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {productData.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

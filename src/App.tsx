@@ -7,14 +7,23 @@ import Homepage from "./pages/Homepage";
 const App = () => {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        {/* Add other routes here */}
-      </Routes>
-      <Footer />
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            {/* Add other routes here */}
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </Router>
   );
 };
 
 export default App;
+
+
+
+
+
