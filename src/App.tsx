@@ -7,16 +7,14 @@ import Homepage from "./pages/Homepage";
 const App = () => {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
         <Header />
-        <div className="flex-grow">
+        <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Homepage />} />
             {/* Add other routes here */}
           </Routes>
-        </div>
+        </main>
         <Footer />
-      </div>
     </Router>
   );
 };
