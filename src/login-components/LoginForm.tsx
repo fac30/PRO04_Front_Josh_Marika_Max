@@ -11,7 +11,7 @@ export default function LoginForm() {
         label="Username"
         type="text"
         name="username"
-        labelClass="block font-bold text-gray-700 mb-2" // Tailwind classes for label
+        labelClass="block font-bold text-gray-700 mb-2"
         inputClass="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" // Tailwind classes for input
       />
 
@@ -25,7 +25,7 @@ export default function LoginForm() {
 
       <SubmitButton />
 
-      <p className="text-center text-gray-600 mt-4 mb-72">
+      <p className="text-center text-gray-600 mt-4 mb-60">
         Don't have an account?{" "}
         <Link to="/UserSignUp" className="text-blue-500 hover:underline">
           Sign up
