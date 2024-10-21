@@ -34,9 +34,8 @@ const Main = () => {
   };
 
   return (
-    <main
+    <div
       id="main-content"
-      // className="flex-grow w-full px-4 py-4 flex flex-col  bg-background-default"
       className="items-center justify-center text-center px-4 py-4 flex flex-col"
       role="main"
     >
@@ -56,7 +55,7 @@ const Main = () => {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 
