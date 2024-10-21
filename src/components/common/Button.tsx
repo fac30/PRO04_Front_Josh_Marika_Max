@@ -8,6 +8,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset'
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
+  
 }
 
 
