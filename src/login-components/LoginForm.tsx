@@ -1,5 +1,6 @@
 import UserInput from "../components/common/UserInput";
 import SubmitButton from "../components/common/SubmitButton";
+import { Link } from "react-router-dom";
 
 export default function LoginForm() {
   return (
@@ -9,7 +10,7 @@ export default function LoginForm() {
       <UserInput label="Password" type="password" name="password" />
       <SubmitButton />
       <p className="signup-text">
-        Don't have an account? <a href="#">Sign up</a>
+        Don't have an account? <Link to="/UserSignUp">Sign up</Link>
       </p>
     </form>
   );
