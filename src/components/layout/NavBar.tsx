@@ -7,7 +7,7 @@ const NavBar = () => {
     <nav className="bg-background-default py-2 border-t border-background-light">
       <ul className="flex justify-center space-x-8">
         <li>
-          <Link to="/vinyls" className={linkStyles}>
+          <Link data-test="link-to-vinyl-section" to="/vinyls" className={linkStyles}>
             VINYLS
           </Link>
         </li>
@@ -38,7 +38,7 @@ const NavBar = () => {
         </li>
         <li>
           <Link to="/shipping" className={linkStyles}>
-            SHIPPING INFO
+            SHIPPING
           </Link>
         </li>
       </ul>
