@@ -1,14 +1,20 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Homepage from "./pages/Homepage";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        {/* Add other routes here */}
-      </Routes>
+      <Header />
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* Add other routes here */}
+        </Routes>
+      </main>
+      <Footer />
     </Router>
   );
 };
