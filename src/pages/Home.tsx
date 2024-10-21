@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import ProductCard from "../productsCard/ProductCard";
-import { fetchData } from "../../utils/fetch-data";
-
-
+import ProductCard from "../components/productsCard/ProductCard";
+import { fetchData } from "../utils/fetch-data";
 
 interface Product {
   id: number;
@@ -47,9 +45,13 @@ const Home = () => {
       </p>
 
       <section className="mb-12 w-full" aria-labelledby="new-on-store">
-      <h3 id="new-on-store" className="text-2xl font-semibold mb-4 text-text-primary">
-          New on Store</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <h3
+          id="new-on-store"
+          className="text-2xl font-semibold mb-4 text-text-primary"
+        >
+          New on Store
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {productData.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
