@@ -1,6 +1,7 @@
 import UserInput from "../components/common/UserInput";
 import SubmitButton from "../components/common/SubmitButton";
 import { Link } from "react-router-dom";
+import { inputLabelClass, inputFieldClass } from "../components/common/styles";
 
 export default function SignUpForm() {
   return (
@@ -11,61 +12,55 @@ export default function SignUpForm() {
         label="Username"
         type="text"
         name="username"
-        labelClass="block font-bold text-gray-700 mb-2"
-        inputClass="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        labelClass={inputLabelClass}
+        inputClass={inputFieldClass}
       />
-
       <UserInput
         label="Email"
         type="email"
         name="email"
-        labelClass="block font-bold text-gray-700 mb-2"
-        inputClass="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        labelClass={inputLabelClass}
+        inputClass={inputFieldClass}
       />
-
       <UserInput
         label="Phone Number"
         type="tel"
         name="phone_number"
-        labelClass="block font-bold text-gray-700 mb-2"
-        inputClass="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        labelClass={inputLabelClass}
+        inputClass={inputFieldClass}
       />
-
       <UserInput
         label="Date of Birth"
         type="date"
         name="date_of_birth"
-        labelClass="block font-bold text-gray-700 mb-2"
-        inputClass="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        labelClass={inputLabelClass}
+        inputClass={inputFieldClass}
       />
-
       <UserInput
         label="Street Address"
         type="text"
         name="street_address"
-        labelClass="block font-bold text-gray-700 mb-2"
-        inputClass="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        labelClass={inputLabelClass}
+        inputClass={inputFieldClass}
       />
-
       <UserInput
         label="Password"
         type="password"
         name="password"
-        labelClass="block font-bold text-gray-700 mb-2"
-        inputClass="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        labelClass={inputLabelClass}
+        inputClass={inputFieldClass}
       />
-
       <UserInput
         label="Confirm Password"
         type="password"
         name="confirm_password"
-        labelClass="block font-bold text-gray-700 mb-2"
-        inputClass="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        labelClass={inputLabelClass}
+        inputClass={inputFieldClass}
       />
 
       <SubmitButton />
 
-      <p className="text-center text-gray-600 mt-4 mb-9">
+      <p className="text-center text-gray-600 mt-4 mb-12">
         Already have an account?{" "}
         <Link to="/UserLogin" className="text-blue-500 hover:underline">
           Log In

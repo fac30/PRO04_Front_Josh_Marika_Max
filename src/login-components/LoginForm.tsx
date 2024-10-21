@@ -1,6 +1,7 @@
 import UserInput from "../components/common/UserInput";
 import SubmitButton from "../components/common/SubmitButton";
 import { Link } from "react-router-dom";
+import { inputLabelClass, inputFieldClass } from "../components/common/styles";
 
 export default function LoginForm() {
   return (
@@ -11,16 +12,15 @@ export default function LoginForm() {
         label="Username"
         type="text"
         name="username"
-        labelClass="block font-bold text-gray-700 mb-2"
-        inputClass="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" // Tailwind classes for input
+        labelClass={inputLabelClass}
+        inputClass={inputFieldClass}
       />
-
       <UserInput
         label="Password"
         type="password"
         name="password"
-        labelClass="block font-bold text-gray-700 mb-2"
-        inputClass="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        labelClass={inputLabelClass}
+        inputClass={inputFieldClass}
       />
 
       <SubmitButton />
