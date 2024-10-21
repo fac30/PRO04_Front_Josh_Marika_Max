@@ -12,7 +12,7 @@ interface Product {
   image_url: string;
 }
 
-const Main = () => {
+const Home = () => {
   const [productData, setProductData] = useState<Product[]>([]);
   const [cartCount, setCartCount] = useState(0);
 
@@ -59,4 +59,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Home;
