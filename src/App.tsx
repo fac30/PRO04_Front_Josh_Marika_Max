@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
+import UserLogin from "./pages/UserLogin";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/UserLogin" element={<UserLogin />} />
           {/* Add other routes here */}
         </Routes>
       </main>

@@ -32,7 +32,7 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/on-sale"className={linkStyles}>
+          <Link to="/on-sale" className={linkStyles}>
             ON SALE
           </Link>
         </li>
@@ -47,5 +47,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-
