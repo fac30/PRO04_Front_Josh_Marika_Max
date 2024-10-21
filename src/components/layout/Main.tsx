@@ -39,9 +39,9 @@ const Main = () => {
       className="items-center justify-center text-center px-4 py-4 flex flex-col"
       role="main"
     >
-      <h1 className="text-4xl font-bold mb-4 text-text-primary">
+      <h2 className="text-4xl font-bold mb-4 text-text-primary">
         Welcome to Font Hill Records
-      </h1>
+      </h2>
       <p className="text-xl mb-6 text-text-secondary">
         Discover and collect your favorite vinyl records
       </p>
