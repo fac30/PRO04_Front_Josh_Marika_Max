@@ -47,8 +47,8 @@ const Main = () => {
       </p>
 
       <section className="mb-12 w-full" aria-labelledby="new-on-store">
-      <h2 id="new-on-store" className="text-2xl font-semibold mb-4 text-text-primary">
-          New on Store</h2>
+      <h3 id="new-on-store" className="text-2xl font-semibold mb-4 text-text-primary">
+          New on Store</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {productData.map((product) => (
             <ProductCard key={product.id} product={product} />
