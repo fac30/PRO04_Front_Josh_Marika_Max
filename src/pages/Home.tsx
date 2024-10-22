@@ -8,6 +8,7 @@ interface Product {
   artist: string;
   price: number;
   image_url: string;
+  release_date: string; // Add release date to the Product interface
 }
 
 const Home = () => {
@@ -18,7 +19,17 @@ const Home = () => {
     const fetchProductData = async () => {
       try {
         const data: Product[] = await fetchData("vinyls", "GET");
-        setProductData(data);
+
+        // Sort by release_date in descending order (newest first) and take the top 8
+        const sortedData = data
+          .sort(
+            (a, b) =>
+              new Date(b.release_date).getTime() -
+              new Date(a.release_date).getTime(),
+          )
+          .slice(0, 8); // Limit to 8 newest albums
+
+        setProductData(sortedData);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
@@ -49,7 +60,7 @@ const Home = () => {
           id="new-on-store"
           className="text-2xl font-semibold mb-4 text-text-primary"
         >
-          New on Store
+          Latest Releases
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {productData.map((product) => (

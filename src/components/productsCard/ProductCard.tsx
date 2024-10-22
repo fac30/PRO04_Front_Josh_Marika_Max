@@ -6,6 +6,7 @@ interface Product {
   artist: string;
   price: number;
   image_url: string;
+  release_date: string;
 }
 
 interface ProductCardProps {
