@@ -10,9 +10,13 @@ interface Product {
   image_url: string;
 }
 
-const Home = () => {
+interface HomeProps {
+  setCartCount: (count: number) => void;
+}
+
+const Home = ({setCartCount}: HomeProps) => {
   const [productData, setProductData] = useState<Product[]>([]);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -25,10 +29,21 @@ const Home = () => {
     };
 
     fetchProductData();
+
+    const savedCart = localStorage.getItem("shoppingCart");
+    if(savedCart) {
+      const parsedCart = JSON.parse(savedCart);
+      setCartItems(parsedCart);
+      setCartCount(parsedCart.length);
+    }
+
   }, []);
 
-  const addToCart = () => {
-    setCartCount((prevCount) => prevCount + 1);
+  const addToCart = (product: Product) => {
+    const updateCart = [...cartItems, product];
+    setCartItems(updateCart);
+    setCartCount(updateCart.length);
+    localStorage.setItem("shoppingCart", JSON.stringify(updateCart));
   };
 
   return (
@@ -53,7 +68,7 @@ const Home = () => {
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {productData.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} addToCart={addToCart}/>
           ))}
         </div>
       </section>
