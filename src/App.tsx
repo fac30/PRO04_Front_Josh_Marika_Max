@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/" element={<Home setCartCount={setCartCount}/>} />
           <Route path="/UserLogin" element={<UserLogin />} />
           <Route path="/UserSignUp" element={<UserSignUp />} />
-          <Route path="/ShopCart" element={<ShopCart />} />
+          <Route path="/ShopCart" element={<ShopCart setCartCount={setCartCount} />} />
           {/* Add other routes here */}
         </Routes>
       </main>

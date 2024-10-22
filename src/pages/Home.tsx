@@ -8,6 +8,7 @@ interface Product {
   artist: string;
   price: number;
   image_url: string;
+  quantity: number;
 }
 
 interface HomeProps {
@@ -22,7 +23,11 @@ const Home = ({setCartCount}: HomeProps) => {
     const fetchProductData = async () => {
       try {
         const data: Product[] = await fetchData("vinyls", "GET");
-        setProductData(data);
+        const productsWithQuantity = data.map(product => ({
+          ...product,
+          quantity: 0  
+        }));
+        setProductData(productsWithQuantity);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
@@ -40,10 +45,28 @@ const Home = ({setCartCount}: HomeProps) => {
   }, []);
 
   const addToCart = (product: Product) => {
-    const updateCart = [...cartItems, product];
-    setCartItems(updateCart);
-    setCartCount(updateCart.length);
-    localStorage.setItem("shoppingCart", JSON.stringify(updateCart));
+    const existingProductIndex = cartItems.findIndex(
+      (item) => item.id === product.id
+    );
+
+    let updatedCart;
+    if (existingProductIndex >= 0) {
+      // Product exists in cart, increment quantity
+      updatedCart = cartItems.map((item, index) => {
+        if (index === existingProductIndex) {
+          return { ...item, quantity: item.quantity + 1 };
+        }
+        return item;
+      });
+    } else {
+      // Product doesn't exist in cart, add with quantity 1
+      updatedCart = [...cartItems, { ...product, quantity: 1 }];
+    }
+  
+    setCartItems(updatedCart);
+    const newCartCount = updatedCart.reduce((acc, item) => acc + item.quantity, 0);
+    setCartCount(newCartCount);
+    localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
   };
 
   return (
