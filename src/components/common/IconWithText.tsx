@@ -7,10 +7,10 @@ type IconWithTextProps = {
     onClick?: () => void;
   };
 
-
+// remuve button and everything is inside trhe <link>
   const IconWithText = ({ IconComponent, label, onClick }: IconWithTextProps) => {
     return (
-      <Link to="/ShoCart">
+      <Link to="/ShopCart">
         <button
           type="button"
           onClick={onClick}
