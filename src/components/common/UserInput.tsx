@@ -1,9 +1,13 @@
-interface UserInputProps {
+import React from "react";
+
+export interface UserInputProps {
   label: string;
   type: string;
   name: string;
   labelClass?: string;
   inputClass?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function UserInput({
@@ -12,6 +16,8 @@ export default function UserInput({
   name,
   labelClass = "",
   inputClass = "",
+  value,
+  onChange,
 }: UserInputProps) {
   return (
     <div className="mb-4">
@@ -24,6 +30,8 @@ export default function UserInput({
         name={name}
         className={inputClass}
         required
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
