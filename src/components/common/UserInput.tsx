@@ -1,13 +1,13 @@
 import React from "react";
 
-interface UserInputProps {
+export interface UserInputProps {
   label: string;
   type: string;
   name: string;
   labelClass?: string;
   inputClass?: string;
-  value: string; // Add the value prop for controlled components
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // onChange prop
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function UserInput({

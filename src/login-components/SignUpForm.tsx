@@ -3,58 +3,39 @@ import UserInput from "../components/common/UserInput";
 import SubmitButton from "../components/common/SubmitButton";
 import { Link } from "react-router-dom";
 import { inputLabelClass, inputFieldClass } from "../components/common/styles";
+import {
+  INITIAL_FORM_STATE,
+  FORM_FIELDS,
+} from "../utils/types/customerConstants";
+import { FormFields } from "../utils/types/CustomerFormFields";
 
 export default function SignUpForm() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    phone_number: "",
-    date_of_birth: "",
-    street_address: "",
-    password: "",
-    confirm_password: "",
-  });
+  const [formData, setFormData] = useState<FormFields>(INITIAL_FORM_STATE);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    // Basic validation (e.g., password confirmation)
     if (formData.password !== formData.confirm_password) {
       alert("Passwords do not match!");
       return;
     }
 
-    // Save data to local storage
     const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
-    existingUsers.push({
-      username: formData.username,
-      email: formData.email,
-      phone_number: formData.phone_number,
-      date_of_birth: formData.date_of_birth,
-      street_address: formData.street_address,
-      password: formData.password,
-    });
+    const userWithoutConfirmPassword = {
+      ...formData,
+      confirm_password: undefined,
+    };
 
+    existingUsers.push(userWithoutConfirmPassword);
     localStorage.setItem("users", JSON.stringify(existingUsers));
 
     alert("Sign up successful!");
-    setFormData({
-      username: "",
-      email: "",
-      phone_number: "",
-      date_of_birth: "",
-      street_address: "",
-      password: "",
-      confirm_password: "",
-    });
+    setFormData(INITIAL_FORM_STATE);
   };
 
   return (
@@ -64,69 +45,18 @@ export default function SignUpForm() {
     >
       <h2 className="text-2xl font-semibold text-center mb-6">Sign Up</h2>
 
-      <UserInput
-        label="Username"
-        type="text"
-        name="username"
-        labelClass={inputLabelClass}
-        inputClass={inputFieldClass}
-        value={formData.username}
-        onChange={handleChange}
-      />
-      <UserInput
-        label="Email"
-        type="email"
-        name="email"
-        labelClass={inputLabelClass}
-        inputClass={inputFieldClass}
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <UserInput
-        label="Phone Number"
-        type="tel"
-        name="phone_number"
-        labelClass={inputLabelClass}
-        inputClass={inputFieldClass}
-        value={formData.phone_number}
-        onChange={handleChange}
-      />
-      <UserInput
-        label="Date of Birth"
-        type="date"
-        name="date_of_birth"
-        labelClass={inputLabelClass}
-        inputClass={inputFieldClass}
-        value={formData.date_of_birth}
-        onChange={handleChange}
-      />
-      <UserInput
-        label="Street Address"
-        type="text"
-        name="street_address"
-        labelClass={inputLabelClass}
-        inputClass={inputFieldClass}
-        value={formData.street_address}
-        onChange={handleChange}
-      />
-      <UserInput
-        label="Password"
-        type="password"
-        name="password"
-        labelClass={inputLabelClass}
-        inputClass={inputFieldClass}
-        value={formData.password}
-        onChange={handleChange}
-      />
-      <UserInput
-        label="Confirm Password"
-        type="password"
-        name="confirm_password"
-        labelClass={inputLabelClass}
-        inputClass={inputFieldClass}
-        value={formData.confirm_password}
-        onChange={handleChange}
-      />
+      {FORM_FIELDS.map(({ label, type, name }) => (
+        <UserInput
+          key={name}
+          label={label}
+          type={type}
+          name={name}
+          labelClass={inputLabelClass}
+          inputClass={inputFieldClass}
+          value={formData[name as keyof FormFields]}
+          onChange={handleChange}
+        />
+      ))}
 
       <SubmitButton />
 
