@@ -7,17 +7,17 @@ import {
   INITIAL_FORM_STATE,
   FORM_FIELDS,
 } from "../utils/types/customerConstants";
-import { FormFields } from "../utils/types/CustomerFormFields";
+import { SHA256 } from "crypto-js"; // Correct import for SHA256
 
-export default function SignUpForm() {
-  const [formData, setFormData] = useState<FormFields>(INITIAL_FORM_STATE);
+const SignUpForm = () => {
+  const [formData, setFormData] = useState(INITIAL_FORM_STATE);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirm_password) {
@@ -25,17 +25,27 @@ export default function SignUpForm() {
       return;
     }
 
-    const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
-    const userWithoutConfirmPassword = {
-      ...formData,
-      confirm_password: undefined,
-    };
+    // Hash the password using SHA256
+    const hashedPassword = SHA256(formData.password).toString();
 
-    existingUsers.push(userWithoutConfirmPassword);
-    localStorage.setItem("users", JSON.stringify(existingUsers));
+    try {
+      // Store user data directly in localStorage without confirm_password
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const userWithoutConfirmPassword = {
+        ...formData,
+        password: hashedPassword, // Store hashed password
+        confirm_password: undefined, // Remove confirm_password
+      };
 
-    alert("Sign up successful!");
-    setFormData(INITIAL_FORM_STATE);
+      users.push(userWithoutConfirmPassword);
+      localStorage.setItem("users", JSON.stringify(users));
+
+      alert("Sign up successful!");
+      setFormData(INITIAL_FORM_STATE);
+    } catch (error) {
+      console.error("Error during signup:", error);
+      alert("An error occurred during signup. Please try again.");
+    }
   };
 
   return (
@@ -53,7 +63,7 @@ export default function SignUpForm() {
           name={name}
           labelClass={inputLabelClass}
           inputClass={inputFieldClass}
-          value={formData[name as keyof FormFields]}
+          value={formData[name]}
           onChange={handleChange}
         />
       ))}
@@ -68,4 +78,6 @@ export default function SignUpForm() {
       </p>
     </form>
   );
-}
+};
+
+export default SignUpForm;
