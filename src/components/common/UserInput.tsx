@@ -1,10 +1,10 @@
-type UserInputProps = {
+interface UserInputProps {
   label: string;
   type: string;
   name: string;
   labelClass?: string;
   inputClass?: string;
-};
+}
 
 export default function UserInput({
   label,
