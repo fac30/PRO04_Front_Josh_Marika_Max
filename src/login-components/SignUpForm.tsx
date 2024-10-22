@@ -7,8 +7,8 @@ import {
   INITIAL_FORM_STATE,
   FORM_FIELDS,
 } from "../utils/types/customerConstants";
-import { hashPassword } from "../hashing"; // Import the hashPassword function
-import { FormFields } from "../utils/types/CustomerFormFields"; // Ensure this interface exists and defines your form fields
+import { hashPassword } from "../hashing";
+import { FormFields } from "../utils/types/CustomerFormFields";
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState<FormFields>(INITIAL_FORM_STATE);
@@ -26,28 +26,21 @@ const SignUpForm = () => {
       return;
     }
 
-    // Hash the password using the imported hashPassword function
     const hashedPassword = hashPassword(formData.password);
 
-    try {
-      // Store user data directly in localStorage without confirm_password
-      const users: Omit<FormFields, "confirm_password">[] = JSON.parse(
-        localStorage.getItem("users") || "[]",
-      );
-      const userWithoutConfirmPassword: Omit<FormFields, "confirm_password"> = {
-        ...formData,
-        password: hashedPassword, // Store hashed password
-      };
+    const users: Omit<FormFields, "confirm_password">[] = JSON.parse(
+      localStorage.getItem("users") || "[]",
+    );
+    const userWithoutConfirmPassword: Omit<FormFields, "confirm_password"> = {
+      ...formData,
+      password: hashedPassword,
+    };
 
-      users.push(userWithoutConfirmPassword);
-      localStorage.setItem("users", JSON.stringify(users));
+    users.push(userWithoutConfirmPassword);
+    localStorage.setItem("users", JSON.stringify(users));
 
-      alert("Sign up successful!");
-      setFormData(INITIAL_FORM_STATE);
-    } catch (error) {
-      console.error("Error during signup:", error);
-      alert("An error occurred during signup. Please try again.");
-    }
+    alert("Sign up successful!");
+    setFormData(INITIAL_FORM_STATE);
   };
 
   return (
@@ -65,7 +58,7 @@ const SignUpForm = () => {
           name={name}
           labelClass={inputLabelClass}
           inputClass={inputFieldClass}
-          value={formData[name as keyof FormFields]} // Use key indexing to access values
+          value={formData[name as keyof FormFields]}
           onChange={handleChange}
         />
       ))}
