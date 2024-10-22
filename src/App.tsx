@@ -5,6 +5,7 @@ import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import UserSignUp from "./pages/UserSignUp";
+import UserPage from "./pages/UserPage";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/UserLogin" element={<UserLogin />} />
           <Route path="/UserSignUp" element={<UserSignUp />} />
+          <Route path="/UsserPage" element={<UserPage />} />
           {/* Add other routes here */}
         </Routes>
       </main>
