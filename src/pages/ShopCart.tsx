@@ -40,7 +40,8 @@ const ShopCart = () => {
             {cartItems.length === 0 ? (
               <p>Your cart is empty</p>
             ) : (
-              cartItems.map((product) => (
+                // change to localstore
+              cartItems.map((product) => (  
                 <div className="product" key={product.id}>
                   <img src={product.image_url} alt={product.title} />
                   <h3>{product.title}</h3>
