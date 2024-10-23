@@ -8,5 +8,5 @@ import { SHA256 } from "crypto-js";
  * @returns The hashed password as a string.
  */
 export const hashPassword = (password: string): string => {
-  return SHA256(password).toString();
+  return SHA256(password).toString(); 
 };

@@ -22,6 +22,7 @@ export interface Customer extends BaseEntity {
   payment_details?: string;
   date_of_birth?: Date;
   street_address: string;
+  city: string;
   location_id: number; // foreign key reference to locations
 }
 
