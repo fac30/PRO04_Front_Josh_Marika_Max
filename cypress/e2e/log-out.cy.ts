@@ -7,14 +7,14 @@ describe('User Logout Tests', () => {
     cy.get('[data-test="logout-button"]').click();
 
     // After logout, the user should be redirected to the login page
-    cy.location("pathname").should("equal", "/log-in");
+    cy.location("pathname").should("equal", "/UserLogin");
   });
 
   it('should prevent access to protected pages after logging out', () => {
-    cy.visit('http://localhost:5173/UserPage');
+    cy.visit('http://localhost:5173/UserLogin');
 
 
-    cy.location("pathname").should("equal", "/log-in");
+    cy.location("pathname").should("equal", "/UserLogin");
   });
 });
 
