@@ -4,8 +4,10 @@ interface TotalPrioceProps {
 
 const TotalPrice = ({amount}: TotalPrioceProps) => {
     return (
-        <div className="total">
-        <h2>Total Price: £{amount.toFixed(2)}</h2>
+        <div 
+        id="total"
+        className=" text-center py-6 text-black mt-6 rounded-md">
+        <p className=" text-2xl font-semibold">Total Price: £{amount.toFixed(2)}</p>
       </div>
     )
         

@@ -66,18 +66,29 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
   };
 
   return (
-    <section className="cart">
-      <h1>Shopping Cart</h1>
+    <section 
+    id="cart"
+    className="py-8 bg-background-light">
+      <h1 className="text-4xl font-bold mb-4 text-text-primary text-center">Shopping Cart</h1>
 
-      <div className="container">
+      <div 
+      id="container"
+      className="mx-auto">
         {cartItems.length === 0 ? (
-          <p>Your cart is empty</p>
+          <p className="text-text-secondary text-center">Your cart is empty</p>
         ) : (
           cartItems.map((product) => (
-            <div className="product" key={product.id}>
-              <img src={product.image_url} alt={product.title} />
-              <h3>{product.title}</h3>
-              <p>£{product.price.toFixed(2)}</p>
+            <div 
+            id="product"
+            className="flex items-center justify-between p-4 mb-4 border border-gray-300 rounded-md bg-background-default shadow-sm"
+            key={product.id}>
+              <img src={product.image_url} alt={product.title} 
+              className="w-24 h-24 object-cover rounded-lg"/>
+                <div className="ml-4 flex-grow">
+            <h3 className="text-lg font-medium text-text-primary">{product.title}</h3>
+            <p className="text-text-secondary">{product.artist}</p>
+            <p className="font-bold text-dark">£{product.price.toFixed(2)}</p>
+          </div>
               <Quantifier
                 quantity={product.quantity}
                 onIncrease={() => increaseQuantity(product.id)}
