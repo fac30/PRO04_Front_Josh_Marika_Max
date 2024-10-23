@@ -68,7 +68,8 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
   return (
     <section 
     id="cart"
-    className="py-8 bg-background-light">
+    className="bg-background-light p-4 shadow rounded-t-lg"
+    >
       <h1 className="text-4xl font-bold mb-4 text-text-primary text-center">Shopping Cart</h1>
 
       <div 
