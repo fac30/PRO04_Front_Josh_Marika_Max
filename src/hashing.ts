@@ -1,12 +1,9 @@
-// src/utils/hashPassword.ts
+import bcrypt from "bcryptjs";
 
-import { SHA256 } from "crypto-js";
-
-/**
- * Hashes the given password using SHA256.
- * @param password - The password to hash.
- * @returns The hashed password as a string.
- */
-export const hashPassword = (password: string): string => {
-  return SHA256(password).toString(); 
+const hashPassword = async (password: string): Promise<string> => {
+  const saltRounds = 12; // Number of salt rounds
+  const hash = await bcrypt.hash(password, saltRounds); // Hashing the password
+  return hash; // Return the hashed password
 };
+
+export default hashPassword;
