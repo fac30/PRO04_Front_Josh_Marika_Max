@@ -73,7 +73,8 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
       >
         <h1 className="text-4xl font-bold mb-4 text-text-primary text-center">Shopping Cart</h1>
       
-        <div id="container" className="max-w-6xl mx-auto">
+        <div id="container" 
+        className="max-w-6xl mx-auto ">
           {cartItems.length === 0 ? (
             <p className="text-text-primary text-center">Your cart is empty</p>
           ) : (
@@ -103,7 +104,8 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
           )}
         </div>
   
-        <div className="border-t border-b border-gray-300 py-4 flex justify-end max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto flex">
+        {/* <div className="border-t border-b border-gray-300 py-4 flex justify-end max-w-6xl mx-auto"> */}
           <p className="text-lg font-bold">
             Total: <span className="text-2xl font-semibold text-text-dark">£{totalPrice.toFixed(2)}</span>
           </p>
