@@ -111,3 +111,5 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
       </section>
   );
 };  
+
+export default ShopCart;
