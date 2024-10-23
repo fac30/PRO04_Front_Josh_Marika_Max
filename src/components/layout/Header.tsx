@@ -5,7 +5,12 @@ import { FaUserCircle, FaShoppingBag } from "react-icons/fa";
 import IconWithText from "../common/IconWithText";
 import SearchBar from "../common/SearchBar";
 
-const Header = () => {
+
+interface HeaderProps {
+  cartCount: number;
+}
+
+const Header = ({cartCount}: HeaderProps)  => {
   const navigate = useNavigate();
 
   const handleAccountClick = () => {
@@ -13,7 +18,7 @@ const Header = () => {
   };
 
   const handleCartClick = () => {
-    navigate("/cart");
+    navigate("/ShopCart");
   };
 
   return (
@@ -32,7 +37,7 @@ const Header = () => {
           />
           <IconWithText
             IconComponent={FaShoppingBag}
-            label="Cart"
+            label={`Cart (${cartCount})`}
             onClick={handleCartClick}
           />
         </div>

@@ -12,7 +12,7 @@ export default function NewsletterForm() {
           type="email"
           name="email"
           labelClass="block text-gray-700 mb-2"
-          inputClass="border border-gray-300 p-2 rounded-lg focus:outline-none focus:border-background-light transition w-full"
+          inputClass="border border-gray-300 p-2 rounded-lg focus:outline-none focus:border-background-light w-full"
         />
         <button className="bg-background-light text-black py-2 rounded-lg hover:bg-background-footer transition">
           Subscribe

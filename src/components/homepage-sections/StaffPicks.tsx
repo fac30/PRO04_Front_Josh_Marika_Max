@@ -2,10 +2,16 @@ import { Vinyl } from "../../utils/types";
 import ProductCard from "../productsCard/ProductCard";
 
 interface StaffPicksProps {
-  products: Vinyl[];
+  vinyl: Vinyl[];
+  addToCart: (product: Vinyl) => void; // Add this line
 }
 
-const StaffPicks = ({ products }: StaffPicksProps) => {
+const StaffPicks = ({ vinyl }: StaffPicksProps) => {
+  function addToCart(vinyl: Vinyl): void {
+    throw new Error("Function not implemented.");
+  }
+
+  // Destructure 'vinyl'
   return (
     <section className="mb-12 max-w-90" aria-labelledby="staff-picks">
       <h3
@@ -15,8 +21,8 @@ const StaffPicks = ({ products }: StaffPicksProps) => {
         Staff's Picks:
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-        {products.map((product) => (
-          <ProductCard key={product.id} Vinyl={product} />
+        {vinyl.map((product) => (
+          <ProductCard key={product.id} vinyl={product} addToCart={addToCart} />
         ))}
       </div>
     </section>

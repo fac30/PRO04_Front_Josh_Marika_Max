@@ -2,10 +2,11 @@ import ProductCard from "../productsCard/ProductCard";
 import { Vinyl } from "../../utils/types";
 
 interface LatestReleasesProps {
-  products: Vinyl[];
+  vinyl: Vinyl[];
+  addToCart: (product: Vinyl) => void; // Add this line
 }
 
-const LatestReleases = ({ products }: LatestReleasesProps) => {
+const LatestReleases = ({ vinyl, addToCart }: LatestReleasesProps) => {
   return (
     <section className="mb-12 max-w-90" aria-labelledby="new-on-store">
       <h3
@@ -15,8 +16,12 @@ const LatestReleases = ({ products }: LatestReleasesProps) => {
         Latest Releases:
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-        {products.map((product) => (
-          <ProductCard key={product.id} Vinyl={product} />
+        {vinyl.map((product) => (
+          <ProductCard
+            key={product.id}
+            vinyl={product}
+            addToCart={addToCart} // Pass the addToCart function
+          />
         ))}
       </div>
     </section>

@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "../utils/fetch-data";
 import NewsletterForm from "../components/NewsLetterForm";
-import LatestReleases from "../components/homepage-sections/LatestRelases"; // Corrected the typo
+import LatestReleases from "../components/homepage-sections/LatestReleases"; // Corrected the typo
 import StaffPicks from "../components/homepage-sections/StaffPicks";
 import GenreSection from "../components/homepage-sections/BrowseByGenre";
-import { Vinyl, Genre } from "../utils/types";
+import { Vinyl, Genre } from "../utils/types"; // Ensure Product is imported
 
-const Home = () => {
+interface HomeProps {
+  setCartCount: (count: number) => void;
+}
+
+const Home = ({ setCartCount }: HomeProps) => {
   const [latestReleases, setLatestReleases] = useState<Vinyl[]>([]);
   const [staffPicks, setStaffPicks] = useState<Vinyl[]>([]);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [genreVinyls, setGenreVinyls] = useState<{
     [key: string]: Vinyl[] | null;
   }>({});
+  const [productData, setProductData] = useState<Vinyl[]>([]); // Changed to Vinyl[]
+  const [cartItems, setCartItems] = useState<Vinyl[]>([]); // Changed to Vinyl[]
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -35,10 +41,6 @@ const Home = () => {
       }
     };
 
-    fetchGenres();
-  }, []);
-
-  useEffect(() => {
     const fetchProductData = async () => {
       try {
         const data: Vinyl[] = await fetchData("vinyls", "GET");
@@ -56,15 +58,57 @@ const Home = () => {
         const shuffledVinyls = [...data]
           .sort(() => 0.5 - Math.random())
           .slice(0, 4);
-
         setStaffPicks(shuffledVinyls);
+
+        // Ensure you map product data to include quantity
+        const productsWithQuantity = data.map((product) => ({
+          ...product,
+          quantity: 0,
+        }));
+        setProductData(productsWithQuantity);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
     };
 
+    fetchGenres();
     fetchProductData();
-  }, []);
+
+    const savedCart = localStorage.getItem("shoppingCart");
+    if (savedCart) {
+      const parsedCart = JSON.parse(savedCart);
+      setCartItems(parsedCart);
+      setCartCount(parsedCart.length);
+    }
+  }, [setCartCount]); // Add setCartCount as a dependency
+
+  const addToCart = (product: Vinyl) => {
+    const existingProductIndex = cartItems.findIndex(
+      (item) => item.id === product.id,
+    );
+
+    let updatedCart;
+    if (existingProductIndex >= 0) {
+      // Product exists in cart, increment quantity
+      updatedCart = cartItems.map((item, index) => {
+        if (index === existingProductIndex) {
+          return { ...item, quantity: item.quantity + 1 };
+        }
+        return item;
+      });
+    } else {
+      // Product doesn't exist in cart, add with quantity 1
+      updatedCart = [...cartItems, { ...product, quantity: 1 }];
+    }
+
+    setCartItems(updatedCart);
+    const newCartCount = updatedCart.reduce(
+      (acc, item) => acc + item.quantity,
+      0,
+    );
+    setCartCount(newCartCount);
+    localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
+  };
 
   return (
     <div
@@ -79,8 +123,8 @@ const Home = () => {
         Discover and collect your favorite vinyl records
       </p>
 
-      <LatestReleases products={latestReleases} />
-      <StaffPicks products={staffPicks} />
+      <LatestReleases vinyl={latestReleases} addToCart={addToCart} />
+      <StaffPicks vinyl={staffPicks} addToCart={addToCart} />
       <GenreSection genres={genres} genreVinyls={genreVinyls} />
 
       <section className="mb-12 max-w-90" aria-labelledby="newsletter">
@@ -90,8 +134,8 @@ const Home = () => {
         >
           Sign Up To Our Newsletter:
         </h3>
-        <NewsletterForm />
       </section>
+      <NewsletterForm />
     </div>
   );
 };

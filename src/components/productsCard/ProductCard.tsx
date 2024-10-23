@@ -1,17 +1,20 @@
+// src/components/productsCard/ProductCard.tsx
+
 import { Vinyl } from "../../utils/types";
 
 interface ProductCardProps {
-  Vinyl: Vinyl;
+  vinyl: Vinyl; // Changed to 'vinyl' to follow convention
+  addToCart: (vinyl: Vinyl) => void; // Include addToCart in the props
 }
 
-const ProductCard = ({ Vinyl }: ProductCardProps) => {
+const ProductCard = ({ vinyl, addToCart }: ProductCardProps) => {
   return (
     <div className="bg-white shadow-md p-4 max-w-80 w-full">
-      {Vinyl.image_url ? (
+      {vinyl.image_url ? (
         <img
-          src={Vinyl.image_url}
-          alt={`Vinyl cover for ${Vinyl.title}`}
-          className=" object-cover"
+          src={vinyl.image_url}
+          alt={`Vinyl cover for ${vinyl.title}`}
+          className="object-cover"
         />
       ) : (
         <div className="w-full h-48 bg-gray-200 flex items-center justify-center rounded-t-lg">
@@ -19,10 +22,13 @@ const ProductCard = ({ Vinyl }: ProductCardProps) => {
         </div>
       )}
       <div className="p-4">
-        <h2 className="text-lg font-bold mb-2">{Vinyl.title}</h2>
-        <p className="text-gray-600">{Vinyl.artist}</p>
-        <p className="text-gray-800 font-semibold">£{Vinyl.price}</p>
-        <button className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition">
+        <h2 className="text-lg font-bold mb-2">{vinyl.title}</h2>
+        <p className="text-gray-600">{vinyl.artist}</p>
+        <p className="text-gray-800 font-semibold">£{vinyl.price}</p>
+        <button
+          className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition"
+          onClick={() => addToCart(vinyl)} // Pass the vinyl object to addToCart
+        >
           Add To Basket
         </button>
       </div>

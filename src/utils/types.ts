@@ -70,7 +70,7 @@ export interface Vinyl extends BaseEntity {
   title: string;
   release_date?: Date;
   limited_edition: boolean;
-  genre_id: number; // foreign key to genres
+  genre_id: number;
   condition_id: number; // foreign key to conditions
   price_range_id: number; // foreign key to price_ranges
   collection_type_id: number; // foreign key to collection_types
@@ -80,6 +80,7 @@ export interface Vinyl extends BaseEntity {
   image_url?: string;
   discount?: number;
   on_sale: boolean;
+  quantity: number;
 }
 
 export interface Format extends BaseEntity {
