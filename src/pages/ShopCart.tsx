@@ -74,9 +74,9 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
 
       <div 
       id="container"
-      className="mx-auto">
+      className="max-w-6xl mx-auto">
         {cartItems.length === 0 ? (
-          <p className="text-text-secondary text-center">Your cart is empty</p>
+          <p className="text-text-primary text-center">Your cart is empty</p>
         ) : (
           cartItems.map((product) => (
             <div 
@@ -100,7 +100,11 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
         )}
       </div>
 
-      <TotalPrice amount={totalPrice} />
+      <div className="border-t border-b border-gray-300 py-4 flex justify-end max-w-6xl mx-auto">
+        <p className="text-lg font-bold">
+          Total: <span className="text-2xl font-semibold text-text-dark">£{totalPrice.toFixed(2)}</span>
+        </p>
+      </div>
     </section>
   );
 };

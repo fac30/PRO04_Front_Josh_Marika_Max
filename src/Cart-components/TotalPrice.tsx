@@ -1,17 +1,16 @@
-interface TotalPrioceProps {
+interface TotalPriceProps {
     amount: number;
-}
-
-const TotalPrice = ({amount}: TotalPrioceProps) => {
+  }
+  
+  const TotalPrice = ({ amount }: TotalPriceProps) => {
     return (
-        <div 
-        id="total"
-        className=" text-center py-6 text-black mt-6 rounded-md">
-        <p className=" text-2xl font-semibold">Total Price: £{amount.toFixed(2)}</p>
+      <div className="border-t border-b border-gray-300 py-4 flex justify-end pr-4">
+        <p className="text-lg font-bold">
+          Total: <span className="text-2xl font-semibold text-text-dark">£{amount.toFixed(2)}</span>
+        </p>
       </div>
-    )
-        
-    
-};
-
-export default TotalPrice;
+    );
+  };
+  
+  export default TotalPrice;
+  
