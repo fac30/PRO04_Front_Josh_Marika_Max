@@ -1,6 +1,7 @@
-const UserPage = () => {
+const UserPage: React.FC = () => {
     return (
-      <div id="UserPage">
+      <div>
+        <h1>User Page</h1>
         <button data-test="logout-button">Logout</button>
       </div>
     );
