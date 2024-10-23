@@ -1,25 +1,16 @@
-// ProductCard.tsx
-
-interface Product {
-  id: number;
-  title: string;
-  artist: string;
-  price: number;
-  image_url: string;
-  release_date: string;
-}
+import { Vinyl } from "../../utils/types";
 
 interface ProductCardProps {
-  product: Product;
+  Vinyl: Vinyl;
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ Vinyl }: ProductCardProps) => {
   return (
     <div className="bg-white shadow-md p-4 max-w-80 w-full">
-      {product.image_url ? (
+      {Vinyl.image_url ? (
         <img
-          src={product.image_url}
-          alt={`Vinyl cover for ${product.title}`}
+          src={Vinyl.image_url}
+          alt={`Vinyl cover for ${Vinyl.title}`}
           className=" object-cover"
         />
       ) : (
@@ -28,9 +19,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       )}
       <div className="p-4">
-        <h2 className="text-lg font-bold mb-2">{product.title}</h2>
-        <p className="text-gray-600">{product.artist}</p>
-        <p className="text-gray-800 font-semibold">£{product.price}</p>
+        <h2 className="text-lg font-bold mb-2">{Vinyl.title}</h2>
+        <p className="text-gray-600">{Vinyl.artist}</p>
+        <p className="text-gray-800 font-semibold">£{Vinyl.price}</p>
         <button className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition">
           Add To Basket
         </button>
