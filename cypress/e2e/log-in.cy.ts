@@ -11,6 +11,7 @@ describe('User Authentication Tests', () => {
     cy.get('[name="password"]').type('validPassword');
 
 
+
     cy.get('button[type="submit"]').click();
 
     cy.location("pathname").should("equal", "/UserPage");
@@ -26,8 +27,8 @@ describe('User Authentication Tests', () => {
     cy.get('button[type="submit"]').click();
 
     // error message after login atempt
-    cy.get('[class=.error-message]').should('be.visible')
-      .and('contain', 'Email or password is incorrect');
+    cy.get('.error-message').should('be.visible').and('contain', 'Email or password is incorrect');
+
   });
 
 });
