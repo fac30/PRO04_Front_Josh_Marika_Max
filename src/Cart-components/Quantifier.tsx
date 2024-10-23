@@ -1,17 +1,17 @@
 interface QuantifierProps {
     quantity: number;
-    onIcrease: () => void;
+    onIncrease: () => void;
     onDecrease: () => void;
 }
 
-const Quantifier = ({quantity, onIcrease, onDecrease}: QuantifierProps) => {
+const Quantifier = ({quantity, onIncrease, onDecrease}: QuantifierProps) => {
     return (
         <div className="quantity-controls">
             <button className="decrease-btn" onClick={onDecrease}>
                 -
             </button>
             <span>{quantity}</span>
-            <button className="increase-btn" onClick={onIcrease}>
+            <button className="increase-btn" onClick={onIncrease}>
                 +
             </button>
         </div>
