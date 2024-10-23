@@ -1,28 +1,20 @@
-// ProductCard.tsx
+// src/components/productsCard/ProductCard.tsx
 
-interface Product {
-  id: number;
-  title: string;
-  artist: string;
-  price: number;
-  image_url: string;
-  quantity: number;
-}
+import { Vinyl } from "../../utils/types";
 
 interface ProductCardProps {
-  product: Product;
-  addToCart: (Product: Product) => void;
+  vinyl: Vinyl; // Changed to 'vinyl' to follow convention
+  addToCart: (vinyl: Vinyl) => void; // Include addToCart in the props
 }
 
-const ProductCard = ({ product, addToCart }: ProductCardProps) => {
-
+const ProductCard = ({ vinyl, addToCart }: ProductCardProps) => {
   return (
     <div className="bg-white shadow-md p-4 max-w-80 w-full">
-      {product.image_url ? (
+      {vinyl.image_url ? (
         <img
-          src={product.image_url}
-          alt={`Vinyl cover for ${product.title}`}
-          className=" object-cover"
+          src={vinyl.image_url}
+          alt={`Vinyl cover for ${vinyl.title}`}
+          className="object-cover"
         />
       ) : (
         <div className="w-full h-48 bg-gray-200 flex items-center justify-center rounded-t-lg">
@@ -30,11 +22,13 @@ const ProductCard = ({ product, addToCart }: ProductCardProps) => {
         </div>
       )}
       <div className="p-4">
-        <h2 className="text-lg font-bold mb-2">{product.title}</h2>
-        <p className="text-gray-600">{product.artist}</p>
-        <p className="text-gray-800 font-semibold">£{product.price}</p>
-        <button className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition"
-        onClick={() => addToCart(product)}>
+        <h2 className="text-lg font-bold mb-2">{vinyl.title}</h2>
+        <p className="text-gray-600">{vinyl.artist}</p>
+        <p className="text-gray-800 font-semibold">£{vinyl.price}</p>
+        <button
+          className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition"
+          onClick={() => addToCart(vinyl)} // Pass the vinyl object to addToCart
+        >
           Add To Basket
         </button>
       </div>
