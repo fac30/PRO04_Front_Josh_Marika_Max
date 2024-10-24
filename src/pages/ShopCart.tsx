@@ -84,9 +84,9 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
             <p className="font-bold text-dark">£{vinyl.price.toFixed(2)}</p>
           </div>
               <Quantifier
-                quantity={Vinyl.quantity}
-                onIncrease={() => increaseQuantity(Vinyl.id)}
-                onDecrease={() => decreaseQuantity(Vinyl.id)}
+                quantity={vinyl.quantity}
+                onIncrease={() => increaseQuantity(vinyl.id)}
+                onDecrease={() => decreaseQuantity(vinyl.id)}
               />
             </div>
           ))
