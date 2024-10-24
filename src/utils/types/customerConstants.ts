@@ -1,4 +1,4 @@
-import { FormFields } from "./customerFormFields";
+import { FormFields } from "../types";
 
 export const INITIAL_FORM_STATE: FormFields = {
   username: "",

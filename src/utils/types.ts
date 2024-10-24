@@ -133,3 +133,27 @@ export interface ShippingLocation extends BaseEntity {
   shipping_options_id: number; // foreign key to shipping_options
   location_id: number; // foreign key to locations
 }
+
+export interface FormFields {
+  username: string;
+  email: string;
+  phone_number: string;
+  date_of_birth: string;
+  street_address: string;
+  password_hash: string;
+  password: string;
+  confirm_password: string;
+  city: string;
+  location_id: number;
+}
+
+export interface UserObject {
+  username: string;
+  email: string;
+  phone_number: string;
+  date_of_birth: string;
+  street_address: string;
+  password_hash: string;
+  city: string;
+  location_id: number;
+}

@@ -8,21 +8,11 @@ import {
   FORM_FIELDS,
 } from "../utils/types/customerConstants";
 import hashPassword from "../hashing";
-import { FormFields } from "../utils/types/customerFormFields";
+import { FormFields } from "../utils/types";
+import { UserObject } from "../utils/types";
 import { fetchData } from "../utils/fetch-data";
 
-interface UserObject {
-  username: string;
-  email: string;
-  phone_number: string;
-  date_of_birth: string;
-  street_address: string;
-  password_hash: string;
-  city: string;
-  location_id: number;
-}
-
-const SignUpForm: React.FC = () => {
+const SignUpForm = () => {
   const [formData, setFormData] = useState<FormFields>(INITIAL_FORM_STATE);
   const [error, setError] = useState<string>("");
 
