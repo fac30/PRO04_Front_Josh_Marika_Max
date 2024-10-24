@@ -71,17 +71,17 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
         {cartItems.length === 0 ? (
           <p className="text-text-primary text-center">Your cart is empty</p>
         ) : (
-          cartItems.map((Vinyl) => (
+          cartItems.map((vinyl) => (
             <div 
-            id="Vinyl"
+            id="vinyl"
             className="flex items-center justify-between p-4 mb-4 border border-gray-300 rounded-md bg-background-default shadow-sm"
-            key={Vinyl.id}>
-              <img src={Vinyl.image_url} alt={Vinyl.title} 
+            key={vinyl.id}>
+              <img src={vinyl.image_url} alt={vinyl.title} 
               className="w-24 h-24 object-cover rounded-lg"/>
                 <div className="ml-4 flex-grow">
-            <h3 className="text-lg font-medium text-text-primary">{Vinyl.title}</h3>
-            <p className="text-text-secondary">{Vinyl.artist}</p>
-            <p className="font-bold text-dark">£{Vinyl.price.toFixed(2)}</p>
+            <h3 className="text-lg font-medium text-text-primary">{vinyl.title}</h3>
+            <p className="text-text-secondary">{vinyl.artist}</p>
+            <p className="font-bold text-dark">£{vinyl.price.toFixed(2)}</p>
           </div>
               <Quantifier
                 quantity={Vinyl.quantity}
