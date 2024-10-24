@@ -6,18 +6,47 @@ import { inputLabelClass, inputFieldClass } from "../components/common/styles";
 import {
   INITIAL_FORM_STATE,
   FORM_FIELDS,
+  Locations,
 } from "../utils/types/customerConstants";
 import hashPassword from "../hashing";
 import { FormFields, UserObject } from "../utils/types";
 import { fetchData } from "../utils/fetch-data";
 
+const LocationSelect = ({
+  value,
+  onChange,
+}: {
+  value: number;
+  onChange: (value: number) => void;
+}) => (
+  <select
+    value={value}
+    onChange={(e) => onChange(Number(e.target.value))}
+    className={inputFieldClass}
+  >
+    {Locations.map(({ id, country, region }) => (
+      <option key={id} value={id}>
+        {country}
+        {region ? ` - ${region}` : ""}
+      </option>
+    ))}
+  </select>
+);
+
 const SignUpForm = () => {
   const [formData, setFormData] = useState<FormFields>(INITIAL_FORM_STATE);
-  const [error, setError] = useState<string>("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement> | number | string,
+    fieldName?: string,
+  ) => {
+    const value =
+      typeof e === "number" || typeof e === "string" ? e : e.target.value;
+
+    setFormData((prev) => ({
+      ...prev,
+      [fieldName ?? e.target.name]: value,
+    }));
   };
 
   const createUserObject = async (): Promise<UserObject> => {
@@ -29,16 +58,36 @@ const SignUpForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirm_password) {
-      setError("Passwords do not match.");
-      return;
+    const userObject = await createUserObject();
+    await fetchData("register", "POST", userObject);
+    console.log("User saved successfully.");
+  };
+
+  const renderFormField = (field: (typeof FORM_FIELDS)[number]) => {
+    if (field.name === "location_id") {
+      return (
+        <div key={field.name} className="flex flex-col gap-2">
+          <label className={inputLabelClass}>{field.label}</label>
+          <LocationSelect
+            value={formData.location_id}
+            onChange={(value) => handleChange(value, "location_id")}
+          />
+        </div>
+      );
     }
 
-    setError("");
-
-    const userObject = await createUserObject();
-    const result = await fetchData("register", "POST", userObject);
-    console.log("User saved successfully:", result);
+    return (
+      <UserInput
+        key={field.name}
+        label={field.label}
+        type={field.type}
+        name={field.name}
+        labelClass={inputLabelClass}
+        inputClass={inputFieldClass}
+        value={formData[field.name as keyof FormFields]}
+        onChange={handleChange}
+      />
+    );
   };
 
   return (
@@ -47,19 +96,7 @@ const SignUpForm = () => {
       onSubmit={handleSubmit}
     >
       <h2 className="text-2xl font-semibold text-center mb-6">Sign Up</h2>
-      {FORM_FIELDS.map(({ label, type, name }) => (
-        <UserInput
-          key={name}
-          label={label}
-          type={type}
-          name={name}
-          labelClass={inputLabelClass}
-          inputClass={inputFieldClass}
-          value={formData[name as keyof FormFields]}
-          onChange={handleChange}
-        />
-      ))}
-      {error && <p className="text-red-500 text-center">{error}</p>}
+      {FORM_FIELDS.map(renderFormField)}
       <SubmitButton />
       <p className="text-center text-gray-600 mt-4 mb-12">
         Already have an account?{" "}

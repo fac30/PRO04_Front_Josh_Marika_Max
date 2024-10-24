@@ -17,8 +17,11 @@ const Home = ({ setCartCount }: HomeProps) => {
   const [genreVinyls, setGenreVinyls] = useState<{
     [key: string]: Vinyl[] | null;
   }>({});
-  const [productData, setProductData] = useState<Vinyl[]>([]); // Changed to Vinyl[]
-  const [cartItems, setCartItems] = useState<Vinyl[]>([]); // Changed to Vinyl[]
+  const [coversByGenre, setCoversByGenre] = useState<{
+    [key: string]: string | null;
+  }>({});
+  const [productData, setProductData] = useState<Vinyl[]>([]);
+  const [cartItems, setCartItems] = useState<Vinyl[]>([]);
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -26,16 +29,30 @@ const Home = ({ setCartCount }: HomeProps) => {
         const genresData: Genre[] = await fetchData("genres", "GET");
         setGenres(genresData);
 
+        const covers: { [key: string]: string | null } = {}; // Initialize an empty object to hold covers
+
         for (const genre of genresData) {
           const vinyls: Vinyl[] = await fetchData(
             `vinyls?genre=${genre.genre}`,
             "GET",
           );
+
           setGenreVinyls((prev) => ({
             ...prev,
             [genre.genre]: vinyls.length > 0 ? vinyls : null,
           }));
+
+          // Get a random vinyl cover image for the genre
+          if (vinyls.length > 0) {
+            const randomVinyl =
+              vinyls[Math.floor(Math.random() * vinyls.length)];
+            covers[genre.genre] = randomVinyl.coverImageUrl; // Adjust this to match your cover image property
+          } else {
+            covers[genre.genre] = null; // No vinyls found for this genre
+          }
         }
+
+        setCoversByGenre(covers); // Update state with the new covers object
       } catch (error) {
         console.error("Error fetching genre data:", error);
       }
@@ -44,7 +61,6 @@ const Home = ({ setCartCount }: HomeProps) => {
     const fetchProductData = async () => {
       try {
         const data: Vinyl[] = await fetchData("vinyls", "GET");
-
         const sortedLatest = data
           .sort((a, b) => {
             const dateA = new Date(a.release_date || 0).getTime();
@@ -60,7 +76,6 @@ const Home = ({ setCartCount }: HomeProps) => {
           .slice(0, 4);
         setStaffPicks(shuffledVinyls);
 
-        // Ensure you map product data to include quantity
         const productsWithQuantity = data.map((product) => ({
           ...product,
           quantity: 0,
@@ -80,7 +95,7 @@ const Home = ({ setCartCount }: HomeProps) => {
       setCartItems(parsedCart);
       setCartCount(parsedCart.length);
     }
-  }, [setCartCount]); // Add setCartCount as a dependency
+  }, [setCartCount]);
 
   const addToCart = (product: Vinyl) => {
     const existingProductIndex = cartItems.findIndex(
@@ -89,7 +104,6 @@ const Home = ({ setCartCount }: HomeProps) => {
 
     let updatedCart;
     if (existingProductIndex >= 0) {
-      // Product exists in cart, increment quantity
       updatedCart = cartItems.map((item, index) => {
         if (index === existingProductIndex) {
           return { ...item, quantity: item.quantity + 1 };
@@ -97,7 +111,6 @@ const Home = ({ setCartCount }: HomeProps) => {
         return item;
       });
     } else {
-      // Product doesn't exist in cart, add with quantity 1
       updatedCart = [...cartItems, { ...product, quantity: 1 }];
     }
 
@@ -122,11 +135,14 @@ const Home = ({ setCartCount }: HomeProps) => {
       <p className="text-xl mb-6 text-text-secondary">
         Discover and collect your favorite vinyl records
       </p>
-
       <LatestReleases vinyl={latestReleases} addToCart={addToCart} />
       <StaffPicks vinyl={staffPicks} addToCart={addToCart} />
-      <GenreSection genres={genres} genreVinyls={genreVinyls} />
-
+      <GenreSection
+        genres={genres}
+        genreVinyls={genreVinyls}
+        coversByGenre={coversByGenre}
+      />{" "}
+      {/* Pass coversByGenre */}
       <section className="mb-12 max-w-90" aria-labelledby="newsletter">
         <h3
           id="newsletter"
