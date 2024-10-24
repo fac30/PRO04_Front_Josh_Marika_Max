@@ -63,7 +63,7 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
     id="cart"
     className="bg-background-light p-4 shadow rounded-t-lg"
     >
-      <h1 className="text-4xl font-bold mb-4 text-text-primary text-center">Shopping Cart</h1>
+      <h2 className="text-4xl font-bold mb-4 text-text-primary text-center">Shopping Cart</h2>
 
       <div 
       id="container"
