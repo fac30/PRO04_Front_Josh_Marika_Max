@@ -1,4 +1,4 @@
-import { FormFields } from "../types";
+import { FormFields, Location } from "../types";
 
 export const INITIAL_FORM_STATE: FormFields = {
   username: "",
@@ -24,3 +24,24 @@ export const FORM_FIELDS = [
   { label: "Confirm Password", type: "password", name: "confirm_password" },
   { label: "location", type: "number", name: "location_id" },
 ] as const;
+
+export const Locations: Location[] = [
+  { id: 1, country: "United Kingdom", region: "North East" },
+  { id: 2, country: "United Kingdom", region: "North West" },
+  { id: 3, country: "United Kingdom", region: "Yorkshire and the Humber" },
+  { id: 4, country: "United Kingdom", region: "East Midlands" },
+  { id: 5, country: "United Kingdom", region: "West Midlands" },
+  { id: 6, country: "United Kingdom", region: "East of England" },
+  { id: 7, country: "United Kingdom", region: "London" },
+  { id: 8, country: "United Kingdom", region: "South East" },
+  { id: 9, country: "United Kingdom", region: "South West" },
+  { id: 10, country: "France" }, // Remove region property entirely for countries without regions
+  { id: 11, country: "Spain" },
+  { id: 12, country: "Italy" },
+  { id: 13, country: "Germany" },
+  { id: 14, country: "Sweden" },
+  { id: 15, country: "Denmark" },
+  { id: 16, country: "Netherlands" },
+  { id: 17, country: "Norway" },
+  { id: 18, country: "Croatia" },
+];

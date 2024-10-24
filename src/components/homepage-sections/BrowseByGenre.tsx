@@ -3,12 +3,16 @@ import GenreCard from "../common/GenreCard";
 
 interface GenreSectionProps {
   genres: Genre[];
-  genreVinyls: {
-    [key: string]: Vinyl[] | null; // Keep it as is
-  };
+  genreVinyls: { [key: string]: Vinyl[] | null };
+  coversByGenre: { [key: string]: string | null }; // Include coversByGenre in the props
 }
 
-const GenreSection = ({ genres, genreVinyls }: GenreSectionProps) => {
+const GenreSection = ({
+  genres,
+  genreVinyls,
+  coversByGenre,
+}: GenreSectionProps) => {
+  // Ensure coversByGenre is destructured
   return (
     <section className="mb-12 max-w-90" aria-labelledby="genres">
       <h3
@@ -21,9 +25,15 @@ const GenreSection = ({ genres, genreVinyls }: GenreSectionProps) => {
         {genres.slice(7, 12).map((genre) => {
           const vinyls = genreVinyls[genre.genre];
           const product = vinyls && vinyls.length > 0 ? vinyls[0] : null;
+          const coverImage = coversByGenre[genre.genre]; // Get the cover image for the genre
 
           return (
-            <GenreCard key={genre.id} genre={genre.genre} product={product} />
+            <GenreCard
+              key={genre.id}
+              genre={genre.genre}
+              product={product}
+              coverImage={coverImage}
+            /> // Pass coverImage to GenreCard
           );
         })}
       </div>
