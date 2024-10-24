@@ -1,3 +1,5 @@
+import QuantifierBtn from "./QuantifierBtn";
+
 interface QuantifierProps {
     quantity: number;
     onIncrease: () => void;
@@ -7,21 +9,23 @@ interface QuantifierProps {
 const Quantifier = ({quantity, onIncrease, onDecrease}: QuantifierProps) => {
     return (
         <div 
-        id="quantifier"
-        className=" flex items-center space-x-0 border border-gray shadow-md">
-            <button
-            className="rounded text-white font-bold bg-background-footer hover:bg-accent-light transition w-12 h-12 flex justify-center items-center" 
-            onClick={onDecrease}>
-                -
-            </button>
-            <span className="rounded text-lg bg-white w-12 h-12 flex justify-center items-center">{quantity}</span>
-            <button 
-            className="rounded text-white font-bold bg-background-footer hover:bg-accent-light transition w-12 h-12 flex justify-center items-center"  
-            onClick={onIncrease}>
-                +
-            </button>
+          id="quantifier" 
+          className="flex items-center space-x-0 border border-gray shadow-md"
+        >
+          <QuantifierBtn 
+            text="-" 
+            onClick={onDecrease} 
+          />
+          <span className="rounded text-lg bg-white w-12 h-12 flex justify-center items-center">
+            {quantity}
+          </span>
+          <QuantifierBtn 
+            text="+" 
+            onClick={onIncrease} 
+          />
         </div>
-    );
-};
+      );
+    };
+    
 
 export default Quantifier;
