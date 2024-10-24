@@ -28,17 +28,17 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
     setTotalPrice(total);
   };
 
-  const increaseQuantity = (VinylId: number) => {
+  const increaseQuantity = (vinylId: number) => {
     const updatedCart = cartItems.map((item) =>
-      item.id === VinylId ? { ...item, quantity: item.quantity + 1 } : item
+      item.id === vinylId ? { ...item, quantity: item.quantity + 1 } : item
     );
     updateCartState(updatedCart);
   };
 
-  const decreaseQuantity = (VinylId: number) => {
+  const decreaseQuantity = (vinylId: number) => {
     const updatedCart = cartItems
       .map((item) => {
-        if (item.id === VinylId) {
+        if (item.id === vinylId) {
           if (item.quantity > 1) {
             return { ...item, quantity: item.quantity - 1 };
           }
