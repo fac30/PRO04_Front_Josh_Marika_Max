@@ -20,19 +20,19 @@ const App = () => {
   }, [])
 
   return (
-    <Router>
-      <Header cartCount={cartCount} />
-      <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<Home setCartCount={setCartCount}/>} />
-          <Route path="/UserLogin" element={<UserLogin />} />
-          <Route path="/UserSignUp" element={<UserSignUp />} />
-          <Route path="/ShopCart" element={<ShopCart setCartCount={setCartCount} />} />
-          {/* Add other routes here */}
-        </Routes>
-      </main>
-      <Footer />
-    </Router>
+      <Router>
+        <Header cartCount={cartCount} />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home setCartCount={setCartCount} />} />
+            <Route path="/UserLogin" element={<UserLogin />} />
+            <Route path="/UserSignUp" element={<UserSignUp />} />
+            <Route path="/ShopCart" element={<ShopCart setCartCount={setCartCount} />} />
+            {/* Add other routes here */}
+          </Routes>
+        </main>
+        <Footer />
+      </Router>
   );
 };
 

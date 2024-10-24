@@ -44,9 +44,9 @@ export default function LoginForm() {
         inputClass={inputFieldClass}
       />
       
-
-      <SubmitButton />
       {loginError && <span className="error-message">Email or password is incorrect</span>}
+      <SubmitButton />
+
 
       <p className="text-center text-gray-600 mt-4 mb-60">
         Don't have an account?{" "}

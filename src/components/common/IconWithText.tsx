@@ -4,13 +4,14 @@ import {Link} from 'react-router-dom';
 type IconWithTextProps = {
     IconComponent: React.FC<{ size: number }>;
     label: string;
+    to: string; 
     onClick?: () => void;
   };
 
 // remuve button and everything is inside trhe <link>
-  const IconWithText = ({ IconComponent, label, onClick }: IconWithTextProps) => {
+  const IconWithText = ({ IconComponent, label, to, onClick }: IconWithTextProps) => {
     return (
-      <Link to="/ShopCart">
+      <Link to={to}>
         <button
           type="button"
           onClick={onClick}

@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Logo from "../common/Logo";
 import NavBar from "../layout/NavBar";
 import { FaUserCircle, FaShoppingBag } from "react-icons/fa";
@@ -11,15 +10,6 @@ interface HeaderProps {
 }
 
 const Header = ({cartCount}: HeaderProps)  => {
-  const navigate = useNavigate();
-
-  const handleAccountClick = () => {
-    navigate("/UserLogin");
-  };
-
-  const handleCartClick = () => {
-    navigate("/ShopCart");
-  };
 
   return (
     <header className="bg-background-default p-4 shadow">
@@ -33,12 +23,12 @@ const Header = ({cartCount}: HeaderProps)  => {
           <IconWithText
             IconComponent={FaUserCircle}
             label="Account"
-            onClick={handleAccountClick}
+            to="/UserLogin"  
           />
           <IconWithText
             IconComponent={FaShoppingBag}
             label={`Cart (${cartCount})`}
-            onClick={handleCartClick}
+            to="/ShopCart" 
           />
         </div>
       </div>
