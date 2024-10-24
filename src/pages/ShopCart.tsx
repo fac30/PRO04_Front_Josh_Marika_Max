@@ -1,22 +1,15 @@
 import { useEffect, useState } from 'react';
 import TotalPrice from '../Cart-components/TotalPrice';
 import Quantifier from '../Cart-components/Quantifier';
+import { Vinyl } from '../utils/types';
 
-interface Product {
-  id: number;
-  title: string;
-  artist: string;
-  price: number;
-  image_url: string;
-  quantity: number;
-}
 
 interface ShopCartProps {
   setCartCount: (count: number) => void;
 }
 
 const ShopCart = ({ setCartCount }: ShopCartProps) => {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [cartItems, setCartItems] = useState<Vinyl[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -25,27 +18,27 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
       const items = JSON.parse(savedCart);
       setCartItems(items);
       calculateTotal(items);
-      const newCartCount = items.reduce((acc: number, item: Product) => acc + item.quantity, 0);
+      const newCartCount = items.reduce((acc: number, item: Vinyl) => acc + item.quantity, 0);
       setCartCount(newCartCount);
     }
   }, [setCartCount]);
 
-  const calculateTotal = (items: Product[]) => {
+  const calculateTotal = (items: Vinyl[]) => {
     const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
     setTotalPrice(total);
   };
 
-  const increaseQuantity = (productId: number) => {
+  const increaseQuantity = (VinylId: number) => {
     const updatedCart = cartItems.map((item) =>
-      item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+      item.id === VinylId ? { ...item, quantity: item.quantity + 1 } : item
     );
     updateCartState(updatedCart);
   };
 
-  const decreaseQuantity = (productId: number) => {
+  const decreaseQuantity = (VinylId: number) => {
     const updatedCart = cartItems
       .map((item) => {
-        if (item.id === productId) {
+        if (item.id === VinylId) {
           if (item.quantity > 1) {
             return { ...item, quantity: item.quantity - 1 };
           }
@@ -53,11 +46,11 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
         }
         return item;
       })
-      .filter((item): item is Product => item !== null);
+      .filter((item): item is Vinyl => item !== null);
     updateCartState(updatedCart);
   };
 
-  const updateCartState = (updatedCart: Product[]) => {
+  const updateCartState = (updatedCart: Vinyl[]) => {
     setCartItems(updatedCart);
     localStorage.setItem('shoppingCart', JSON.stringify(updatedCart));
     calculateTotal(updatedCart);
@@ -78,22 +71,22 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
         {cartItems.length === 0 ? (
           <p className="text-text-primary text-center">Your cart is empty</p>
         ) : (
-          cartItems.map((product) => (
+          cartItems.map((Vinyl) => (
             <div 
-            id="product"
+            id="Vinyl"
             className="flex items-center justify-between p-4 mb-4 border border-gray-300 rounded-md bg-background-default shadow-sm"
-            key={product.id}>
-              <img src={product.image_url} alt={product.title} 
+            key={Vinyl.id}>
+              <img src={Vinyl.image_url} alt={Vinyl.title} 
               className="w-24 h-24 object-cover rounded-lg"/>
                 <div className="ml-4 flex-grow">
-            <h3 className="text-lg font-medium text-text-primary">{product.title}</h3>
-            <p className="text-text-secondary">{product.artist}</p>
-            <p className="font-bold text-dark">£{product.price.toFixed(2)}</p>
+            <h3 className="text-lg font-medium text-text-primary">{Vinyl.title}</h3>
+            <p className="text-text-secondary">{Vinyl.artist}</p>
+            <p className="font-bold text-dark">£{Vinyl.price.toFixed(2)}</p>
           </div>
               <Quantifier
-                quantity={product.quantity}
-                onIncrease={() => increaseQuantity(product.id)}
-                onDecrease={() => decreaseQuantity(product.id)}
+                quantity={Vinyl.quantity}
+                onIncrease={() => increaseQuantity(Vinyl.id)}
+                onDecrease={() => decreaseQuantity(Vinyl.id)}
               />
             </div>
           ))
