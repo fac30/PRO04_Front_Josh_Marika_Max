@@ -8,8 +8,7 @@ import {
   FORM_FIELDS,
 } from "../utils/types/customerConstants";
 import hashPassword from "../hashing";
-import { FormFields } from "../utils/types";
-import { UserObject } from "../utils/types";
+import { FormFields, UserObject } from "../utils/types";
 import { fetchData } from "../utils/fetch-data";
 
 const SignUpForm = () => {
@@ -24,24 +23,22 @@ const SignUpForm = () => {
   const createUserObject = async (): Promise<UserObject> => {
     const { confirm_password, password, ...userObject } = formData;
     userObject.password_hash = await hashPassword(password);
-    return userObject as UserObject; // Ensure the return type is UserObject
+    return userObject as UserObject;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirm_password) {
       setError("Passwords do not match.");
       return;
     }
+
     setError("");
+
     const userObject = await createUserObject();
-    try {
-      const result = await fetchData("register", "POST", userObject);
-      console.log("User saved successfully:", result);
-    } catch (error) {
-      console.error("Error saving user:", error);
-      setError("Failed to save user. Please try again.");
-    }
+    const result = await fetchData("register", "POST", userObject);
+    console.log("User saved successfully:", result);
   };
 
   return (
