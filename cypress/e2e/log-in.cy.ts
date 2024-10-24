@@ -27,7 +27,7 @@ describe('User Authentication Tests', () => {
     cy.get('button[type="submit"]').click();
 
     // error message after login atempt
-    cy.get('.error-message').should('be.visible').and('contain', 'Email or password is incorrect');
+    cy.get('span[class="error-message"]').should('be.visible').and('contain', 'Email or password is incorrect');
 
   });
 
