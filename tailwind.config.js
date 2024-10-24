@@ -19,14 +19,13 @@ export default {
           secondary: '#4B5563', 
         },
         background: {
-          // light: '#F2DCDC', 
           light: '#F6E9E9',   
           default: '#FFFFFF',  
           footer: '#B55252',
-          
         },
         error: '#DC2626', 
       },
+       
     },
   },
   plugins: [],
