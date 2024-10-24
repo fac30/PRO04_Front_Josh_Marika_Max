@@ -7,40 +7,38 @@ import {
   INITIAL_FORM_STATE,
   FORM_FIELDS,
 } from "../utils/types/customerConstants";
-import { hashPassword } from "../hashing";
-import { FormFields } from "../utils/types/CustomerFormFields";
+import hashPassword from "../hashing";
+import { FormFields, UserObject } from "../utils/types";
+import { fetchData } from "../utils/fetch-data";
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState<FormFields>(INITIAL_FORM_STATE);
+  const [error, setError] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const createUserObject = async (): Promise<UserObject> => {
+    const { confirm_password, password, ...userObject } = formData;
+    userObject.password_hash = await hashPassword(password);
+    return userObject as UserObject;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirm_password) {
-      alert("Passwords do not match!");
+      setError("Passwords do not match.");
       return;
     }
 
-    const hashedPassword = hashPassword(formData.password);
+    setError("");
 
-    const users: Omit<FormFields, "confirm_password">[] = JSON.parse(
-      localStorage.getItem("users") || "[]",
-    );
-    const userWithoutConfirmPassword: Omit<FormFields, "confirm_password"> = {
-      ...formData,
-      password: hashedPassword,
-    };
-
-    users.push(userWithoutConfirmPassword);
-    localStorage.setItem("users", JSON.stringify(users));
-
-    alert("Sign up successful!");
-    setFormData(INITIAL_FORM_STATE);
+    const userObject = await createUserObject();
+    const result = await fetchData("register", "POST", userObject);
+    console.log("User saved successfully:", result);
   };
 
   return (
@@ -49,7 +47,6 @@ const SignUpForm = () => {
       onSubmit={handleSubmit}
     >
       <h2 className="text-2xl font-semibold text-center mb-6">Sign Up</h2>
-
       {FORM_FIELDS.map(({ label, type, name }) => (
         <UserInput
           key={name}
@@ -62,9 +59,8 @@ const SignUpForm = () => {
           onChange={handleChange}
         />
       ))}
-
+      {error && <p className="text-red-500 text-center">{error}</p>}
       <SubmitButton />
-
       <p className="text-center text-gray-600 mt-4 mb-12">
         Already have an account?{" "}
         <Link to="/UserLogin" className="text-blue-500 hover:underline">

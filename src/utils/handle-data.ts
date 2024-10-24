@@ -1,15 +1,15 @@
-const fetchData = async (
-  table: string,
+const handleData = async (
+  query: string,
   method: string,
-  body?: any, 
+  body?: any,
 ): Promise<any> => {
   try {
-    const response = await fetch(`http://localhost:3000/${table}`, {
+    const response = await fetch(`http://localhost:3000/${query}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",
       },
-      body: method === "POST" ? JSON.stringify(body) : null, 
+      body: method === "POST" ? JSON.stringify(body) : null,
     });
 
     if (!response.ok) {
@@ -24,4 +24,4 @@ const fetchData = async (
   }
 };
 
-export { fetchData };
+export { handleData };

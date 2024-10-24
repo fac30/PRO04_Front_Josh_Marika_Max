@@ -6,7 +6,7 @@ export interface UserInputProps {
   name: string;
   labelClass?: string;
   inputClass?: string;
-  value: string;
+  value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -16,7 +16,7 @@ export default function UserInput({
   name,
   labelClass = "",
   inputClass = "",
-  value,
+  value = "",
   onChange,
 }: UserInputProps) {
   return (
