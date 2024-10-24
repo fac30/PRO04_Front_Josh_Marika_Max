@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "../utils/fetch-data";
 import NewsletterForm from "../components/NewsLetterForm";
-import LatestReleases from "../components/homepage-sections/LatestReleases"; // Corrected the typo
+import LatestReleases from "../components/homepage-sections/LatestReleases";
 import StaffPicks from "../components/homepage-sections/StaffPicks";
 import GenreSection from "../components/homepage-sections/BrowseByGenre";
-import { Vinyl, Genre } from "../utils/types"; // Ensure Product is imported
+import { Vinyl, Genre } from "../utils/types";
 
 interface HomeProps {
   setCartCount: (count: number) => void;
