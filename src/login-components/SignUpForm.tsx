@@ -7,9 +7,20 @@ import {
   INITIAL_FORM_STATE,
   FORM_FIELDS,
 } from "../utils/types/customerConstants";
-import { hashPassword } from "../hashing";
+import hashPassword from "../hashing";
 import { FormFields } from "../utils/types/customerFormFields";
 import { fetchData } from "../utils/fetch-data";
+
+interface UserObject {
+  username: string;
+  email: string;
+  phone_number: string;
+  date_of_birth: string;
+  street_address: string;
+  password_hash: string;
+  city: string;
+  location_id: number;
+}
 
 const SignUpForm: React.FC = () => {
   const [formData, setFormData] = useState<FormFields>(INITIAL_FORM_STATE);
@@ -20,10 +31,10 @@ const SignUpForm: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const createUserObject = () => {
-    const { confirm_password, password, ...userObject } = formData; // Exclude password and confirm_password
-    userObject.password_hash = hashPassword(password); // Hash the original password
-    return userObject; // Return object without password fields
+  const createUserObject = async (): Promise<UserObject> => {
+    const { confirm_password, password, ...userObject } = formData;
+    userObject.password_hash = await hashPassword(password);
+    return userObject as UserObject; // Ensure the return type is UserObject
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,13 +44,10 @@ const SignUpForm: React.FC = () => {
       return;
     }
     setError("");
-
-    const userObject = createUserObject();
-
+    const userObject = await createUserObject();
     try {
       const result = await fetchData("register", "POST", userObject);
       console.log("User saved successfully:", result);
-      // Optionally, redirect user or show success message
     } catch (error) {
       console.error("Error saving user:", error);
       setError("Failed to save user. Please try again.");
@@ -64,8 +72,7 @@ const SignUpForm: React.FC = () => {
           onChange={handleChange}
         />
       ))}
-      {error && <p className="text-red-500 text-center">{error}</p>}{" "}
-      {/* Error message */}
+      {error && <p className="text-red-500 text-center">{error}</p>}
       <SubmitButton />
       <p className="text-center text-gray-600 mt-4 mb-12">
         Already have an account?{" "}
