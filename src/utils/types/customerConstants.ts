@@ -35,7 +35,7 @@ export const Locations: Location[] = [
   { id: 7, country: "United Kingdom", region: "London" },
   { id: 8, country: "United Kingdom", region: "South East" },
   { id: 9, country: "United Kingdom", region: "South West" },
-  { id: 10, country: "France" }, // Remove region property entirely for countries without regions
+  { id: 10, country: "France" },
   { id: 11, country: "Spain" },
   { id: 12, country: "Italy" },
   { id: 13, country: "Germany" },

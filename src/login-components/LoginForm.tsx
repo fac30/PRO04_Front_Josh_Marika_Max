@@ -5,14 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { inputLabelClass, inputFieldClass } from "../components/common/styles";
 
 export default function LoginForm() {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [loginError, setLoginError] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleLogin = <T extends React.FormEvent<HTMLFormElement>>(e: T) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const username = e.currentTarget.username.value;
-    const password = e.currentTarget.password.value;
 
+    // Use state values instead of accessing them from the event
     if (username === "existingUser" && password === "validPassword") {
       console.log("Navigating to UserPage");
       setLoginError(false);
@@ -20,6 +21,16 @@ export default function LoginForm() {
     } else {
       console.log("Login failed");
       setLoginError(true);
+    }
+  };
+
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (name === "username") {
+      setUsername(value);
+    } else if (name === "password") {
+      setPassword(value);
     }
   };
 
@@ -34,6 +45,8 @@ export default function LoginForm() {
         label="Username"
         type="text"
         name="username"
+        value={username} // Controlled input
+        onChange={handleInputChange} // Pass the change handler
         labelClass={inputLabelClass}
         inputClass={inputFieldClass}
       />
@@ -41,6 +54,8 @@ export default function LoginForm() {
         label="Password"
         type="password"
         name="password"
+        value={password} // Controlled input
+        onChange={handleInputChange} // Pass the change handler
         labelClass={inputLabelClass}
         inputClass={inputFieldClass}
       />

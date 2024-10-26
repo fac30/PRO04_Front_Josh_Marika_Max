@@ -2,27 +2,35 @@ import { Vinyl } from "../../utils/types";
 
 interface GenreCardProps {
   genre: string;
-  product: Vinyl | null; // Ensure this is Vinyl or null
-  coverImage: string | null; // Accept coverImage as a prop
+  vinyl: Vinyl | null; // Ensure this is Vinyl or null
 }
 
-const GenreCard = ({ genre, product, coverImage }: GenreCardProps) => {
-  // Add coverImage to destructured props
+const GenreCard = ({ genre, vinyl }: GenreCardProps) => {
   return (
     <div className="genre-card">
-      <h4 className="text-xl font-bold">{genre}</h4>
-      {coverImage && <img src={coverImage} alt={`${genre} cover`} />}{" "}
-      {/* Display the genre cover */}
-      {product ? (
-        <div>
-          <img src={product.image_url} alt={product.title} />
-          <h5>{product.title}</h5>
-          <p>{product.artist}</p>
-          <p>${product.price}</p>
+      <div className="w-full bg-white shadow-md p-4 max-w-80 ">
+        {vinyl ? (
+          <img
+            src={vinyl.image_url}
+            alt={vinyl.title}
+            className="object-cover w-full h-full rounded-t-lg"
+          />
+        ) : (
+          <span>No Image Available</span>
+        )}
+        <div className="p-4">
+          {vinyl ? (
+            <>
+              <h2 className="text-lg font-bold mb-2">{genre}</h2>
+              <button className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition">
+                View All
+              </button>
+            </>
+          ) : (
+            <p className="text-gray-600">No product information available</p>
+          )}
         </div>
-      ) : (
-        <p>No products available</p>
-      )}
+      </div>
     </div>
   );
 };

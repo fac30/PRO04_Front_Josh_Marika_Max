@@ -69,6 +69,8 @@ const LocationSelect = ({
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState<FormFields>(INITIAL_FORM_STATE);
+  const [passwordError, setPasswordError] = useState<string>("");
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const handleChange = (event: FieldChangeEvent, fieldName?: string) => {
     const value = typeof event === "object" ? event.target.value : event;
@@ -78,6 +80,25 @@ const SignUpForm = () => {
       [fieldName ?? (event as React.ChangeEvent<HTMLInputElement>).target.name]:
         value,
     }));
+
+    // Clear password error when either password field changes
+    if (
+      fieldName === "password" ||
+      fieldName === "confirm_password" ||
+      (typeof event === "object" &&
+        (event.target.name === "password" ||
+          event.target.name === "confirm_password"))
+    ) {
+      setPasswordError("");
+    }
+  };
+
+  const validatePasswords = (): boolean => {
+    if (formData.password !== formData.confirm_password) {
+      setPasswordError("Passwords do not match");
+      return false;
+    }
+    return true;
   };
 
   const createUserObject = async (): Promise<UserObject> => {
@@ -88,8 +109,18 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const userObject = await createUserObject();
-    await fetchData("register", "POST", userObject);
+
+    if (!validatePasswords()) {
+      return;
+    }
+
+    try {
+      await fetchData("register", "POST", await createUserObject());
+      setIsSuccess(true);
+      setFormData(INITIAL_FORM_STATE);
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
   };
 
   return (
@@ -107,6 +138,16 @@ const SignUpForm = () => {
           onChange={handleChange}
         />
       ))}
+
+      {passwordError && (
+        <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+      )}
+
+      {isSuccess && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+          Registration successful! You can now log in.
+        </div>
+      )}
 
       <SubmitButton buttonText="Sign Up" />
 

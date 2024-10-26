@@ -140,7 +140,6 @@ const Home = ({ setCartCount }: HomeProps) => {
       <GenreSection
         genres={genres}
         genreVinyls={genreVinyls}
-        coversByGenre={coversByGenre}
       />{" "}
       {/* Pass coversByGenre */}
       <section className="mb-12 max-w-90" aria-labelledby="newsletter">

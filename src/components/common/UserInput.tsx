@@ -6,19 +6,20 @@ export interface UserInputProps {
   name: string;
   labelClass?: string;
   inputClass?: string;
-  value: string | number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string | number; // Accept string for text input
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // onChange handler
 }
 
-export default function UserInput({
+// UserInput function component
+const UserInput = ({
   label,
   type,
   name,
   labelClass = "",
   inputClass = "",
-  value = "",
+  value,
   onChange,
-}: UserInputProps) {
+}: UserInputProps) => {
   return (
     <div className="mb-4">
       <label htmlFor={name} className={labelClass}>
@@ -30,9 +31,11 @@ export default function UserInput({
         name={name}
         className={inputClass}
         required
-        value={value}
-        onChange={onChange}
+        value={value} // Controlled input
+        onChange={onChange} // onChange handler
       />
     </div>
   );
-}
+};
+
+export default UserInput;
