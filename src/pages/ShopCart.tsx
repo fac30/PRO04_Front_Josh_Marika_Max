@@ -1,61 +1,22 @@
-import { useEffect, useState } from 'react';
-import TotalPrice from '../Cart-components/TotalPrice';
 import Quantifier from '../Cart-components/Quantifier';
-import { Vinyl } from '../utils/types';
+// import { Vinyl } from '../utils/types';
+import { useCartContext } from '../Context/Cart';
 
-
-interface ShopCartProps {
-  setCartCount: (count: number) => void;
-}
-
-const ShopCart = ({ setCartCount }: ShopCartProps) => {
-  const [cartItems, setCartItems] = useState<Vinyl[]>([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  useEffect(() => {
-    const savedCart = localStorage.getItem('shoppingCart');
-    if (savedCart) {
-      const items = JSON.parse(savedCart);
-      setCartItems(items);
-      calculateTotal(items);
-      const newCartCount = items.reduce((acc: number, item: Vinyl) => acc + item.quantity, 0);
-      setCartCount(newCartCount);
-    }
-  }, [setCartCount]);
-
-  const calculateTotal = (items: Vinyl[]) => {
-    const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    setTotalPrice(total);
-  };
+const ShopCart = () => {
+  const { state: { cartItems, totalPrice }, dispatch } = useCartContext();
 
   const increaseQuantity = (vinylId: number) => {
-    const updatedCart = cartItems.map((item) =>
-      item.id === vinylId ? { ...item, quantity: item.quantity + 1 } : item
-    );
-    updateCartState(updatedCart);
+    const product = cartItems.find(item => item.id === vinylId);
+    if (product) {
+      dispatch({ type: "ADD_TO_CART", payload: product });
+    }
   };
 
   const decreaseQuantity = (vinylId: number) => {
-    const updatedCart = cartItems
-      .map((item) => {
-        if (item.id === vinylId) {
-          if (item.quantity > 1) {
-            return { ...item, quantity: item.quantity - 1 };
-          }
-          return null; // Remove item if quantity is less than 1
-        }
-        return item;
-      })
-      .filter((item): item is Vinyl => item !== null);
-    updateCartState(updatedCart);
-  };
-
-  const updateCartState = (updatedCart: Vinyl[]) => {
-    setCartItems(updatedCart);
-    localStorage.setItem('shoppingCart', JSON.stringify(updatedCart));
-    calculateTotal(updatedCart);
-    const newCartCount = updatedCart.reduce((acc, item) => acc + item.quantity, 0);
-    setCartCount(newCartCount);
+    const product = cartItems.find(item => item.id === vinylId);
+    if (product && product.quantity > 1) {
+      dispatch({ type: "REMOVE_FROM_CART", payload: product });
+    }
   };
 
   return (
@@ -83,7 +44,7 @@ const ShopCart = ({ setCartCount }: ShopCartProps) => {
             <p className="text-text-secondary">{vinyl.artist}</p>
             <p className="font-bold text-dark">£{vinyl.price.toFixed(2)}</p>
           </div>
-              <Quantifier
+          <Quantifier
                 quantity={vinyl.quantity}
                 onIncrease={() => increaseQuantity(vinyl.id)}
                 onDecrease={() => decreaseQuantity(vinyl.id)}
