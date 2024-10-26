@@ -32,7 +32,7 @@ const Header = () => {
       </div>
       <NavBar />
       <p className="bg-background-light text-center py-2 font-semibold">
-        FREE UK DELIVERY ON ALL ORDERS (International delivery available)
+        FREE UK DELIVERY ON ALL ORDERS OVER £35!(International delivery available)
       </p>
     </header>
   );
