@@ -28,12 +28,10 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
       let updatedItems;
 
       if (existingItemIndex >= 0) {
-        // Item already in cart, increase quantity
         updatedItems = state.cartItems.map((item, index) =>
           index === existingItemIndex ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        // Add new item
         updatedItems = [...state.cartItems, { ...action.payload, quantity: 1 }];
       }
 
@@ -43,7 +41,6 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
       return { cartItems: updatedItems, cartCount: newCartCount, totalPrice: newTotalPrice };
 
     case "REMOVE_FROM_CART":
-      // Logic for removing items from the cart if needed
       return state;
 
     default:
@@ -51,7 +48,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
   }
 };
 
-// Cart Provider component
+
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
@@ -66,7 +63,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 };
 
-// Custom hook to use the CartContext
+
 export const useCartContext = () => {
   const context = useContext(CartContext);
   if (!context) {
