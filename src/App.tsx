@@ -9,27 +9,18 @@ import UserSignUp from "./pages/UserSignUp";
 import ShopCart from "./pages/ShopCart";
 
 const App = () => {
-  const [cartCount, setCartCount] = useState(0);
-
-  useEffect(() => {
-    const savedCart = localStorage.getItem("shoppingCart");
-    if (savedCart) {
-      const parsedCart = JSON.parse(savedCart);
-      setCartCount(parsedCart.length);
-    }
-  }, []);
 
   return (
     <Router>
-      <Header cartCount={cartCount} />
+      <Header/>
       <main className="flex-grow">
         <Routes>
-          <Route path="/" element={<Home setCartCount={setCartCount} />} />
+          <Route path="/" element={<Home/>} />
           <Route path="/UserLogin" element={<UserLogin />} />
           <Route path="/UserSignUp" element={<UserSignUp />} />
           <Route
             path="/ShopCart"
-            element={<ShopCart setCartCount={setCartCount} />}
+            element={<ShopCart  />}
           />
         </Routes>
       </main>
