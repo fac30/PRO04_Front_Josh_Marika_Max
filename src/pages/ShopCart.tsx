@@ -22,7 +22,10 @@ const ShopCart = () => {
   };
 
   return (
-    <section className="bg-background-light p-4 shadow rounded-t-lg max-w-7xl mx-auto">
+    <section 
+    id="cart"
+    className="bg-background-light p-4 shadow rounded-t-lg">
+      
       <h2 className="text-4xl font-bold mb-6 text-text-primary text-center">Shopping Cart</h2>
 
       <div className="flex flex-col md:flex-row md:space-x-8">
