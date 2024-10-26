@@ -58,7 +58,6 @@ const Home = () => {
           .slice(0, 4);
         setStaffPicks(shuffledVinyls);
 
-        // Ensure you map product data to include quantity
         const productsWithQuantity = data.map((product) => ({
           ...product,
           quantity: 0,

@@ -14,8 +14,8 @@ const ShopCart = () => {
 
   const decreaseQuantity = (vinylId: number) => {
     const product = cartItems.find(item => item.id === vinylId);
-    if (product && product.quantity > 1) {
-      dispatch({ type: "REMOVE_FROM_CART", payload: product });
+    if (product) {
+      dispatch({ type: "DECREASE_QUANTITY", payload: product });
     }
   };
 
