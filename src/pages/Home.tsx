@@ -5,20 +5,18 @@ import LatestReleases from "../components/homepage-sections/LatestReleases";
 import StaffPicks from "../components/homepage-sections/StaffPicks";
 import GenreSection from "../components/homepage-sections/BrowseByGenre";
 import { Vinyl, Genre } from "../utils/types";
+import { useCartContext } from '../Context/Cart';
 
-interface HomeProps {
-  setCartCount: (count: number) => void;
-}
 
-const Home = ({ setCartCount }: HomeProps) => {
+
+const Home = () => {
   const [latestReleases, setLatestReleases] = useState<Vinyl[]>([]);
   const [staffPicks, setStaffPicks] = useState<Vinyl[]>([]);
   const [genres, setGenres] = useState<Genre[]>([]);
-  const [genreVinyls, setGenreVinyls] = useState<{
-    [key: string]: Vinyl[] | null;
-  }>({});
-  const [productData, setProductData] = useState<Vinyl[]>([]); // Changed to Vinyl[]
-  const [cartItems, setCartItems] = useState<Vinyl[]>([]); // Changed to Vinyl[]
+  const [genreVinyls, setGenreVinyls] = useState<{[key: string]: Vinyl[] | null;}>({});
+  const [productData, setProductData] = useState<Vinyl[]>([]); 
+  const { dispatch } = useCartContext(); 
+  
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -73,41 +71,10 @@ const Home = ({ setCartCount }: HomeProps) => {
 
     fetchGenres();
     fetchProductData();
-
-    const savedCart = localStorage.getItem("shoppingCart");
-    if (savedCart) {
-      const parsedCart = JSON.parse(savedCart);
-      setCartItems(parsedCart);
-      setCartCount(parsedCart.length);
-    }
-  }, [setCartCount]); // Add setCartCount as a dependency
+  }, []); 
 
   const addToCart = (product: Vinyl) => {
-    const existingProductIndex = cartItems.findIndex(
-      (item) => item.id === product.id,
-    );
-
-    let updatedCart;
-    if (existingProductIndex >= 0) {
-      // Product exists in cart, increment quantity
-      updatedCart = cartItems.map((item, index) => {
-        if (index === existingProductIndex) {
-          return { ...item, quantity: item.quantity + 1 };
-        }
-        return item;
-      });
-    } else {
-      // Product doesn't exist in cart, add with quantity 1
-      updatedCart = [...cartItems, { ...product, quantity: 1 }];
-    }
-
-    setCartItems(updatedCart);
-    const newCartCount = updatedCart.reduce(
-      (acc, item) => acc + item.quantity,
-      0,
-    );
-    setCartCount(newCartCount);
-    localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
+    dispatch({ type: "ADD_TO_CART", payload: product });
   };
 
   return (
