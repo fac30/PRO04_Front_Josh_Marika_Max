@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "../utils/fetch-data";
-import NewsletterForm from "../components/NewsLetterForm";
+// import NewsletterForm from "../components/NewsLetterForm";
 import LatestReleases from "../components/homepage-sections/LatestReleases";
 import StaffPicks from "../components/homepage-sections/StaffPicks";
 import GenreSection from "../components/homepage-sections/BrowseByGenre";
@@ -93,7 +93,7 @@ const Home = () => {
       <StaffPicks vinyl={staffPicks} addToCart={addToCart} />
       <GenreSection genres={genres} genreVinyls={genreVinyls} />
 
-      <section className="mb-12 max-w-90" aria-labelledby="newsletter">
+      {/* <section className="mb-12 max-w-90" aria-labelledby="newsletter">
         <h3
           id="newsletter"
           className="text-2xl font-semibold mb-14 mt-20 text-text-primary"
@@ -101,7 +101,7 @@ const Home = () => {
           Sign Up To Our Newsletter:
         </h3>
       </section>
-      <NewsletterForm />
+      <NewsletterForm /> */}
     </div>
   );
 };
