@@ -3,12 +3,11 @@ import NavBar from "../layout/NavBar";
 import { FaUserCircle, FaShoppingBag } from "react-icons/fa";
 import IconWithText from "../common/IconWithText";
 import SearchBar from "../common/SearchBar";
+import { useCartContext } from "../../Context/Cart";
 
-interface HeaderProps {
-  cartCount: number;
-}
+const Header = () => {
+  const { state: { cartCount } } = useCartContext();
 
-const Header = ({ cartCount }: HeaderProps) => {
 
   return (
     <header className="bg-background-default p-4 shadow">
