@@ -3,12 +3,11 @@ import NavBar from "../layout/NavBar";
 import { FaUserCircle, FaShoppingBag } from "react-icons/fa";
 import IconWithText from "../common/IconWithText";
 import SearchBar from "../common/SearchBar";
+import { useCartContext } from "../../Context/Cart";
 
-interface HeaderProps {
-  cartCount: number;
-}
+const Header = () => {
+  const { state: { cartCount } } = useCartContext();
 
-const Header = ({ cartCount }: HeaderProps) => {
 
   return (
     <header className="bg-background-default p-4 shadow">
@@ -33,7 +32,7 @@ const Header = ({ cartCount }: HeaderProps) => {
       </div>
       <NavBar />
       <p className="bg-background-light text-center py-2 font-semibold">
-        FREE UK DELIVERY ON ALL ORDERS (International delivery available)
+        FREE UK DELIVERY ON ALL ORDERS OVER £35!(International delivery available)
       </p>
     </header>
   );
