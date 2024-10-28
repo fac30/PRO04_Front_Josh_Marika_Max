@@ -1,6 +1,6 @@
 interface Link {
   url: string;
-  name: string;
+  name: React.ReactNode;
 }
 
 interface FooterSectionProps {
