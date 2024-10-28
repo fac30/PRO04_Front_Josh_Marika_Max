@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer, useEffect, ReactNode } from "react";
 import { Vinyl } from "../utils/types";
 
-const ADD_TO_CART = "ADD_TO_CART";
+export const ADD_TO_CART = "ADD_TO_CART";
 const DECREASE_QUANTITY = "DECREASE_QUANTITY";
 
 

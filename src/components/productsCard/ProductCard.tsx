@@ -1,6 +1,6 @@
 // src/components/productsCard/ProductCard.tsx
 
-import { useCartContext } from '../../Context/Cart';
+import { useCartContext, ADD_TO_CART  } from '../../Context/Cart';
 import { Vinyl } from "../../utils/types";
 
 interface ProductCardProps {
@@ -9,10 +9,6 @@ interface ProductCardProps {
 
 const ProductCard = ({ vinyl }: ProductCardProps) => {
   const { dispatch } = useCartContext();
-
-  const handleAddToCart = () => {
-    dispatch({ type: 'ADD_TO_CART', payload: vinyl });
-  };
 
   return (
     <div className="bg-white shadow-md p-4 max-w-80 w-full">
@@ -33,7 +29,8 @@ const ProductCard = ({ vinyl }: ProductCardProps) => {
         <p className="text-gray-800 font-semibold">£{vinyl.price}</p>
         <button
           className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition"
-          onClick={handleAddToCart}
+          onClick={() => dispatch({ type: ADD_TO_CART, payload: vinyl })}
+
         >
           Add To Basket
         </button>
