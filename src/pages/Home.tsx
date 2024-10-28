@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "../utils/fetch-data";
-import NewsletterForm from "../components/NewsLetterForm";
 import LatestReleases from "../components/homepage-sections/LatestReleases";
 import StaffPicks from "../components/homepage-sections/StaffPicks";
 import GenreSection from "../components/homepage-sections/BrowseByGenre";
 import { Vinyl, Genre } from "../utils/types";
-import { useCartContext } from '../Context/Cart';
-
+import { useCartContext } from "../Context/Cart";
 
 const Home = () => {
   const [latestReleases, setLatestReleases] = useState<Vinyl[]>([]);
@@ -15,12 +13,7 @@ const Home = () => {
   const [genreVinyls, setGenreVinyls] = useState<{
     [key: string]: Vinyl[] | null;
   }>({});
-  const [coversByGenre, setCoversByGenre] = useState<{
-    [key: string]: string | null;
-  }>({});
-  const [productData, setProductData] = useState<Vinyl[]>([]);
-  const { dispatch } = useCartContext(); 
-
+  const { dispatch } = useCartContext();
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -41,19 +34,16 @@ const Home = () => {
             [genre.genre]: vinyls.length > 0 ? vinyls : null,
           }));
 
-          // Get a random vinyl cover image for the genre
           if (vinyls.length > 0) {
             const randomVinyl =
               vinyls[Math.floor(Math.random() * vinyls.length)];
             covers[genre.genre] = randomVinyl.coverImageUrl; // Adjust this to match your cover image property
           } else {
-            covers[genre.genre] = null; // No vinyls found for this genre
+            covers[genre.genre] = null;
           }
         }
-
-        setCoversByGenre(covers); // Update state with the new covers object
       } catch (error) {
-        console.error("Error fetching genre data:", error);
+        console.error("Error fetching genres:", error);
       }
     };
 
@@ -74,12 +64,6 @@ const Home = () => {
           .sort(() => 0.5 - Math.random())
           .slice(0, 4);
         setStaffPicks(shuffledVinyls);
-
-        const productsWithQuantity = data.map((product) => ({
-          ...product,
-          quantity: 0,
-        }));
-        setProductData(productsWithQuantity);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
@@ -87,11 +71,9 @@ const Home = () => {
 
     fetchGenres();
     fetchProductData();
-
-  
+  }, []);
 
   const addToCart = (product: Vinyl) => {
-
     dispatch({ type: "ADD_TO_CART", payload: product });
   };
 
@@ -109,20 +91,11 @@ const Home = () => {
       </p>
       <LatestReleases vinyl={latestReleases} addToCart={addToCart} />
       <StaffPicks vinyl={staffPicks} addToCart={addToCart} />
-      <GenreSection
-        genres={genres}
-        genreVinyls={genreVinyls}
-      />{" "}
-      {/* Pass coversByGenre */}
-      <section className="mb-12 max-w-90" aria-labelledby="newsletter">
-        <h3
-          id="newsletter"
-          className="text-2xl font-semibold mb-14 mt-20 text-text-primary"
-        >
-          Sign Up To Our Newsletter:
-        </h3>
-      </section>
-      <NewsletterForm /> 
+      <GenreSection genres={genres} genreVinyls={genreVinyls} />{" "}
+      <section
+        className="mb-12 max-w-90"
+        aria-labelledby="newsletter"
+      ></section>
     </div>
   );
 };
