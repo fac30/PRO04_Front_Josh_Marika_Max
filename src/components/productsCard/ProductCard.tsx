@@ -5,6 +5,7 @@ import { Vinyl } from "../../utils/types";
 
 interface ProductCardProps {
   vinyl: Vinyl; 
+  addToCart: (product: Vinyl) => void;
 }
 
 const ProductCard = ({ vinyl }: ProductCardProps) => {
