@@ -1,11 +1,10 @@
 import { useCartContext } from '../Context/Cart';
 
 const CartSummary: React.FC = () => {
-    const { state: { totalPrice } } = useCartContext(); 
-    const remainingForFreeShipping = 35 - totalPrice;
-
-    const deliveryCharge = totalPrice < 35 ? 5 : 0; 
-    const finalTotal = totalPrice + (totalPrice < 35 ? deliveryCharge : 0);
+  const { state: { totalPrice } } = useCartContext();
+  const remainingForFreeShipping = 35 - totalPrice;
+  const deliveryCharge = totalPrice < 35 ? 5 : 0;
+  const finalTotal = totalPrice + deliveryCharge;
   
     return (
       <div className="p-6 bg-background-light shadow-lg rounded-md">
