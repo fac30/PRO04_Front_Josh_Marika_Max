@@ -14,15 +14,35 @@ export const INITIAL_FORM_STATE: FormFields = {
 };
 
 export const FORM_FIELDS = [
-  { label: "Username", type: "text", name: "username" },
-  { label: "Email", type: "email", name: "email" },
-  { label: "Phone Number", type: "tel", name: "phone_number" },
-  { label: "Date of Birth", type: "date", name: "date_of_birth" },
-  { label: "Street Address", type: "text", name: "street_address" },
-  { label: "City", type: "text", name: "city" },
-  { label: "Password", type: "password", name: "password" },
-  { label: "Confirm Password", type: "password", name: "confirm_password" },
-  { label: "location", type: "number", name: "location_id" },
+  { id: "username", label: "Username", type: "text", name: "username" },
+  { id: "email", label: "Email", type: "email", name: "email" },
+  {
+    id: "phone_number",
+    label: "Phone Number",
+    type: "tel",
+    name: "phone_number",
+  },
+  {
+    id: "date_of_birth",
+    label: "Date of Birth",
+    type: "date",
+    name: "date_of_birth",
+  },
+  {
+    id: "street_address",
+    label: "Street Address",
+    type: "text",
+    name: "street_address",
+  },
+  { id: "city", label: "City", type: "text", name: "city" },
+  { id: "password", label: "Password", type: "password", name: "password" },
+  {
+    id: "confirm_password",
+    label: "Confirm Password",
+    type: "password",
+    name: "confirm_password",
+  },
+  { id: "location_id", label: "Location", type: "number", name: "location_id" },
 ] as const;
 
 export const Locations: Location[] = [

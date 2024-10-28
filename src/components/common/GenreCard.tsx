@@ -2,7 +2,7 @@ import { Vinyl } from "../../utils/types";
 
 interface GenreCardProps {
   genre: string;
-  vinyl: Vinyl | null; // Ensure this is Vinyl or null
+  vinyl: Vinyl | null;
 }
 
 const GenreCard = ({ genre, vinyl }: GenreCardProps) => {

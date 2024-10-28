@@ -13,7 +13,7 @@ export default function LoginForm() {
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Use state values instead of accessing them from the event
+    // Replace this with actual authentication logic
     if (username === "existingUser" && password === "validPassword") {
       console.log("Navigating to UserPage");
       setLoginError(false);
@@ -24,7 +24,6 @@ export default function LoginForm() {
     }
   };
 
-  // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === "username") {
@@ -35,42 +34,45 @@ export default function LoginForm() {
   };
 
   return (
-    <form
-      className="w-full max-w-sm mx-auto flex flex-col gap-y-4 mt-9"
-      onSubmit={handleLogin}
-    >
-      <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
+    <>
+      <h2 className="text-2xl font-semibold text-center mt-24 mb-6">Login</h2>
+      <form
+        className="w-full max-w-sm mx-auto flex flex-col gap-y-4 mt-9"
+        onSubmit={handleLogin}
+      >
+        <UserInput
+          id="username"
+          label="Username"
+          type="text"
+          name="username"
+          value={username}
+          onChange={handleInputChange}
+          labelClass={inputLabelClass}
+          inputClass={inputFieldClass}
+        />
+        <UserInput
+          id="password"
+          label="Password"
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleInputChange}
+          labelClass={inputLabelClass}
+          inputClass={inputFieldClass}
+        />
 
-      <UserInput
-        label="Username"
-        type="text"
-        name="username"
-        value={username} // Controlled input
-        onChange={handleInputChange} // Pass the change handler
-        labelClass={inputLabelClass}
-        inputClass={inputFieldClass}
-      />
-      <UserInput
-        label="Password"
-        type="password"
-        name="password"
-        value={password} // Controlled input
-        onChange={handleInputChange} // Pass the change handler
-        labelClass={inputLabelClass}
-        inputClass={inputFieldClass}
-      />
+        {loginError && (
+          <span className="error-message">Email or password is incorrect</span>
+        )}
+        <SubmitButton buttonText="Sign In" />
 
-      {loginError && (
-        <span className="error-message">Email or password is incorrect</span>
-      )}
-      <SubmitButton buttonText="Sign In" />
-
-      <p className="text-center text-gray-600 mt-4 mb-60">
-        Don't have an account?{" "}
-        <Link to="/UserSignUp" className="text-blue-500 hover:underline">
-          Sign up
-        </Link>
-      </p>
-    </form>
+        <p className="text-center text-gray-600 mt-4 mb-60">
+          Don't have an account?{" "}
+          <Link to="/UserSignUp" className="text-blue-500 hover:underline">
+            Sign up
+          </Link>
+        </p>
+      </form>
+    </>
   );
 }

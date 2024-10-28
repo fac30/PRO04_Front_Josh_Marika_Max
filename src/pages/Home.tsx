@@ -37,7 +37,7 @@ const Home = () => {
           if (vinyls.length > 0) {
             const randomVinyl =
               vinyls[Math.floor(Math.random() * vinyls.length)];
-            covers[genre.genre] = randomVinyl.coverImageUrl; // Adjust this to match your cover image property
+            covers[genre.genre] = randomVinyl.coverImageUrl;
           } else {
             covers[genre.genre] = null;
           }

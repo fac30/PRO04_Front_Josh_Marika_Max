@@ -24,7 +24,9 @@ const FormField = ({ field, value, onChange }: FormFieldProps) => {
   if (field.name === "location_id") {
     return (
       <div className="flex flex-col gap-2">
-        <label className={inputLabelClass}>{field.label}</label>
+        <label htmlFor={field.id} className={inputLabelClass}>
+          {field.label}
+        </label>
         <LocationSelect
           value={value as number}
           onChange={(newValue) => onChange(newValue, "location_id")}
@@ -35,6 +37,7 @@ const FormField = ({ field, value, onChange }: FormFieldProps) => {
 
   return (
     <UserInput
+      id={field.id}
       label={field.label}
       type={field.type}
       name={field.name}
@@ -81,7 +84,6 @@ const SignUpForm = () => {
         value,
     }));
 
-    // Clear password error when either password field changes
     if (
       fieldName === "password" ||
       fieldName === "confirm_password" ||

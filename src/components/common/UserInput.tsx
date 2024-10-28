@@ -1,17 +1,18 @@
 import React from "react";
 
 export interface UserInputProps {
+  id: string;
   label: string;
   type: string;
   name: string;
   labelClass?: string;
   inputClass?: string;
-  value: string | number; // Accept string for text input
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // onChange handler
+  value: string | number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-// UserInput function component
 const UserInput = ({
+  id,
   label,
   type,
   name,
@@ -22,17 +23,17 @@ const UserInput = ({
 }: UserInputProps) => {
   return (
     <div className="mb-4">
-      <label htmlFor={name} className={labelClass}>
+      <label htmlFor={id} className={labelClass}>
         {label}
       </label>
       <input
         type={type}
-        id={name}
+        id={id}
         name={name}
         className={inputClass}
         required
-        value={value} // Controlled input
-        onChange={onChange} // onChange handler
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
