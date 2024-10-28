@@ -1,6 +1,16 @@
+interface Link {
+  url: string;
+  name: string;
+}
+
+interface FooterSectionProps {
+  title: string;
+  links: Link[];
+  isHorizontal: boolean;
+}
 
 
-const FooterSection = ({ title, links, isHorizontal }) => {
+const FooterSection: React.FC<FooterSectionProps> = ({ title, links, isHorizontal }) => {
   return (
     <div className="footer-section">
       <h3 className="text-lg font-bold mb-4">{title}</h3>
