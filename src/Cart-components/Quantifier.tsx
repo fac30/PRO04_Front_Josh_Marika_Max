@@ -6,8 +6,7 @@ interface QuantifierProps {
     onDecrease: () => void;
 }
 
-const Quantifier = ({quantity, onIncrease, onDecrease}: QuantifierProps) => {
-    return (
+const Quantifier = ({quantity, onIncrease, onDecrease}: QuantifierProps) => (
         <div 
           id="quantifier" 
           className="flex items-center space-x-0 border border-gray shadow-md"
@@ -25,7 +24,7 @@ const Quantifier = ({quantity, onIncrease, onDecrease}: QuantifierProps) => {
           />
         </div>
       );
-    };
+
     
 
 export default Quantifier;

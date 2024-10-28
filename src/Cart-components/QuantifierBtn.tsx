@@ -6,12 +6,9 @@ interface QuantifierButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> 
     disabled?: boolean; 
 }
 
-const QuantifierBtn = ({ text, onClick, disabled = false, ...props }: QuantifierButtonProps) => {
-    const QuantifierBtnClasses = "rounded text-white font-bold bg-background-footer text-white hover:bg-accent-light transition w-12 h-12 flex justify-center items-center";
-
-    return (
+const QuantifierBtn = ({ text, onClick, disabled = false, ...props }: QuantifierButtonProps) => (
         <button
-            className={QuantifierBtnClasses}
+            className="rounded text-white font-bold bg-background-footer text-white hover:bg-accent-light transition w-12 h-12 flex justify-center items-center"
             onClick={onClick}
             disabled={disabled}
             aria-label={disabled.toString()} 
@@ -20,6 +17,6 @@ const QuantifierBtn = ({ text, onClick, disabled = false, ...props }: Quantifier
             {text}
         </button>
     );
-};
+
 
 export default QuantifierBtn;
