@@ -1,6 +1,7 @@
 import React from "react";
 
 export interface UserInputProps {
+  id: string;
   label: string;
   type: string;
   name: string;
@@ -10,23 +11,24 @@ export interface UserInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function UserInput({
+const UserInput = ({
+  id,
   label,
   type,
   name,
   labelClass = "",
   inputClass = "",
-  value = "",
+  value,
   onChange,
-}: UserInputProps) {
+}: UserInputProps) => {
   return (
     <div className="mb-4">
-      <label htmlFor={name} className={labelClass}>
+      <label htmlFor={id} className={labelClass}>
         {label}
       </label>
       <input
         type={type}
-        id={name}
+        id={id}
         name={name}
         className={inputClass}
         required
@@ -35,4 +37,6 @@ export default function UserInput({
       />
     </div>
   );
-}
+};
+
+export default UserInput;

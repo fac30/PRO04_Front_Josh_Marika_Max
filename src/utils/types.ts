@@ -64,6 +64,7 @@ export interface Label extends BaseEntity {
 }
 
 export interface Vinyl extends BaseEntity {
+  coverImageUrl: string | null;
   stock: number;
   description?: string;
   price: number;
@@ -156,4 +157,10 @@ export interface UserObject {
   password_hash: string;
   city: string;
   location_id: number;
+}
+
+export interface Location {
+  id: number;
+  country: string;
+  region?: string;
 }
