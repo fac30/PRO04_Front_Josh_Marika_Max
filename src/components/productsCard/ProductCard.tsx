@@ -1,13 +1,16 @@
 // src/components/productsCard/ProductCard.tsx
 
+import { useCartContext, ADD_TO_CART  } from '../../Context/Cart';
 import { Vinyl } from "../../utils/types";
 
 interface ProductCardProps {
-  vinyl: Vinyl; // Changed to 'vinyl' to follow convention
-  addToCart: (vinyl: Vinyl) => void; // Include addToCart in the props
+  vinyl: Vinyl; 
+  addToCart: (product: Vinyl) => void;
 }
 
-const ProductCard = ({ vinyl, addToCart }: ProductCardProps) => {
+const ProductCard = ({ vinyl }: ProductCardProps) => {
+  const { dispatch } = useCartContext();
+
   return (
     <div className="bg-white shadow-md p-4 max-w-80 w-full">
       {vinyl.image_url ? (
@@ -27,7 +30,8 @@ const ProductCard = ({ vinyl, addToCart }: ProductCardProps) => {
         <p className="text-gray-800 font-semibold">£{vinyl.price}</p>
         <button
           className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition"
-          onClick={() => addToCart(vinyl)} // Pass the vinyl object to addToCart
+          onClick={() => dispatch({ type: ADD_TO_CART, payload: vinyl })}
+
         >
           Add To Basket
         </button>

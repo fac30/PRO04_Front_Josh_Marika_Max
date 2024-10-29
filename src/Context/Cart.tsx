@@ -1,30 +1,33 @@
 import { createContext, useContext, useReducer, useEffect, ReactNode } from "react";
 import { Vinyl } from "../utils/types";
 
-// Define the shape of the cart state
+export const ADD_TO_CART = "ADD_TO_CART";
+const DECREASE_QUANTITY = "DECREASE_QUANTITY";
+
+
 interface CartState {
   cartItems: Vinyl[];
   cartCount: number;
   totalPrice: number;
 }
 
-// Define the shape of the actions
+
 interface CartAction {
-  type: "ADD_TO_CART" | "REMOVE_FROM_CART" | "DECREASE_QUANTITY";
+  type: typeof ADD_TO_CART | typeof DECREASE_QUANTITY;
   payload: Vinyl;
 }
 
-// Create a context with undefined initial value
+
 const CartContext = createContext<{ state: CartState; dispatch: React.Dispatch<CartAction> } | undefined>(undefined);
 
-// Define the initial state of the cart
+
 const initialState: CartState = {
   cartItems: JSON.parse(localStorage.getItem("shoppingCart") || "[]"),
   cartCount: 0,
   totalPrice: 0,
 };
 
-// Reducer function to handle cart actions
+
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
     case "ADD_TO_CART":
@@ -69,7 +72,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  // Sync cart items with localStorage whenever cartItems changes
+
   useEffect(() => {
     localStorage.setItem("shoppingCart", JSON.stringify(state.cartItems));
   }, [state.cartItems]);
@@ -81,7 +84,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   );
 };
 
-// Custom hook to use the CartContext easily
+
 export const useCartContext = () => {
   const context = useContext(CartContext);
   if (!context) {
