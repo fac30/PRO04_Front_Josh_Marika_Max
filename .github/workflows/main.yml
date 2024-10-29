@@ -23,7 +23,7 @@ jobs:
 
       - name: Build frontend
         run: npm run build 
-        working-directory: ./PRO04_Front_Josh_Marika_Max # Specify the correct path to your frontend code
+        # working-directory: ./PRO04_Front_Josh_Marika_Max # Specify the correct path to your frontend code
 
       - name: Install AWS CDK
         run: npm install -g aws-cdk
