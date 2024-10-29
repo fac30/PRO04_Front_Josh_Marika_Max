@@ -1,34 +1,95 @@
-const FiltersSidebar = () => {
+import { useEffect, useState } from "react";
+import { fetchData } from "../../utils/fetch-data";
+import {
+  Genre,
+  PriceRange,
+  TimePeriod,
+  FiltersSidebarProps,
+} from "../../utils/types";
+
+const FiltersSidebar = ({
+  selectedGenres = [],
+  selectedPriceRanges = [],
+  selectedTimePeriods = [],
+  onGenreChange,
+  onPriceRangeChange,
+  onTimePeriodChange,
+}: FiltersSidebarProps) => {
+  const [genres, setGenres] = useState<Genre[]>([]);
+  const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
+  const [timePeriods, setTimePeriods] = useState<TimePeriod[]>([]);
+
+  useEffect(() => {
+    const fetchFilters = async () => {
+      const fetchedGenres: Genre[] = await fetchData("genres", "GET");
+      const fetchedPriceRanges: PriceRange[] = await fetchData(
+        "price_ranges",
+        "GET",
+      );
+      const fetchedTimePeriods: TimePeriod[] = await fetchData(
+        "time_periods",
+        "GET",
+      );
+
+      setGenres(fetchedGenres);
+      setPriceRanges(fetchedPriceRanges);
+      setTimePeriods(fetchedTimePeriods);
+    };
+
+    fetchFilters();
+  }, []);
+
   return (
     <aside className="w-72 pr-4">
       <div className="p-4 border border-gray-300 rounded mb-4">
         <h2 className="text-xl font-semibold mb-3">Filters</h2>
-        <div className="mb-3">
+
+        <div className="mb-16">
           <h3 className="font-medium mb-2">Genre</h3>
           <div className="space-y-1">
-            {["Rock", "Pop", "Jazz", "Hip-Hop"].map((genre) => (
-              <label key={genre} className="flex items-center">
-                <input type="checkbox" className="mr-2" /> {genre}
+            {genres.map((genre) => (
+              <label key={genre.id} className="flex items-center">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={selectedGenres.includes(genre.genre)}
+                  onChange={() => onGenreChange(genre.genre)}
+                />
+                {genre.genre}
               </label>
             ))}
           </div>
         </div>
-        <div className="mb-3">
+
+        <div className="mb-16">
           <h3 className="font-medium mb-2">Price Range</h3>
           <div className="space-y-1">
-            {["£0 - £20", "£20 - £50", "£50 - £100"].map((range) => (
-              <label key={range} className="flex items-center">
-                <input type="checkbox" className="mr-2" /> {range}
+            {priceRanges.map((range) => (
+              <label key={range.id} className="flex items-center">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={selectedPriceRanges.includes(range.price_range)}
+                  onChange={() => onPriceRangeChange(range.price_range)}
+                />
+                {range.price_range}
               </label>
             ))}
           </div>
         </div>
-        <div className="mb-3">
-          <h3 className="font-medium mb-2">Year</h3>
+
+        <div className="mb-16">
+          <h3 className="font-medium mb-2">Time Periods</h3>
           <div className="space-y-1">
-            {["2023", "2022", "2021"].map((year) => (
-              <label key={year} className="flex items-center">
-                <input type="checkbox" className="mr-2" /> {year}
+            {timePeriods.map((period) => (
+              <label key={period.id} className="flex items-center">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={selectedTimePeriods.includes(period.time_period)}
+                  onChange={() => onTimePeriodChange(period.time_period)}
+                />
+                {period.time_period}
               </label>
             ))}
           </div>

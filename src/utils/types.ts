@@ -64,25 +64,23 @@ export interface Label extends BaseEntity {
 }
 
 export interface Vinyl extends BaseEntity {
-  coverImageUrl: string | null;
   stock: number;
   description?: string;
   price: number;
   artist: string;
   title: string;
-  release_date?: Date;
+  release_date: string; // Using string to match the input format
   limited_edition: boolean;
-  genre_id: number;
-  condition_id: number; // foreign key to conditions
-  price_range_id: number; // foreign key to price_ranges
-  collection_type_id: number; // foreign key to collection_types
-  new_release: boolean;
-  time_period_id: number; // foreign key to time_periods
-  label_id: number; // foreign key to labels
-  image_url?: string;
+  genres: Genre; // Changed to match the nested structure
+  conditions: Condition; // Changed to match the nested structure
+  price_ranges: PriceRange; // Changed to match the nested structure
+  collection_types: CollectionType; // Changed to match the nested structure
+  new_release: boolean; // Since you already have this as a boolean in the original data
+  time_periods: TimePeriod; // Changed to match the nested structure
+  labels: Label; // Changed to match the nested structure
+  image_url: string | null; // Keeping null as an option
   discount?: number;
   on_sale: boolean;
-  quantity: number;
 }
 
 export interface Format extends BaseEntity {
@@ -159,8 +157,16 @@ export interface UserObject {
   location_id: number;
 }
 
-export interface Location {
-  id: number;
-  country: string;
-  region?: string;
+export type SortControlsProps = {
+  sortBy: string;
+  setSortBy: (value: string) => void;
+};
+
+export interface FiltersSidebarProps {
+  selectedGenres: string[];
+  selectedPriceRanges: string[];
+  selectedTimePeriods: string[];
+  onGenreChange: (genre: string) => void;
+  onPriceRangeChange: (priceRange: string) => void;
+  onTimePeriodChange: (timePeriod: string) => void;
 }

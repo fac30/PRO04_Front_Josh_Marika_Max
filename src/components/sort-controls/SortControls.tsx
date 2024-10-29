@@ -1,4 +1,6 @@
-const SortControls = ({ sortBy, setSortBy }) => {
+import { SortControlsProps } from "../../utils/types";
+
+const SortControls = ({ sortBy, setSortBy }: SortControlsProps) => {
   return (
     <div className="flex justify-center gap-10 items-center mt-6">
       <div>
