@@ -15,6 +15,7 @@ const Vinyls = () => {
   const [timePeriods, setTimePeriods] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<string>("/");
   const [productsPerPage, setProductsPerPage] = useState<number>(24);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const { addToCart } = useCartContext();
 
   const fetchProductData = async () => {
@@ -61,6 +62,26 @@ const Vinyls = () => {
 
     filterVinyls();
   }, [vinyls, genres, priceRanges, years, timePeriods]);
+
+  const totalPages = Math.ceil(filteredVinyls.length / productsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const displayedVinyls = filteredVinyls.slice(startIndex, endIndex); // Use the sliced array based on pagination
 
   const handleGenreChange = (genre: string) => {
     setGenres((prev) => {
@@ -109,10 +130,29 @@ const Vinyls = () => {
             onTimePeriodChange={handleTimePeriodChange}
           />
           <div className="w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredVinyls.slice(0, productsPerPage).map((vinyl) => (
+            {displayedVinyls.map((vinyl) => (
               <ProductCard key={vinyl.id} vinyl={vinyl} addToCart={addToCart} />
             ))}
           </div>
+        </div>
+        <div className="flex justify-center gap-16 items-center mt-4">
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className="p-2 border border-gray-300 rounded disabled:opacity-50 cursor-pointer"
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className="p-2 border border-gray-300 rounded disabled:opacity-50"
+          >
+            Next
+          </button>
         </div>
       </div>
     </>
