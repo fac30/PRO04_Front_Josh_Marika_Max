@@ -10,7 +10,7 @@ interface FooterSectionProps {
 }
 
 
-const FooterSection: React.FC<FooterSectionProps> = ({ title, links, isHorizontal }) => {
+const FooterSection = ({ title, links, isHorizontal }: FooterSectionProps) => {
   return (
     <div className="footer-section">
       <h3 className="text-lg font-bold mb-4">{title}</h3>
