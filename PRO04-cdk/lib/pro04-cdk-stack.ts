@@ -24,7 +24,7 @@ export class Pro04CdkStack extends cdk.Stack {
 
     // Deploy the files from the dist folder
     new s3deploy.BucketDeployment(this, "DeployWebsite", {
-      sources: [s3deploy.Source.asset("/Users/marikabertelli/Documents/MyProject/PRO04_Front_Josh_Marika_Max/dist")],
+      sources: [s3deploy.Source.asset("../dist")],
       // sources: [s3deploy.Source.asset("../dist")],
       destinationBucket: siteBucket,
     });
