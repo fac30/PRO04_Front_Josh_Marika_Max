@@ -48,10 +48,13 @@ const FiltersSidebar = ({
           <h3 className="font-medium mb-2">Genre</h3>
           <div className="space-y-1">
             {genres.map((genre) => (
-              <label key={genre.id} className="flex items-center">
+              <label
+                key={genre.id}
+                className="flex items-center cursor-pointer hover:text-background-footer"
+              >
                 <input
                   type="checkbox"
-                  className="mr-2"
+                  className="mr-2 "
                   checked={selectedGenres.includes(genre.genre)}
                   onChange={() => onGenreChange(genre.genre)}
                 />
@@ -65,7 +68,10 @@ const FiltersSidebar = ({
           <h3 className="font-medium mb-2">Price Range</h3>
           <div className="space-y-1">
             {priceRanges.map((range) => (
-              <label key={range.id} className="flex items-center">
+              <label
+                key={range.id}
+                className="flex items-center cursor-pointer hover:text-background-footer"
+              >
                 <input
                   type="checkbox"
                   className="mr-2"
@@ -82,7 +88,10 @@ const FiltersSidebar = ({
           <h3 className="font-medium mb-2">Time Periods</h3>
           <div className="space-y-1">
             {timePeriods.map((period) => (
-              <label key={period.id} className="flex items-center">
+              <label
+                key={period.id}
+                className="flex items-center cursor-pointer hover:text-background-footer"
+              >
                 <input
                   type="checkbox"
                   className="mr-2"
