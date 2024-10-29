@@ -9,7 +9,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ vinyl, addToCart }: ProductCardProps) => {
   return (
-    <div className="bg-white shadow-md p-4 max-w-80 w-full">
+    <div className="bg-white shadow-md p-4 max-w-80 w-full text-center">
       {vinyl.image_url ? (
         <img
           src={vinyl.image_url}

@@ -25,7 +25,7 @@ const Vinyls = () => {
   return (
     <div
       id="main-content"
-      className="items-center justify-center text-center px-4 py-4 flex flex-col"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-24 px-4 py-4 max-w-7xl m-auto"
       role="main"
     >
       {vinyls.map((vinyl) => (
