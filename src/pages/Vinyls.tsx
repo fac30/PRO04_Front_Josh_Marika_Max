@@ -121,15 +121,17 @@ const Vinyls = () => {
 
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex">
-          <FiltersSidebar
-            selectedGenres={genres}
-            selectedPriceRanges={priceRanges}
-            selectedTimePeriods={timePeriods}
-            onGenreChange={handleGenreChange}
-            onPriceRangeChange={handlePriceRangeChange}
-            onTimePeriodChange={handleTimePeriodChange}
-          />
-          <div className="w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="hidden md:block">
+            <FiltersSidebar
+              selectedGenres={genres}
+              selectedPriceRanges={priceRanges}
+              selectedTimePeriods={timePeriods}
+              onGenreChange={handleGenreChange}
+              onPriceRangeChange={handlePriceRangeChange}
+              onTimePeriodChange={handleTimePeriodChange}
+            />
+          </div>
+          <div className="w-full md:w-3/4 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {displayedVinyls.map((vinyl) => (
               <ProductCard key={vinyl.id} vinyl={vinyl} addToCart={addToCart} />
             ))}
