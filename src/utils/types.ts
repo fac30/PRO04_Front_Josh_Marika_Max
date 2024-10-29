@@ -157,10 +157,12 @@ export interface UserObject {
   location_id: number;
 }
 
-export type SortControlsProps = {
+export interface SortControlsProps {
   sortBy: string;
   setSortBy: (value: string) => void;
-};
+  productsPerPage: number; // Add productsPerPage
+  setProductsPerPage: (value: number) => void; // Add setProductsPerPage
+}
 
 export interface FiltersSidebarProps {
   selectedGenres: string[];

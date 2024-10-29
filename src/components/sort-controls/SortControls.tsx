@@ -1,6 +1,16 @@
 import { SortControlsProps } from "../../utils/types";
 
-const SortControls = ({ sortBy, setSortBy }: SortControlsProps) => {
+type SortControlsPropsExtended = SortControlsProps & {
+  productsPerPage: number; // Add productsPerPage to props
+  setProductsPerPage: (value: number) => void; // Callback for changing products per page
+};
+
+const SortControls = ({
+  sortBy,
+  setSortBy,
+  productsPerPage,
+  setProductsPerPage,
+}: SortControlsPropsExtended) => {
   return (
     <div className="flex justify-center gap-10 items-center mt-6">
       <div>
@@ -11,7 +21,7 @@ const SortControls = ({ sortBy, setSortBy }: SortControlsProps) => {
           id="sort"
           className="p-2 border border-gray-300 rounded"
           value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)} // Update sortBy state
+          onChange={(e) => setSortBy(e.target.value)}
         >
           <option value="/"> - </option>
           <option value="newest">Newest Arrivals</option>
@@ -27,11 +37,12 @@ const SortControls = ({ sortBy, setSortBy }: SortControlsProps) => {
         <select
           id="productsPerPage"
           className="p-2 border border-gray-300 rounded"
-          defaultValue="24"
+          value={productsPerPage}
+          onChange={(e) => setProductsPerPage(Number(e.target.value))} // Handle change for products per page
         >
-          <option value="24">24</option>
-          <option value="48">48</option>
-          <option value="72">72</option>
+          <option value={24}>24</option>
+          <option value={48}>48</option>
+          <option value={72}>72</option>
         </select>
       </div>
     </div>

@@ -11,9 +11,10 @@ const Vinyls = () => {
   const [filteredVinyls, setFilteredVinyls] = useState<Vinyl[]>([]);
   const [genres, setGenres] = useState<string[]>([]);
   const [priceRanges, setPriceRanges] = useState<string[]>([]);
-  const [years, setYears] = useState<string[]>([]);
+  const [years] = useState<string[]>([]);
   const [timePeriods, setTimePeriods] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<string>("/");
+  const [productsPerPage, setProductsPerPage] = useState<number>(24);
   const { addToCart } = useCartContext();
 
   const fetchProductData = async () => {
@@ -90,7 +91,12 @@ const Vinyls = () => {
 
   return (
     <>
-      <SortControls sortBy={sortBy} setSortBy={setSortBy} />
+      <SortControls
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        productsPerPage={productsPerPage}
+        setProductsPerPage={setProductsPerPage}
+      />
 
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex">
@@ -103,7 +109,7 @@ const Vinyls = () => {
             onTimePeriodChange={handleTimePeriodChange}
           />
           <div className="w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredVinyls.map((vinyl) => (
+            {filteredVinyls.slice(0, productsPerPage).map((vinyl) => (
               <ProductCard key={vinyl.id} vinyl={vinyl} addToCart={addToCart} />
             ))}
           </div>
