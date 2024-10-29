@@ -6,12 +6,8 @@ interface StaffPicksProps {
   addToCart: (product: Vinyl) => void; // Add this line
 }
 
-const StaffPicks = ({ vinyl }: StaffPicksProps) => {
-  function addToCart(vinyl: Vinyl): void {
-    throw new Error("Function not implemented.");
-  }
-
-  // Destructure 'vinyl'
+const StaffPicks = ({ vinyl, addToCart  }: StaffPicksProps) => {
+ 
   return (
     <section className="mb-12 max-w-90" aria-labelledby="staff-picks">
       <h3

@@ -22,6 +22,7 @@ export default function NewsletterForm() {
         {" "}
         {/* Step 3: Attach the submit handler */}
         <UserInput
+        id="id"
           label="Email Address"
           type="email"
           name="email"
