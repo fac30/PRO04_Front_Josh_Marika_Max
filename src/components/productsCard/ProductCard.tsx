@@ -9,7 +9,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ vinyl, addToCart }: ProductCardProps) => {
   return (
-    <div className="bg-white shadow-md p-4 max-w-80 w-full text-center">
+    <div className="bg-white shadow-md p-4 max-w-80 w-full text-center ">
       {vinyl.image_url ? (
         <img
           src={vinyl.image_url}
@@ -22,7 +22,7 @@ const ProductCard = ({ vinyl, addToCart }: ProductCardProps) => {
         </div>
       )}
       <div className="p-4">
-        <h2 className="text-lg font-bold mb-2">{vinyl.title}</h2>
+        <h2 className="text-md font-bold mb-5">{vinyl.title}</h2>
         <p className="text-gray-600">{vinyl.artist}</p>
         <p className="text-gray-800 font-semibold">£{vinyl.price}</p>
         <button

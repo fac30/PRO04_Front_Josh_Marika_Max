@@ -1,6 +1,6 @@
-const SortControls = () => {
+const SortControls = ({ sortBy, setSortBy }) => {
   return (
-    <div className="flex justify-between items-center mb-6">
+    <div className="flex justify-center gap-10 items-center mt-6">
       <div>
         <label htmlFor="sort" className="mr-2 font-medium">
           Sort by:
@@ -8,12 +8,28 @@ const SortControls = () => {
         <select
           id="sort"
           className="p-2 border border-gray-300 rounded"
-          defaultValue="popularity"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)} // Update sortBy state
         >
-          <option value="popularity">Popularity</option>
+          <option value="/"> - </option>
           <option value="newest">Newest Arrivals</option>
           <option value="priceLowHigh">Price: Low to High</option>
           <option value="priceHighLow">Price: High to Low</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="productsPerPage" className="mr-2 font-medium">
+          Products per page:
+        </label>
+        <select
+          id="productsPerPage"
+          className="p-2 border border-gray-300 rounded"
+          defaultValue="24"
+        >
+          <option value="24">24</option>
+          <option value="48">48</option>
+          <option value="72">72</option>
         </select>
       </div>
     </div>

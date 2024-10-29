@@ -16,7 +16,7 @@ const FiltersSidebar = () => {
         <div className="mb-3">
           <h3 className="font-medium mb-2">Price Range</h3>
           <div className="space-y-1">
-            {["$0 - $20", "$20 - $50", "$50 - $100"].map((range) => (
+            {["£0 - £20", "£20 - £50", "£50 - £100"].map((range) => (
               <label key={range} className="flex items-center">
                 <input type="checkbox" className="mr-2" /> {range}
               </label>

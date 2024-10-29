@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import UserSignUp from "./pages/UserSignUp";
 import ShopCart from "./pages/ShopCart";
-import Vinyls from "./pages/vinyls";
+import Vinyls from "./pages/Vinyls";
 
 const App = () => {
   return (
