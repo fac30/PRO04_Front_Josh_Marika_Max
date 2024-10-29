@@ -6,21 +6,19 @@ import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import UserSignUp from "./pages/UserSignUp";
 import ShopCart from "./pages/ShopCart";
+import Vinyls from "./pages/vinyls";
 
 const App = () => {
-
   return (
     <Router>
-      <Header/>
+      <Header />
       <main className="flex-grow">
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Vinyls" element={<Vinyls />} />
           <Route path="/UserLogin" element={<UserLogin />} />
           <Route path="/UserSignUp" element={<UserSignUp />} />
-          <Route
-            path="/ShopCart"
-            element={<ShopCart  />}
-          />
+          <Route path="/ShopCart" element={<ShopCart />} />
         </Routes>
       </main>
       <Footer />
