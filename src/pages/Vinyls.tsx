@@ -69,6 +69,11 @@ const Vinyls = () => {
     currentPage * productsPerPage,
   );
 
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    window.scrollTo(0, 0); // Scroll to top on page change
+  };
+
   return (
     <>
       <SortControls
@@ -95,7 +100,9 @@ const Vinyls = () => {
             />
           </div>
 
-          <div className="w-full max-h-10 grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-6 min-h-[500px]">
+            {" "}
+            {/* Set a minimum height */}
             {displayedVinyls.map((vinyl) => (
               <ProductCard key={vinyl.id} vinyl={vinyl} addToCart={addToCart} />
             ))}
@@ -104,7 +111,7 @@ const Vinyls = () => {
 
         <div className="flex justify-center gap-16 items-center mt-4">
           <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
             disabled={currentPage === 1}
             className="p-2 border border-gray-300 rounded disabled:opacity-50 cursor-pointer"
           >
@@ -116,9 +123,9 @@ const Vinyls = () => {
           </span>
           <button
             onClick={() =>
-              setCurrentPage((prev) =>
+              handlePageChange(
                 Math.min(
-                  prev + 1,
+                  currentPage + 1,
                   Math.ceil(filteredVinyls.length / productsPerPage),
                 ),
               )
