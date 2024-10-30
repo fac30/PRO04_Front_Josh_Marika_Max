@@ -1,10 +1,10 @@
 // src/components/productsCard/ProductCard.tsx
 
-import { useCartContext, ADD_TO_CART  } from '../../Context/Cart';
+import { useCartContext, ADD_TO_CART } from "../../Context/Cart";
 import { Vinyl } from "../../utils/types";
 
 interface ProductCardProps {
-  vinyl: Vinyl; 
+  vinyl: Vinyl;
   addToCart: (product: Vinyl) => void;
 }
 
@@ -31,7 +31,6 @@ const ProductCard = ({ vinyl }: ProductCardProps) => {
         <button
           className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition"
           onClick={() => dispatch({ type: ADD_TO_CART, payload: vinyl })}
-
         >
           Add To Basket
         </button>
