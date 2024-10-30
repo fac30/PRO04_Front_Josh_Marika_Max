@@ -3,26 +3,13 @@ import UserInput from "../components/common/UserInput";
 import SubmitButton from "../components/common/SubmitButton";
 import { Link, useNavigate } from "react-router-dom";
 import { inputLabelClass, inputFieldClass } from "../components/common/styles";
+import hashPassword from "../hashing";
+import { fetchData } from "../utils/fetch-data";
 
 export default function LoginForm() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loginError, setLoginError] = useState<boolean>(false);
-  const navigate = useNavigate();
-
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // Replace this with actual authentication logic
-    if (username === "existingUser" && password === "validPassword") {
-      console.log("Navigating to UserPage");
-      setLoginError(false);
-      navigate("/UserPage");
-    } else {
-      console.log("Login failed");
-      setLoginError(true);
-    }
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,6 +17,27 @@ export default function LoginForm() {
       setUsername(value);
     } else if (name === "password") {
       setPassword(value);
+    }
+  };
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const hashedPassword = await hashPassword(password);
+    const loginDetails = {
+      username: username,
+      password_hash: hashedPassword,
+    };
+
+    try {
+      const response = await fetchData("login", "POST", loginDetails);
+      if (response.ok) {
+        console.log("sucess");
+      } else {
+        setLoginError(true);
+      }
+    } catch (error) {
+      setLoginError(true);
     }
   };
 
