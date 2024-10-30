@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa"; // Importing icons for hamburger and close
 
 const NavBar = () => {
-  const linkStyles = "text-text-primary hover:text-primary";
+  const linkStyles = "text-text-primary hover:text-background-footer";
   const [isOpen, setIsOpen] = useState(false); // State for managing menu visibility
 
   // Function to toggle the mobile menu
