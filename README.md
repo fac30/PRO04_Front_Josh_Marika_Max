@@ -91,7 +91,35 @@ Example:
 feat(header): add navigation bar
 ```
 
+## Deployment
 
+### AWS S3 Deployment via CDK
+
+#### CDK Setup
+The `pro04-cdk-stack.ts` file in this repository defines the S3 deployment stack. This configuration includes:
+- **websiteIndexDocument**: Specifies the main file to load for the S3 website.
+- **publicReadAccess**: Grants public read access to the bucket.
+- **blockPublicAccess**: Controls public access settings to secure the bucket.
+
+#### BucketDeployment
+Files from the `dist` folder are uploaded to the S3 bucket during deployment. Upon a successful deployment, the bucket’s website URL will be output.
+
+#### Build and Deploy Commands
+
+1. **Build the Project**:
+   ```
+   npm run build
+   ```
+
+Deploy Using AWS CDK:
+```
+cdk deploy
+```
+
+#### Automated Deployment with GitHub Actions
+GitHub Actions is configured to automatically deploy the frontend on commits to the main branch.
+Store AWS credentials (Access Key ID and Secret Access Key) as GitHub Secrets under AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
+Ensure your GitHub Actions workflow specifies npm run build for the build command and syncs the dist folder to the S3 bucket.
 
 
 
