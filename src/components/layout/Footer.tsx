@@ -5,16 +5,6 @@ const Footer = () => {
   return (
     <footer
       role="contentinfo"
-<<<<<<< HEAD
-      className="bg-background-footer text-text-primary py-8 w-full "
-    >
-      <div className="flex flex-col md:flex-row justify-between items-center mx-auto max-w-6xl px-4">
-        <div className="ml-auto max-w-md w-full mb-4 md:mb-0 md:mr-8">
-          <NewsletterForm />
-        </div>
-
-        <div className="mb-4 md:mb-0">
-=======
       className="bg-background-footer text-white py-8 w-full text-center"
     >
       <div className="flex flex-col justify-between items-center mx-auto max-w-6xl px-4">
@@ -24,7 +14,6 @@ const Footer = () => {
 
         {/* Socials */}
         <div className="mb-4 md:mb-0 ">
->>>>>>> main
           <Socials />
         </div>
       </div>
