@@ -1,10 +1,45 @@
 import { useCartContext } from '../Context/Cart';
+import { useEffect, useState } from 'react';
+
+type ShippingOption = {
+  id: number;
+  shipping_option: string;
+  price: number;
+  lead_time_days: number;
+};
 
 const CartSummary: React.FC = () => {
   const { state: { totalPrice } } = useCartContext();
+  const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>([]);
+  const [selectedShipping, setSelectedShipping] = useState<ShippingOption | null>(null);
   const remainingForFreeShipping = 35 - totalPrice;
-  const deliveryCharge = totalPrice < 35 ? 5 : 0;
+
+  useEffect(() => {
+    const fetchShippingOptions = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/shipping-options');
+        const data: ShippingOption[] = await response.json();
+        setShippingOptions(data);
+        if (data.length > 0) {
+          setSelectedShipping(data[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching shipping options:', error);
+      }
+    };
+    fetchShippingOptions();
+  }, []);
+
+  const handleShippingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = Number(event.target.value);
+    const option = shippingOptions.find(option => option.id === selectedId);
+    setSelectedShipping(option || null);
+  };
+
+
+  const deliveryCharge = selectedShipping && totalPrice < 35 ? selectedShipping.price : 0;
   const finalTotal = totalPrice + deliveryCharge;
+
   
     return (
       <div className="p-6 bg-background-light shadow-lg rounded-md">
@@ -16,6 +51,24 @@ const CartSummary: React.FC = () => {
             Add <span className="font-semibold">£{remainingForFreeShipping.toFixed(2)}</span> of eligible items to qualify for FREE UK Delivery.
           </p>
         )}
+        
+        
+        <label className='block mb-4'>
+          <span className='text-sm font-semibold text-text-primary'>Choose Shipping Option:</span>
+          <select
+          className='mt-2 p-2 border rounded-md'
+          onChange={handleShippingChange}
+          value={selectedShipping?.id || ''} >
+            
+            
+            {shippingOptions.map(opt => (
+              <option key={opt.id} value={opt.id}>
+                {opt.shipping_option} - £{opt.price} (Lead time: {opt.lead_time_days} days)
+                </option>
+              ))}
+              </select>
+              </label>
+
         
         
         {deliveryCharge > 0 && (
