@@ -1,14 +1,31 @@
+import { useEffect, useState } from "react";
 import Logo from "../common/Logo";
 import NavBar from "../layout/NavBar";
 import { FaUserCircle, FaShoppingBag } from "react-icons/fa";
 import IconWithText from "../common/IconWithText";
 import SearchBar from "../common/SearchBar";
 import { useCartContext } from "../../Context/Cart";
+import { fetchData } from "../../utils/fetch-data";
 
 const Header = () => {
   const {
     state: { cartCount },
   } = useCartContext();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Use fetchData to check session status
+    const fetchSessionData = async () => {
+      try {
+        const data = await fetchData("check-session", "GET");
+        setIsLoggedIn(data.isLoggedIn); // Assuming the response includes { isLoggedIn: true/false }
+      } catch (error) {
+        console.error("Error fetching session data:", error);
+      }
+    };
+    fetchSessionData();
+  }, []);
 
   return (
     <header className="bg-background-default p-4 shadow">
@@ -25,7 +42,7 @@ const Header = () => {
           <IconWithText
             IconComponent={FaUserCircle}
             label="Account"
-            to="/UserLogin"
+            to={isLoggedIn ? "/UserPage" : "/UserLogin"}
           />
           <IconWithText
             IconComponent={FaShoppingBag}
