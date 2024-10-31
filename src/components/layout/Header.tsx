@@ -14,18 +14,15 @@ const Header = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    // Use fetchData to check session status
-    const fetchSessionData = async () => {
-      try {
-        const data = await fetchData("check-session", "GET");
-        setIsLoggedIn(data.isLoggedIn); // Assuming the response includes { isLoggedIn: true/false }
-      } catch (error) {
-        console.error("Error fetching session data:", error);
-      }
-    };
-    fetchSessionData();
-  }, []);
+  const fetchSessionData = async () => {
+    try {
+      const data = await fetchData("check-session", "GET");
+      setIsLoggedIn(data.isLoggedIn);
+    } catch (error) {
+      console.error("Error fetching session data:", error);
+    }
+  };
+  fetchSessionData();
 
   return (
     <header className="bg-background-default p-4 shadow">

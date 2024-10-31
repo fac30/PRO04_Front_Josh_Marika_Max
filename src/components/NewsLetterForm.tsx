@@ -15,14 +15,14 @@ export default function NewsletterForm() {
 
   return (
     <div className="bg-white shadow-md p-4 max-w-md w-full rounded-lg">
-      <h2 className="text-xl font-bold mb-4 text-center">
+      <h2 className="text-xl text-black font-bold mb-4 text-center">
         Subscribe to Our Newsletter
       </h2>
       <form className="flex flex-col" onSubmit={handleSubmit}>
         {" "}
         {/* Step 3: Attach the submit handler */}
         <UserInput
-        id="id"
+          id="id"
           label="Email Address"
           type="email"
           name="email"

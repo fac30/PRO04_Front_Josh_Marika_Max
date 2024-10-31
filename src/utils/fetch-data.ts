@@ -4,7 +4,7 @@ const fetchData = async (
   body?: any,
 ): Promise<any> => {
   try {
-    const response = await fetch(`http://18.175.143.146:3000/${table}`, {
+    const response = await fetch(`http://localhost:3000/${table}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",
@@ -17,7 +17,6 @@ const fetchData = async (
     }
 
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
