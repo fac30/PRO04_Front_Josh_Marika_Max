@@ -9,6 +9,7 @@ const fetchData = async (
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: method === "POST" ? JSON.stringify(body) : null,
     });
 

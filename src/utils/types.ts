@@ -172,3 +172,11 @@ export interface FiltersSidebarProps {
   onPriceRangeChange: (priceRange: string) => void;
   onTimePeriodChange: (timePeriod: string) => void;
 }
+
+export interface SessionResponse {
+  isLoggedIn: boolean;
+  user?: {
+    username?: string;
+    email?: string;
+  };
+}
