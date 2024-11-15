@@ -44,28 +44,13 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/artists" className={linkStyles}>
-            ARTISTS
-          </Link>
-        </li>
-        <li>
-          <Link to="/labels" className={linkStyles}>
-            LABELS
-          </Link>
-        </li>
-        <li>
           <Link to="/new-releases" className={linkStyles}>
             NEW RELEASES
           </Link>
         </li>
         <li>
-          <Link to="/on-sale" className={linkStyles}>
-            ON SALE
-          </Link>
-        </li>
-        <li>
           <Link to="/shipping" className={linkStyles}>
-            SHIPPING
+            CONTACT US
           </Link>
         </li>
       </ul>
