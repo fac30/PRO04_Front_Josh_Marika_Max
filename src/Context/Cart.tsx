@@ -15,10 +15,6 @@ interface CartAction {
   payload: Vinyl;
 }
 
-interface Vinyl {
-  quantity: number;
-}
-
 const CartContext = createContext<{
   state: CartState;
   dispatch: React.Dispatch<CartAction>;

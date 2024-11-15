@@ -23,22 +23,28 @@ const Vinyls = () => {
     const fetchVinyls = async () => {
       const data: Vinyl[] = await fetchData("vinyls", "GET");
       setVinyls(data);
-      setFilteredVinyls(data);
     };
     fetchVinyls();
   }, []);
 
   useEffect(() => {
-    // Check query params for sorting
+    // Get genre and sort query params
+    const genreParam = searchParams.get("genre");
     const sortParam = searchParams.get("sort");
+
+    // Set the sortBy state based on the query param
     if (sortParam) {
       setSortBy(sortParam);
     }
-  }, [searchParams]); // Re-run when searchParams change
 
-  useEffect(() => {
+    // Apply genre filter based on the query param
+    const filteredByGenre = genreParam
+      ? vinyls.filter((vinyl) => vinyl.genres.genre.toLowerCase() === genreParam.toLowerCase())
+      : vinyls;
+
+    // Now apply additional filters and sorting
     const applyFiltersAndSort = () => {
-      const filtered = vinyls.filter(
+      const filtered = filteredByGenre.filter(
         (vinyl) =>
           (!genres.length || genres.includes(vinyl.genres.genre)) &&
           (!priceRanges.length || priceRanges.includes(vinyl.price_ranges.price_range)) &&
@@ -59,7 +65,12 @@ const Vinyls = () => {
     };
 
     applyFiltersAndSort();
-  }, [vinyls, genres, priceRanges, timePeriods, sortBy]);
+  }, [vinyls, genres, priceRanges, timePeriods, sortBy, searchParams]); // Dependencies include vinyls and searchParams
+
+  // Scroll to the top of the page whenever the component renders or query params change
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [searchParams]); // This runs whenever searchParams change (i.e., when genre or sort changes)
 
   const toggleFilter = (
     item: string,
