@@ -5,7 +5,6 @@ const fetchData = async (
 ): Promise<any> => {
   try {
     const response = await fetch(`http://localhost:3000/${table}`, {
-      // const response = await fetch(`http://18.175.143.146:3000/${table}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",

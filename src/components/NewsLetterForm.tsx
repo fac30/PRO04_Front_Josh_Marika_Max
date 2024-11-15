@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import UserInput from "./common/UserInput";
 
 export default function NewsletterForm() {
-  const [email, setEmail] = useState<string>(""); // Step 1: State for email input
+  const [email, setEmail] = useState<string>(""); 
 
-  // Step 2: Handle form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your subscription logic here
     console.log("Email submitted:", email);
-    // Optionally, reset the email input after submission
     setEmail("");
   };
 
@@ -20,7 +17,6 @@ export default function NewsletterForm() {
       </h2>
       <form className="flex flex-col" onSubmit={handleSubmit}>
         {" "}
-        {/* Step 3: Attach the submit handler */}
         <UserInput
           id="id"
           label="Email Address"

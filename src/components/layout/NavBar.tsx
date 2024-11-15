@@ -67,7 +67,7 @@ const NavBar = () => {
           </button>
         </li>
         <li>
-          <Link to="/shipping" className={linkStyles}>
+          <Link to="/contactUs" className={linkStyles}>
             CONTACT US
           </Link>
         </li>

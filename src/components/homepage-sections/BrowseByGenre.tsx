@@ -20,7 +20,14 @@ const GenreSection = ({ genres, genreVinyls }: GenreSectionProps) => {
           const vinyls = genreVinyls[genre.genre];
           const vinyl = vinyls && vinyls.length > 0 ? vinyls[0] : null;
 
-          return <GenreCard key={genre.id} genre={genre.genre} vinyl={vinyl} />;
+          return (
+            <GenreCard
+              key={genre.id}
+              genre={genre.genre}        // Pass the genre name (genre.genre)
+              genreId={genre.id}         // Pass the genre ID (genre.id)
+              vinyl={vinyl}              // Pass the vinyl object
+            />
+          );
         })}
       </div>
     </section>

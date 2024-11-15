@@ -32,6 +32,7 @@ export interface Session extends ExpirableEntity {
 
 export interface Genre extends BaseEntity {
   genre: string;
+  genreId: number;
 }
 
 export interface Condition extends BaseEntity {
@@ -81,6 +82,7 @@ export interface Vinyl extends BaseEntity {
   image_url: string | null; // Keeping null as an option
   discount?: number;
   on_sale: boolean;
+  quantity: number;
 }
 
 export interface Format extends BaseEntity {
