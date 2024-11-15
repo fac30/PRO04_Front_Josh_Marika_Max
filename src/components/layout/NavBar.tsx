@@ -1,14 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa"; // Importing icons for hamburger and close
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = () => {
   const linkStyles = "text-text-primary hover:text-background-footer";
-  const [isOpen, setIsOpen] = useState(false); // State for managing menu visibility
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Function to toggle the mobile menu
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const scrollToGenreSection = () => {
+    const genreSection = document.querySelector("#genres"); // Adjust selector if necessary
+    if (genreSection) {
+      genreSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const navigateToLatestReleases = () => {
+    navigate("/vinyls?sort=newest");
+    setIsOpen(false); // Close the menu
   };
 
   return (
@@ -39,33 +51,24 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/genres" className={linkStyles}>
+          <button
+            onClick={scrollToGenreSection}
+            className={`${linkStyles} bg-transparent border-none cursor-pointer`}
+          >
             GENRES
-          </Link>
+          </button>
         </li>
         <li>
-          <Link to="/artists" className={linkStyles}>
-            ARTISTS
-          </Link>
+          <button
+            onClick={navigateToLatestReleases}
+            className={`${linkStyles} bg-transparent border-none cursor-pointer`}
+          >
+            LATEST RELEASES
+          </button>
         </li>
         <li>
-          <Link to="/labels" className={linkStyles}>
-            LABELS
-          </Link>
-        </li>
-        <li>
-          <Link to="/new-releases" className={linkStyles}>
-            NEW RELEASES
-          </Link>
-        </li>
-        <li>
-          <Link to="/on-sale" className={linkStyles}>
-            ON SALE
-          </Link>
-        </li>
-        <li>
-          <Link to="/shipping" className={linkStyles}>
-            SHIPPING
+          <Link to="/contactUs" className={linkStyles}>
+            CONTACT US
           </Link>
         </li>
       </ul>

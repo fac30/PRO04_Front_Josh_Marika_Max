@@ -12,13 +12,11 @@ const Footer = () => {
           <NewsletterForm />
         </div>
 
-        {/* Socials */}
         <div className="mb-4 md:mb-0 ">
           <Socials />
         </div>
       </div>
 
-      {/* Footer Text */}
       <p className="text-center mt-4">
         &copy; 2024 Font Hill Records. All rights reserved.
       </p>

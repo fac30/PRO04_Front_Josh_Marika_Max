@@ -4,29 +4,28 @@ import { Vinyl } from "../utils/types";
 export const ADD_TO_CART = "ADD_TO_CART";
 const DECREASE_QUANTITY = "DECREASE_QUANTITY";
 
-
 interface CartState {
   cartItems: Vinyl[];
   cartCount: number;
   totalPrice: number;
 }
 
-
 interface CartAction {
   type: typeof ADD_TO_CART | typeof DECREASE_QUANTITY;
   payload: Vinyl;
 }
 
-
-const CartContext = createContext<{ state: CartState; dispatch: React.Dispatch<CartAction> } | undefined>(undefined);
-
+const CartContext = createContext<{
+  state: CartState;
+  dispatch: React.Dispatch<CartAction>;
+  addToCart: (product: Vinyl) => void; // Add this method
+} | undefined>(undefined);
 
 const initialState: CartState = {
   cartItems: JSON.parse(localStorage.getItem("shoppingCart") || "[]"),
   cartCount: 0,
   totalPrice: 0,
 };
-
 
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
@@ -72,19 +71,23 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
+  // Add the addToCart method to dispatch the action
+  const addToCart = (product: Vinyl) => {
+    dispatch({ type: ADD_TO_CART, payload: product });
+  };
 
   useEffect(() => {
     localStorage.setItem("shoppingCart", JSON.stringify(state.cartItems));
   }, [state.cartItems]);
 
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider value={{ state, dispatch, addToCart }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-
+// Custom hook to access cart context
 export const useCartContext = () => {
   const context = useContext(CartContext);
   if (!context) {

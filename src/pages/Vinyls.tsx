@@ -5,6 +5,7 @@ import { useCartContext } from "../Context/Cart";
 import SortControls from "../components/sort-controls/SortControls";
 import FiltersSidebar from "../components/sort-controls/FilterControls";
 import ProductCard from "../components/productsCard/ProductCard";
+import { useSearchParams } from "react-router-dom"; // Import useSearchParams
 
 const Vinyls = () => {
   const [vinyls, setVinyls] = useState<Vinyl[]>([]);
@@ -16,32 +17,44 @@ const Vinyls = () => {
   const [productsPerPage, setProductsPerPage] = useState<number>(24);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { addToCart } = useCartContext();
+  const [searchParams] = useSearchParams(); // Hook to read query parameters
 
   useEffect(() => {
     const fetchVinyls = async () => {
       const data: Vinyl[] = await fetchData("vinyls", "GET");
       setVinyls(data);
-      setFilteredVinyls(data);
     };
     fetchVinyls();
   }, []);
 
   useEffect(() => {
+    // Get genre and sort query params
+    const genreParam = searchParams.get("genre");
+    const sortParam = searchParams.get("sort");
+
+    // Set the sortBy state based on the query param
+    if (sortParam) {
+      setSortBy(sortParam);
+    }
+
+    // Apply genre filter based on the query param
+    const filteredByGenre = genreParam
+      ? vinyls.filter((vinyl) => vinyl.genres.genre.toLowerCase() === genreParam.toLowerCase())
+      : vinyls;
+
+    // Now apply additional filters and sorting
     const applyFiltersAndSort = () => {
-      const filtered = vinyls.filter(
+      const filtered = filteredByGenre.filter(
         (vinyl) =>
           (!genres.length || genres.includes(vinyl.genres.genre)) &&
-          (!priceRanges.length ||
-            priceRanges.includes(vinyl.price_ranges.price_range)) &&
-          (!timePeriods.length ||
-            timePeriods.includes(vinyl.time_periods.time_period)),
+          (!priceRanges.length || priceRanges.includes(vinyl.price_ranges.price_range)) &&
+          (!timePeriods.length || timePeriods.includes(vinyl.time_periods.time_period)),
       );
 
       const sorted = filtered.sort((a, b) => {
         if (sortBy === "newest")
           return (
-            new Date(b.release_date).getTime() -
-            new Date(a.release_date).getTime()
+            new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
           );
         if (sortBy === "priceLowHigh") return a.price - b.price;
         if (sortBy === "priceHighLow") return b.price - a.price;
@@ -52,7 +65,12 @@ const Vinyls = () => {
     };
 
     applyFiltersAndSort();
-  }, [vinyls, genres, priceRanges, timePeriods, sortBy]);
+  }, [vinyls, genres, priceRanges, timePeriods, sortBy, searchParams]); // Dependencies include vinyls and searchParams
+
+  // Scroll to the top of the page whenever the component renders or query params change
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [searchParams]); // This runs whenever searchParams change (i.e., when genre or sort changes)
 
   const toggleFilter = (
     item: string,

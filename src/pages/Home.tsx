@@ -37,7 +37,7 @@ const Home = () => {
           if (vinyls.length > 0) {
             const randomVinyl =
               vinyls[Math.floor(Math.random() * vinyls.length)];
-            covers[genre.genre] = randomVinyl.coverImageUrl;
+            covers[genre.genre] = randomVinyl.image_url;
           } else {
             covers[genre.genre] = null;
           }
@@ -91,7 +91,9 @@ const Home = () => {
       </p>
       <LatestReleases vinyl={latestReleases} addToCart={addToCart} />
       <StaffPicks vinyl={staffPicks} addToCart={addToCart} />
-      <GenreSection genres={genres} genreVinyls={genreVinyls} />{" "}
+      <div id="genres">
+        <GenreSection genres={genres} genreVinyls={genreVinyls} />
+      </div>
       <section
         className="mb-12 max-w-90"
         aria-labelledby="newsletter"
