@@ -4,7 +4,7 @@ const fetchData = async (
   body?: string | object,
 ): Promise<any> => {
   try {
-    const response = await fetch(`http://localhost:3000/${table}`, {
+    const response = await fetch(`http://ec2-18-175-142-8.eu-west-2.compute.amazonaws.com/${table}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",

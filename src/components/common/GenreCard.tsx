@@ -21,7 +21,7 @@ const GenreCard = ({ genre, genreId, vinyl }: GenreCardProps) => {
       <div className="w-full bg-white shadow-md p-4 max-w-80">
         {vinyl ? (
           <img
-            src={`src/assets/cover${genreId}.png`}  // Use genreId for dynamic image reference
+          src={`/genre-images/cover${genreId}.png`}   // Use genreId for dynamic image reference
             alt={vinyl.title}
             className="object-cover w-full h-full rounded-t-lg"
           />
