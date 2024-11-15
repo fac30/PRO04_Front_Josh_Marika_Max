@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa"; 
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = () => {
   const linkStyles = "text-text-primary hover:text-background-footer";
-  const [isOpen, setIsOpen] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -15,7 +16,11 @@ const NavBar = () => {
     if (genreSection) {
       genreSection.scrollIntoView({ behavior: "smooth" });
     }
-    setIsOpen(false); 
+  };
+
+  const navigateToLatestReleases = () => {
+    navigate("/vinyls?sort=newest");
+    setIsOpen(false); // Close the menu
   };
 
   return (
@@ -54,9 +59,12 @@ const NavBar = () => {
           </button>
         </li>
         <li>
-          <Link to="/new-releases" className={linkStyles}>
-            NEW RELEASES
-          </Link>
+          <button
+            onClick={navigateToLatestReleases}
+            className={`${linkStyles} bg-transparent border-none cursor-pointer`}
+          >
+            LATEST RELEASES
+          </button>
         </li>
         <li>
           <Link to="/shipping" className={linkStyles}>

@@ -5,6 +5,7 @@ import { useCartContext } from "../Context/Cart";
 import SortControls from "../components/sort-controls/SortControls";
 import FiltersSidebar from "../components/sort-controls/FilterControls";
 import ProductCard from "../components/productsCard/ProductCard";
+import { useSearchParams } from "react-router-dom"; // Import useSearchParams
 
 const Vinyls = () => {
   const [vinyls, setVinyls] = useState<Vinyl[]>([]);
@@ -16,6 +17,7 @@ const Vinyls = () => {
   const [productsPerPage, setProductsPerPage] = useState<number>(24);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { addToCart } = useCartContext();
+  const [searchParams] = useSearchParams(); // Hook to read query parameters
 
   useEffect(() => {
     const fetchVinyls = async () => {
@@ -27,21 +29,26 @@ const Vinyls = () => {
   }, []);
 
   useEffect(() => {
+    // Check query params for sorting
+    const sortParam = searchParams.get("sort");
+    if (sortParam) {
+      setSortBy(sortParam);
+    }
+  }, [searchParams]); // Re-run when searchParams change
+
+  useEffect(() => {
     const applyFiltersAndSort = () => {
       const filtered = vinyls.filter(
         (vinyl) =>
           (!genres.length || genres.includes(vinyl.genres.genre)) &&
-          (!priceRanges.length ||
-            priceRanges.includes(vinyl.price_ranges.price_range)) &&
-          (!timePeriods.length ||
-            timePeriods.includes(vinyl.time_periods.time_period)),
+          (!priceRanges.length || priceRanges.includes(vinyl.price_ranges.price_range)) &&
+          (!timePeriods.length || timePeriods.includes(vinyl.time_periods.time_period)),
       );
 
       const sorted = filtered.sort((a, b) => {
         if (sortBy === "newest")
           return (
-            new Date(b.release_date).getTime() -
-            new Date(a.release_date).getTime()
+            new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
           );
         if (sortBy === "priceLowHigh") return a.price - b.price;
         if (sortBy === "priceHighLow") return b.price - a.price;
