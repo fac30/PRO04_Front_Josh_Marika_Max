@@ -91,7 +91,9 @@ const Home = () => {
       </p>
       <LatestReleases vinyl={latestReleases} addToCart={addToCart} />
       <StaffPicks vinyl={staffPicks} addToCart={addToCart} />
-      <GenreSection genres={genres} genreVinyls={genreVinyls} />{" "}
+      <div id="genres">
+        <GenreSection genres={genres} genreVinyls={genreVinyls} />
+      </div>
       <section
         className="mb-12 max-w-90"
         aria-labelledby="newsletter"

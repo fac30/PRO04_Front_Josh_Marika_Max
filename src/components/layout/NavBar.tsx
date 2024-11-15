@@ -1,14 +1,21 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa"; // Importing icons for hamburger and close
+import { FaBars, FaTimes } from "react-icons/fa"; 
 
 const NavBar = () => {
   const linkStyles = "text-text-primary hover:text-background-footer";
-  const [isOpen, setIsOpen] = useState(false); // State for managing menu visibility
+  const [isOpen, setIsOpen] = useState(false); 
 
-  // Function to toggle the mobile menu
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const scrollToGenreSection = () => {
+    const genreSection = document.querySelector("#genres"); // Adjust selector if necessary
+    if (genreSection) {
+      genreSection.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsOpen(false); 
   };
 
   return (
@@ -39,9 +46,12 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/genres" className={linkStyles}>
+          <button
+            onClick={scrollToGenreSection}
+            className={`${linkStyles} bg-transparent border-none cursor-pointer`}
+          >
             GENRES
-          </Link>
+          </button>
         </li>
         <li>
           <Link to="/new-releases" className={linkStyles}>
