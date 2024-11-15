@@ -40,7 +40,7 @@ const ShopCart = () => {
                   id="vinyl"
                   className="flex items-center justify-between p-4 mb-4 border border-gray-300 rounded-md bg-background-default shadow-sm"
                   key={vinyl.id}>
-                  <img src={vinyl.image_url} alt={vinyl.title} className="w-24 h-24 object-cover rounded-lg"/>
+                  <img src={vinyl.image_url as string} alt={vinyl.title} className="w-24 h-24 object-cover rounded-lg"/>
                   <div className="ml-4 flex-grow">
                     <h3 className="text-lg font-medium text-text-primary">{vinyl.title}</h3>
                     <p className="text-text-secondary">{vinyl.artist}</p>
