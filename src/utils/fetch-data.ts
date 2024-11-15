@@ -1,7 +1,7 @@
 const fetchData = async (
   table: string,
   method: string,
-  body?: string,
+  body?: string | object,
 ): Promise<any> => {
   try {
     const response = await fetch(`http://localhost:3000/${table}`, {

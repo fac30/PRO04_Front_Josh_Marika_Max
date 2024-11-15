@@ -8,7 +8,6 @@ import {
   FORM_FIELDS,
   Locations,
 } from "../utils/types/customerConstants";
-import hashPassword from "../hashing";
 import { FormFields, UserObject } from "../utils/types";
 import { fetchData } from "../utils/fetch-data";
 
@@ -104,9 +103,9 @@ const SignUpForm = () => {
   };
 
   const createUserObject = async (): Promise<UserObject> => {
-    const { confirm_password, password, ...userObject } = formData;
-    userObject.password_hash = await hashPassword(password);
-    return userObject as UserObject;
+    const { confirm_password, ...userObject } = formData;
+
+    return userObject; 
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -117,9 +116,11 @@ const SignUpForm = () => {
     }
 
     try {
-      await fetchData("register", "POST", await createUserObject());
+      const userObject = await createUserObject();
+      await fetchData("register", "POST", userObject);
       setIsSuccess(true);
       setFormData(INITIAL_FORM_STATE);
+      console.log("Registration successful!");
     } catch (error) {
       console.error("Registration failed:", error);
     }
