@@ -2,8 +2,8 @@ import ContactUsForm from "../components/common/ContactUsForm";
 
 export default function ContactUsPage() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center px-4">
-      <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-8">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center mt-24 px-4">
+      <div className="max-w-4xl w-full bg-white shadow-sm rounded-lg p-8">
         <h1 className="text-3xl text-black font-bold text-center mb-4">
           Get in Touch
         </h1>
