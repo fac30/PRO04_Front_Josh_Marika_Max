@@ -24,7 +24,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-background-default py-2 border-t border-background-light relative">
+    <nav className="py-2 border-t border-background-light relative">
       {/* Mobile Menu Toggle Button */}
       <div className="md:hidden flex justify-center items-center">
         <button

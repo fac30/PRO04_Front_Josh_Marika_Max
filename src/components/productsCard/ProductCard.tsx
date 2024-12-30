@@ -31,6 +31,7 @@ const ProductCard = ({ vinyl }: ProductCardProps) => {
         <button
           className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition font-['Noto_Sans']"
           onClick={() => dispatch({ type: ADD_TO_CART, payload: vinyl })}
+          aria-label={`Add ${vinyl.title} by ${vinyl.artist} to basket`}
         >
           Add To Basket
         </button>

@@ -27,7 +27,7 @@ export default function ContactUsPage() {
 
   return (
     <motion.div 
-      className="min-h-3.5 bg-gray-100 flex items-center justify-center px-4 my-10"
+      className="min-h-3.5  flex items-center justify-center px-4 my-10"
       initial="hidden"
       animate="visible"
       variants={containerVariants}

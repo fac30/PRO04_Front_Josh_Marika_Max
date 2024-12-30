@@ -109,12 +109,12 @@ const Home = () => {
       animate="visible"
       variants={containerVariants}
     >
-      <motion.h2 
+      <motion.h1 
         className="text-4xl font-bold mb-4 mt-11 text-text-primary"
         variants={itemVariants}
       >
         Welcome to Font Hill Records
-      </motion.h2>
+      </motion.h1>
       <motion.p 
         className="text-xl mb-6 text-text-secondary"
         variants={itemVariants}
