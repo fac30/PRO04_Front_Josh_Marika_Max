@@ -11,7 +11,7 @@ const Header = () => {
   } = useCartContext();
 
   return (
-    <header className="bg-background-default p-4 shadow-xl">
+    <header className="bg-[#ffffffd8] p-4">
       <a href="#main-content" className="sr-only focus:not-sr-only">
         Skip to main content
       </a>
