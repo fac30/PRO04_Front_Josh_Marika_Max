@@ -80,7 +80,7 @@ const Home = () => {
   return (
     <div
       id="main-content"
-      className="items-center justify-center text-center px-4 py-4 flex flex-col"
+      className=" items-center justify-center text-center px-4 py-4 flex flex-col"
       role="main"
     >
       <h2 className="text-4xl font-bold mb-4 mt-11 text-text-primary">
