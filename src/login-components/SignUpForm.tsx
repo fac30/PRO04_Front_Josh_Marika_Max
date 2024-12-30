@@ -127,40 +127,42 @@ const SignUpForm = () => {
   };
 
   return (
-    <form
-      className="w-full max-w-sm mx-auto flex flex-col gap-y-4 mt-9"
-      onSubmit={handleSubmit}
-    >
-      <h2 className="text-2xl font-semibold text-center mb-6">Sign Up</h2>
-
-      {FORM_FIELDS.map((field) => (
-        <FormField
-          key={field.name}
-          field={field}
-          value={formData[field.name as keyof FormFields]}
-          onChange={handleChange}
-        />
-      ))}
-
-      {passwordError && (
-        <p className="text-red-500 text-sm mt-1">{passwordError}</p>
-      )}
-
+    <div className="bg-background-default shadow-[0_0_15px_rgba(0,0,0,0.3)] max-w-lg m-auto flex flex-col my-10">
+      <h2 className="text-2xl font-semibold text-center mt-24 mb-6">Sign Up</h2>
+      
       {isSuccess && (
-        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+        <p className="text-center text-green-500 mb-4">
           Registration successful! You can now log in.
-        </div>
+        </p>
       )}
 
-      <SubmitButton buttonText="Sign Up" />
+      <form
+        className="w-full max-w-sm mx-auto flex flex-col gap-y-4 mt-9"
+        onSubmit={handleSubmit}
+      >
+        {FORM_FIELDS.map((field) => (
+          <FormField
+            key={field.name}
+            field={field}
+            value={formData[field.name as keyof FormFields]}
+            onChange={handleChange}
+          />
+        ))}
 
-      <p className="text-center text-gray-600 mt-4 mb-12">
-        Already have an account?{" "}
-        <Link to="/UserLogin" className="text-blue-500 hover:underline">
-          Log In
-        </Link>
-      </p>
-    </form>
+        {passwordError && (
+          <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+        )}
+
+        <SubmitButton buttonText="Sign Up" />
+
+        <p className="text-center text-gray-600 mt-4 mb-60">
+          Already have an account?{" "}
+          <Link to="/UserLogin" className="text-blue-500 hover:underline">
+            Log In
+          </Link>
+        </p>
+      </form>
+    </div>
   );
 };
 

@@ -18,7 +18,7 @@ const GenreCard = ({ genre, genreId, vinyl }: GenreCardProps) => {
 
   return (
     <div className="genre-card">
-      <div className="w-full bg-background-default shadow-[0_0_15px_rgba(0,0,0,0.4)] p-4 max-w-80">
+      <div className="w-full bg-background-default shadow-[0_0_15px_rgba(0,0,0,0.3)] p-4 max-w-80">
         {vinyl ? (
           <img
           src={`/genre-images/cover${genreId}.png`}   // Use genreId for dynamic image reference

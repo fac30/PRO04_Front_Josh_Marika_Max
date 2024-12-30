@@ -12,7 +12,7 @@ const ProductCard = ({ vinyl }: ProductCardProps) => {
   const { dispatch } = useCartContext();
 
   return (
-    <div className="bg-background-default shadow-[0_0_15px_rgba(0,0,0,0.4)] p-4 max-w-80 max-h-[500px] w-full text-center ">
+    <div className="bg-background-default shadow-[0_0_15px_rgba(0,0,0,0.3)] p-4 max-w-80 max-h-[500px] w-full text-center ">
       {vinyl.image_url ? (
         <img
           src={vinyl.image_url}
