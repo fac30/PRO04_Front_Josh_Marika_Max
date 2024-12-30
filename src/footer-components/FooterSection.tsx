@@ -21,6 +21,7 @@ const FooterSection = ({ title, links, isHorizontal }: FooterSectionProps) => {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
+            className="text-xl"
           >
             {link.name}
           </a>
