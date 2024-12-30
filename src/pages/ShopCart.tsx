@@ -24,7 +24,7 @@ const ShopCart = () => {
   return (
     <section 
     id="cart"
-    className="bg-background-light p-4 shadow rounded-t-lg">
+    className=" p-4 shadow rounded-t-lg">
       
       <h2 className="text-4xl font-bold mb-6 text-text-primary text-center">Shopping Cart</h2>
 

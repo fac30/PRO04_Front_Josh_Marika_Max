@@ -17,7 +17,7 @@ const CartSummary: React.FC = () => {
   useEffect(() => {
     const fetchShippingOptions = async () => {
       try {
-        const response = await fetch('http://localhost:3000/shipping-options');
+        const response = await fetch('http://ec2-18-175-142-8.eu-west-2.compute.amazonaws.com/shipping-options');
         const data: ShippingOption[] = await response.json();
         setShippingOptions(data);
         if (data.length > 0) {
@@ -42,7 +42,7 @@ const CartSummary: React.FC = () => {
 
   
     return (
-      <div className="p-6 bg-background-light shadow-lg rounded-md">
+      <div className="p-6 bg-background-default shadow-[0_0_15px_rgba(0,0,0,0.3)] rounded-md">
         <h3 className="text-2xl font-semibold text-text-primary mb-4">Subtotal</h3>
         <p className="text-xl font-bold text-text-dark mb-4">£{totalPrice.toFixed(2)}</p>
   
@@ -54,9 +54,9 @@ const CartSummary: React.FC = () => {
         
         
         <label className='block mb-4'>
-          <span className='text-sm font-semibold text-text-primary'>Choose Shipping Option:</span>
+          <span className='text-sm font-semibold text-text-primary'>Choose Shipping Option:</span> <br />
           <select
-          className='mt-2 p-2 border rounded-md'
+          className='mt-4 p-2 border rounded-md max-w-[100%]'
           onChange={handleShippingChange}
           value={selectedShipping?.id || ''} >
             
@@ -81,7 +81,7 @@ const CartSummary: React.FC = () => {
         <div className="mt-6 border-t pt-4">
           <p className="text-lg font-bold mb-4">Total: £{finalTotal.toFixed(2)}</p>
           <button
-            className="w-full py-3 bg-accent hover:bg-background-footer text-white font-semibold rounded-lg transition duration-300 shadow-md"
+            className="w-full py-3 bg-background-light hover:bg-background-footer text-white font-semibold rounded-lg transition duration-300 shadow-md"
             onClick={() => alert('Proceeding to checkout...')}
           >
             Proceed to Checkout
