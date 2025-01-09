@@ -127,7 +127,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="bg-background-default shadow-[0_0_15px_rgba(0,0,0,0.3)] max-w-lg m-auto flex flex-col my-10">
+    <div className="bg-background-default shadow-glow max-w-lg m-auto flex flex-col my-10">
       <h2 className="text-2xl font-semibold text-center mt-24 mb-6">Sign Up</h2>
       
       {isSuccess && (

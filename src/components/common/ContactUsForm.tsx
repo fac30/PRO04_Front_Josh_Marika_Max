@@ -20,7 +20,7 @@ export default function ContactUsForm() {
   };
 
   return (
-    <div className=" m-auto bg-background-default shadow-[0_0_15px_rgba(0,0,0,0.3)] p-4 max-w-md w-full rounded-lg">
+    <div className=" m-auto bg-background-default shadow-glow p-4 max-w-md w-full rounded-lg">
       <h2 className="text-xl text-black font-bold mb-4 text-center">
         Contact Us
       </h2>

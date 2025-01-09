@@ -26,7 +26,9 @@ export default {
         },
         error: '#DC2626', 
       },
-       
+      boxShadow: {
+        'glow': '0 0 15px rgba(0,0,0,0.3)',
+      },
     },
   },
   plugins: [],

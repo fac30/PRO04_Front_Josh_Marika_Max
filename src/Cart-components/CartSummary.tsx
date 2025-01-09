@@ -42,7 +42,7 @@ const CartSummary: React.FC = () => {
 
   
     return (
-      <div className="p-6 bg-background-default shadow-[0_0_15px_rgba(0,0,0,0.3)] rounded-md">
+      <div className="p-6 bg-background-default shadow-glow rounded-md">
         <h3 className="text-2xl font-semibold text-text-primary mb-4">Subtotal</h3>
         <p className="text-xl font-bold text-text-dark mb-4">£{totalPrice.toFixed(2)}</p>
   
