@@ -29,7 +29,7 @@ const ProductCard = ({ vinyl }: ProductCardProps) => {
         <p className="text-gray-600">{vinyl.artist}</p>
         <p className="text-gray-800 font-semibold">£{vinyl.price}</p>
         <button
-          className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition font-['Noto_Sans']"
+          className="mt-4 btn-primary"
           onClick={() => dispatch({ type: ADD_TO_CART, payload: vinyl })}
           aria-label={`Add ${vinyl.title} by ${vinyl.artist} to basket`}
         >

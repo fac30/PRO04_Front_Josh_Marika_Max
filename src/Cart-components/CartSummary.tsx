@@ -81,7 +81,7 @@ const CartSummary: React.FC = () => {
         <div className="mt-6 border-t pt-4">
           <p className="text-lg font-bold mb-4">Total: £{finalTotal.toFixed(2)}</p>
           <button
-            className="w-full py-3 bg-background-light hover:bg-background-footer text-white font-semibold rounded-lg transition duration-300 shadow-md"
+            className="w-full py-3 bg-background-light hover:bg-background-footer text-black font-semibold rounded-lg transition duration-300 shadow-md"
             onClick={() => alert('Proceeding to checkout...')}
           >
             Proceed to Checkout

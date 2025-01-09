@@ -35,7 +35,7 @@ const GenreCard = ({ genre, genreId, vinyl }: GenreCardProps) => {
               <button
                 onClick={handleViewAllClick}
                 aria-label={`View all ${genre} vinyls`}
-                className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition font-['Noto_Sans'] font-bold"
+                className="mt-4 btn-primary"
               >
                 View All
               </button>
