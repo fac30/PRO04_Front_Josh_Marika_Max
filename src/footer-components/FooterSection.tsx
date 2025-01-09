@@ -12,7 +12,7 @@ interface FooterSectionProps {
 
 const FooterSection = ({ title, links, isHorizontal }: FooterSectionProps) => {
   return (
-    <div className="footer-section">
+    <div className="footer-section text-black">
       <h3 className="text-lg font-bold mb-4">{title}</h3>
       <div className={isHorizontal ? 'flex space-x-4' : 'flex flex-col space-y-2'}>
         {links.map((link, index) => (
@@ -21,7 +21,7 @@ const FooterSection = ({ title, links, isHorizontal }: FooterSectionProps) => {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-text-primary hover:text-background-footer transition-colors duration-300"
+            className="text-xl"
           >
             {link.name}
           </a>

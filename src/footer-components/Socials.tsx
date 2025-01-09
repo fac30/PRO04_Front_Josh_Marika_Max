@@ -12,37 +12,37 @@ const Socials = () => {
   const socialLinks = [
     {
       name: (
-        <FaFacebookF className="text-white hover:text-black transition-colors duration-300" />
+        <FaFacebookF />
       ),
       url: "https://www.facebook.com",
     },
     {
       name: (
-        <FaTwitter className="text-white hover:text-black transition-colors duration-300" />
+        <FaTwitter  />
       ),
       url: "https://www.x.com",
     },
     {
       name: (
-        <FaInstagram className="text-white hover:text-black transition-colors duration-300" />
+        <FaInstagram />
       ),
       url: "https://www.instagram.com",
     },
     {
       name: (
-        <FaTiktok className="text-white hover:text-black transition-colors duration-300" />
+        <FaTiktok />
       ),
       url: "https://www.tiktok.com",
     },
     {
       name: (
-        <FaYoutube className="text-white hover:text-black transition-colors duration-300" />
+        <FaYoutube />
       ),
       url: "https://www.youtube.com",
     },
     {
       name: (
-        <FaWhatsapp className="text-white hover:text-black transition-colors duration-300" />
+        <FaWhatsapp />
       ),
       url: "https://www.whatsapp.com",
     },

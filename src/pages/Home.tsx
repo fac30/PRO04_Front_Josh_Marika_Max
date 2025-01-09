@@ -5,6 +5,7 @@ import StaffPicks from "../components/homepage-sections/StaffPicks";
 import GenreSection from "../components/homepage-sections/BrowseByGenre";
 import { Vinyl, Genre } from "../utils/types";
 import { useCartContext } from "../Context/Cart";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [latestReleases, setLatestReleases] = useState<Vinyl[]>([]);
@@ -14,6 +15,28 @@ const Home = () => {
     [key: string]: Vinyl[] | null;
   }>({});
   const { dispatch } = useCartContext();
+
+  // Add animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -78,27 +101,48 @@ const Home = () => {
   };
 
   return (
-    <div
+    <motion.div
       id="main-content"
-      className="items-center justify-center text-center px-4 py-4 flex flex-col"
+      className="items-center justify-center text-center px-4 py-4 flex flex-col bg-[#ffffffd8]"
       role="main"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
     >
-      <h2 className="text-4xl font-bold mb-4 mt-11 text-text-primary">
+      <motion.h1 
+        className="text-4xl font-bold mb-4 mt-11 text-text-primary"
+        variants={itemVariants}
+      >
         Welcome to Font Hill Records
-      </h2>
-      <p className="text-xl mb-6 text-text-secondary">
+      </motion.h1>
+      <motion.p 
+        className="text-xl mb-6 text-text-secondary"
+        variants={itemVariants}
+      >
         Discover and collect your favorite vinyl records
-      </p>
-      <LatestReleases vinyl={latestReleases} addToCart={addToCart} />
-      <StaffPicks vinyl={staffPicks} addToCart={addToCart} />
-      <div id="genres">
+      </motion.p>
+      
+      <motion.div variants={itemVariants}>
+        <LatestReleases vinyl={latestReleases} addToCart={addToCart} />
+      </motion.div>
+      
+      <motion.div variants={itemVariants}>
+        <StaffPicks vinyl={staffPicks} addToCart={addToCart} />
+      </motion.div>
+      
+      <motion.div 
+        id="genres" 
+        variants={itemVariants}
+      >
         <GenreSection genres={genres} genreVinyls={genreVinyls} />
-      </div>
-      <section
+      </motion.div>
+      
+      <motion.section
         className="mb-12 max-w-90"
         aria-labelledby="newsletter"
-      ></section>
-    </div>
+        variants={itemVariants}
+      ></motion.section>
+    </motion.div>
   );
 };
 

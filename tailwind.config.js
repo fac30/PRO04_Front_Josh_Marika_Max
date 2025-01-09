@@ -15,17 +15,20 @@ export default {
           DEFAULT: '#F97316', 
         },
         text: {
-          primary: '#000000',  
+          primary: '#08260B',  
           secondary: '#4B5563', 
         },
         background: {
-          light: '#F6E9E9',   
-          default: '#FFFFFF',  
-          footer: '#B55252',
+          light: '#E67771',   
+          default: '#F5F5F5',  
+          footer: '#E44C3B',
+          
         },
         error: '#DC2626', 
       },
-       
+      boxShadow: {
+        'glow': '0 0 15px rgba(0,0,0,0.3)',
+      },
     },
   },
   plugins: [],

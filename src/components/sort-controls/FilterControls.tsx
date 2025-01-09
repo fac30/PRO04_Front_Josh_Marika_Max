@@ -40,32 +40,35 @@ const FiltersSidebar = ({
   }, []);
 
   return (
-    <aside className="w-72 pr-4">
+    <aside className="w-[100%] pr-4" role="complementary" aria-label="Filter options">
       <div className="p-4 border border-gray-300 rounded mb-4">
-        <h2 className="text-xl font-semibold mb-3">Filters</h2>
+        <h2 className="text-xl font-semibold mb-3" id="filters-heading">Filter Products</h2>
 
-        <div className="mb-16">
-          <h3 className="font-medium mb-2">Genre</h3>
+        <fieldset className="mb-16">
+          <legend className="font-medium mb-2">Genre</legend>
           <div className="space-y-1">
             {genres.map((genre) => (
               <label
                 key={genre.id}
+                htmlFor={`genre-${genre.id}`}
                 className="flex items-center cursor-pointer hover:text-background-footer"
               >
                 <input
                   type="checkbox"
-                  className="mr-2 "
+                  id={`genre-${genre.id}`}
+                  className="mr-2"
                   checked={selectedGenres.includes(genre.genre)}
                   onChange={() => onGenreChange(genre.genre)}
+                  aria-label={`Filter by ${genre.genre} genre`}
                 />
                 {genre.genre}
               </label>
             ))}
           </div>
-        </div>
+        </fieldset>
 
-        <div className="mb-16">
-          <h3 className="font-medium mb-2">Price Range</h3>
+        <fieldset className="mb-16">
+          <legend className="font-medium mb-2">Price Range</legend>
           <div className="space-y-1">
             {priceRanges.map((range) => (
               <label
@@ -82,10 +85,10 @@ const FiltersSidebar = ({
               </label>
             ))}
           </div>
-        </div>
+        </fieldset>
 
-        <div className="mb-16">
-          <h3 className="font-medium mb-2">Time Periods</h3>
+        <fieldset className="mb-16">
+          <legend className="font-medium mb-2">Time Periods</legend>
           <div className="space-y-1">
             {timePeriods.map((period) => (
               <label
@@ -102,7 +105,7 @@ const FiltersSidebar = ({
               </label>
             ))}
           </div>
-        </div>
+        </fieldset>
       </div>
     </aside>
   );

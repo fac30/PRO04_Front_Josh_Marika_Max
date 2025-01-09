@@ -5,7 +5,7 @@ interface SubmitButtonProps {
 export default function SubmitButton({ buttonText }: SubmitButtonProps) {
   return (
     <button
-      className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition"
+      className="mt-4 btn-primary"
       type="submit"
     >
       {buttonText}

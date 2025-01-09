@@ -45,7 +45,7 @@ export default function LoginForm() {
   };
 
   return (
-    <>
+    <div className=" bg-background-default shadow-[0_0_15px_rgba(0,0,0,0.3)] max-w-lg max-h-[600px] m-auto flex flex-col my-10">
       <h2 className="text-2xl font-semibold text-center mt-24 mb-6">Login</h2>
       {loginMessage && (
         <p className="text-center text-green-500 mb-4">{loginMessage}</p>
@@ -82,6 +82,6 @@ export default function LoginForm() {
           </Link>
         </p>
       </form>
-    </>
+    </div>
   );
 }

@@ -6,6 +6,7 @@ import SortControls from "../components/sort-controls/SortControls";
 import FiltersSidebar from "../components/sort-controls/FilterControls";
 import ProductCard from "../components/productsCard/ProductCard";
 import { useSearchParams } from "react-router-dom"; // Import useSearchParams
+import { motion } from "framer-motion";
 
 const Vinyls = () => {
   const [vinyls, setVinyls] = useState<Vinyl[]>([]);
@@ -92,18 +93,60 @@ const Vinyls = () => {
     window.scrollTo(0, 0); // Scroll to top on page change
   };
 
+  // Add animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.9
+      }
+    }
+  };
+
+  const sidebarVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <>
-      <SortControls
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        productsPerPage={productsPerPage}
-        setProductsPerPage={setProductsPerPage}
-      />
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.div variants={itemVariants}>
+        <SortControls
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          productsPerPage={productsPerPage}
+          setProductsPerPage={setProductsPerPage}
+        />
+      </motion.div>
 
       <div className="max-w-[1500px] mx-auto px-4 py-6">
         <div className="flex">
-          <div className="hidden md:block w-[250px] mr-6">
+          <motion.div 
+            className="hidden md:block w-[250px] mr-6"
+            variants={sidebarVariants}
+          >
             <FiltersSidebar
               selectedGenres={genres}
               selectedPriceRanges={priceRanges}
@@ -116,18 +159,28 @@ const Vinyls = () => {
                 toggleFilter(period, setTimePeriods, timePeriods)
               }
             />
-          </div>
+          </motion.div>
 
-          <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-6 min-h-[500px]">
-            {" "}
-            {/* Set a minimum height */}
+          <motion.div 
+            className="w-full grid grid-cols-2 lg:grid-cols-4 gap-6 min-h-[500px]"
+            variants={containerVariants}
+          >
             {displayedVinyls.map((vinyl) => (
-              <ProductCard key={vinyl.id} vinyl={vinyl} addToCart={addToCart} />
+              <motion.div
+                key={vinyl.id}
+                variants={itemVariants}
+                layout
+              >
+                <ProductCard vinyl={vinyl} addToCart={addToCart} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        <div className="flex justify-center gap-16 items-center mt-4">
+        <motion.div 
+          className="flex justify-center gap-16 items-center mt-4"
+          variants={itemVariants}
+        >
           <button
             onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
             disabled={currentPage === 1}
@@ -155,9 +208,9 @@ const Vinyls = () => {
           >
             Next
           </button>
-        </div>
+        </motion.div>
       </div>
-    </>
+    </motion.div>
   );
 };
 

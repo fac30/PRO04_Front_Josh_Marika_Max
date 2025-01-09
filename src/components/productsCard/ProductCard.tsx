@@ -12,7 +12,7 @@ const ProductCard = ({ vinyl }: ProductCardProps) => {
   const { dispatch } = useCartContext();
 
   return (
-    <div className="bg-white shadow-md p-4 max-w-80 w-full text-center ">
+    <div className="bg-background-default shadow-glow p-4 max-w-80 max-h-[500px] w-full text-center ">
       {vinyl.image_url ? (
         <img
           src={vinyl.image_url}
@@ -29,8 +29,9 @@ const ProductCard = ({ vinyl }: ProductCardProps) => {
         <p className="text-gray-600">{vinyl.artist}</p>
         <p className="text-gray-800 font-semibold">£{vinyl.price}</p>
         <button
-          className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition"
+          className="mt-4 btn-primary"
           onClick={() => dispatch({ type: ADD_TO_CART, payload: vinyl })}
+          aria-label={`Add ${vinyl.title} by ${vinyl.artist} to basket`}
         >
           Add To Basket
         </button>

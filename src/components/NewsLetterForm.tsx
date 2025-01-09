@@ -27,7 +27,7 @@ export default function NewsletterForm() {
           value={email} // Controlled input
           onChange={(e) => setEmail(e.target.value)} // Step 4: Update state on change
         />
-        <button className="bg-background-light text-black py-2 rounded-lg hover:bg-background-footer transition">
+        <button className="mt-4 btn-primary">
           Subscribe
         </button>
       </form>

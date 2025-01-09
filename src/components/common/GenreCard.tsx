@@ -18,7 +18,7 @@ const GenreCard = ({ genre, genreId, vinyl }: GenreCardProps) => {
 
   return (
     <div className="genre-card">
-      <div className="w-full bg-white shadow-md p-4 max-w-80">
+      <div className="w-full bg-background-default shadow-glow p-4 max-w-80">
         {vinyl ? (
           <img
           src={`/genre-images/cover${genreId}.png`}   // Use genreId for dynamic image reference
@@ -33,8 +33,9 @@ const GenreCard = ({ genre, genreId, vinyl }: GenreCardProps) => {
             <>
               <h2 className="text-lg font-bold mb-2">{genre}</h2>
               <button
-                onClick={handleViewAllClick}  // Add onClick handler
-                className="mt-4 bg-background-light text-black py-2 px-4 rounded-lg hover:bg-background-footer transition"
+                onClick={handleViewAllClick}
+                aria-label={`View all ${genre} vinyls`}
+                className="mt-4 btn-primary"
               >
                 View All
               </button>
